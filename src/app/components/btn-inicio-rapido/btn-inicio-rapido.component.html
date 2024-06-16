@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let user of usuarios">
+            <div class="col-md-6">
+                <div class="card text-bg-dark btn-card" (click)="enviar(user)">
+                    <img [src]="user.fotoPerfil_1" class="card-img w-100 h-100" alt="foto_user">
+                    <div class="card-img-overlay d-flex align-items-end ">
+                        <h5 class="card-title mb-0 nombre">{{user.apellido}}, {{user.nombre}} </h5>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

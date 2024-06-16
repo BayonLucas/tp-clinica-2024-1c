@@ -1,0 +1,31 @@
+<div class="card" style="width: 20rem;">
+    <!-- <ng-container *ngIf="loading">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status"> </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!loading"> -->
+        <img [src]="usuario.fotoPerfil_1" class="card-img-top foto" alt="...">
+        <div class="card-body">
+            <h2 class="card-title">{{usuario.apellido}} {{usuario.nombre}}</h2>
+            <p class="card-text data"><b>DNI:</b> {{usuario.dni}} - <b>Edad: </b>{{usuario.edad}}</p>
+            <p class="card-text data"><b>Email: </b>{{usuario.email}}</p>
+            <p class="card-text data"><b>Rol: </b>{{usuario.rol}}</p>
+            <ng-container *ngIf="usuario.rol == 'paciente'">
+                <p class="card-text"><b>Obra social: </b>{{usuario.obraSocial}}</p>
+            </ng-container>
+            <ng-container *ngIf="usuario.rol == 'especialista'">
+                <p class="card-text"><b>Especialidad/es: </b></p>
+                <ul class="list-group list-group-flush">
+                    <ng-container *ngFor="let item of usuario.especialidad">
+                        <li class="list-group-item">{{item}}</li>
+                    </ng-container>
+                </ul>
+                <div class="form-check form-switch d-flex justify-content-center aling-items-center pt-2">
+                    <input class="form-check-input" (change)="onChangeAutorizacionAdmin($event)" [checked]="usuario.adminValidation" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Autorización</label>
+                </div>
+            </ng-container>
+        </div>
+    <!-- </ng-container> -->
+</div>

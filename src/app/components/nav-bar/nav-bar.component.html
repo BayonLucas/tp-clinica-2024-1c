@@ -1,0 +1,18 @@
+<nav class="navbar sticky d-block bg-body-tertiary border-bottom border-body " data-bs-theme="dark">
+    <div class="container-fluid">
+        <div>
+            <img [routerLink]="['/home']" class="px-1 logo" src="../../../assets/iconos/fav3.ico" alt="">
+            <a class="navbar-brand">{{this.authServ.currentUser()?.email}}</a>
+        </div>
+        <h1 class="navbar-brand fs-1">Bienvenidos!</h1>
+        <div class="d-flex" role="search">
+            @if(!this.authServ.currentUser()){
+                <button class="btn btn-outline-info px-5 me-2" type="button" [routerLink]="['/login']" > Inicia Sesión </button>
+                <button class="btn btn-outline-light px-5 ms-2" type="button" [routerLink]="['/register']"> Registrate </button>
+            }
+            @else{
+                <button class="btn btn-outline-primary px-5 mx-2" type="button" (click)="CerrarSesion()" > Cerrar Sesión </button>
+            }
+        </div> 
+    </div> 
+</nav>
