@@ -59,7 +59,7 @@ export class FormEspecialistaComponent implements OnInit {
     validators: [
       confirmarClaveValidator(), 
       confirmarEspecialidadRequired(),
-    ]
+    ] 
   });
   
   get nombre(){
