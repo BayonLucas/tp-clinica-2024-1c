@@ -8,12 +8,13 @@ import { StoreService } from '../../services/store.service';
 import { Usuario } from '../../models/usuario';
 import { CardUsuarioComponent } from '../../components/card-usuario/card-usuario.component';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-seccion-usuarios',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent
+    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink
   ],
   templateUrl: './seccion-usuarios.component.html',
   styleUrl: './seccion-usuarios.component.scss'

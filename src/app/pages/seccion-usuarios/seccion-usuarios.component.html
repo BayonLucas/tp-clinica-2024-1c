@@ -6,7 +6,7 @@
         <button *ngIf="opcionSelecta != ''" class="btn btn-danger position-absolute top-0 start-0 m-2 backOpcion" (click)="elegirOpcion('')">
             <img src="../../../assets/iconos/volver-flecha.png" alt="">
         </button>
-        <button class="btn position-absolute top-0 end-0 backMenu m-2" (click)="elegirOpcion('')">
+        <button class="btn position-absolute top-0 end-0 backMenu m-2" [routerLink]="['/home']" routerLinkActive="router-link-active" >
             Volver al Menú
         </button>
         <div class="row">

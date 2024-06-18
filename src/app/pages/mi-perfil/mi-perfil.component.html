@@ -1,0 +1,132 @@
+<div class="container-fluid d-flex justify-content-center aling-content-center">
+    <div class="pantalla d-flex flex-column position-relative">
+        <button class="btn position-absolute top-0 end-0 backMenu m-2" [routerLink]="['/home']" routerLinkActive="router-link-active" >
+            Volver al Menú
+        </button>
+        <div class="card m-5 p-3" style="width: 80%; max-width: 90%;">
+            <div class="row g-0">
+                <div *ngIf="usuario?.rol == 'admin'" class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div *ngIf="usuario?.rol == 'especialista'" class="col-md-4">
+                    <img [src]="usuario?.fotoPerfil_1" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div *ngIf="usuario?.rol == 'paciente'" class="col-md-4">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img [src]="usuario!.fotoPerfil_1" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img [src]="usuario!.fotoPerfil_2" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h1 class="card-title">{{usuario?.nombre}} {{usuario?.apellido}}</h1>
+                        <p class="card-text">Rol: {{usuario?.rol}}</p>
+                        <p class="card-text">Email: {{usuario?.email}}</p>
+                        <p class="card-text">Edad: {{usuario?.edad}}</p>
+                        <p class="card-text">DNI: {{usuario?.dni}}</p>
+                        <p *ngIf="usuario?.rol == 'paciente'" class="card-text">Obra social: {{usuario?.obraSocial}}</p>
+                        <div *ngIf="usuario?.rol == 'especialista'">
+                            <p class="card-text">Especialidades:</p>
+                            <ul class="list-group" *ngFor="let item of usuario?.especialidad">
+                                <li class="list-group-item">{{item}}</li>
+                            </ul>
+                            <hr>
+                            <div class="mis-horarios" >
+                                <div class="d-flex justify-content-between">
+                                    <h2>Mis horarios</h2>
+                                    <div>
+                                        <img (click)="onClickEditar()" class="img-btn" *ngIf="!editar" src="../../../assets/botones/editar.png" alt="">
+                                        <img (click)="onClickConfirmar()" class="img-btn" *ngIf="editar" src="../../../assets/botones/cheque.png" alt="">
+                                        <img (click)="onClickCancelar()" class="img-btn" *ngIf="editar" src="../../../assets/botones/x.png" alt="">
+                                    </div>
+                                </div>
+                                <div *ngFor="let item of usuario?.especialidad">
+                                    <div class="row">
+                                        <h3>{{item}}</h3>
+                                        <ng-container *ngFor="let dia of diasLaborables">
+                                            <div class="col-2"> 
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="{{dia}}" [checked]="usuario?.diasLaborales?.includes(dia)" (click)="elegirDiaLaboral($event)" [disabled]="!editar">
+                                                    <label class="form-check-label" for="{{dia}}">{{dia}}</label>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 d-flex justify-content-center flex-row pt-2 pb-2">
+                                            <h3 class="d-flex aling-items-center">Inicio jornada (L a V): </h3>
+                                            <mat-form-field>
+                                                <mat-label>Desde:</mat-label>
+                                                <mat-select [value]="usuario?.horarioSemanaDesde" (selectionChange)="elegirhorario($event, 'semanaDesde')" [disabled]="!editar">
+                                                  @for (hora of horariosSemana; track hora) {
+                                                    <mat-option value="{{hora}}">{{hora}}</mat-option>
+                                                  }
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center flex-row pt-2 pb-2">
+                                            <h3 class="d-flex aling-items-center">Fin de la jornada (L a V): </h3>
+                                            <mat-form-field>
+                                                <mat-label>Hasta:</mat-label>
+                                                <mat-select [value]="usuario?.horarioSemanaHasta" (selectionChange)="elegirhorario($event, 'semanaHasta')" [disabled]="!editar">
+                                                  @for (hora of horariosSemana; track hora) {
+                                                    <mat-option value="{{hora}}">{{hora}}</mat-option>
+                                                  }
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" *ngIf="usuario?.diasLaborales?.includes('Sábado') || diasSelectos.includes('Sábado')" >
+                                        <div class="col-6 d-flex justify-content-center flex-row pt-2 pb-2">
+                                            <h3 class="d-flex aling-items-center">Inicio jornada (L a V): </h3>
+                                            <mat-form-field>
+                                                <mat-label>Desde:</mat-label>
+                                                <mat-select [value]="usuario?.horarioSabadoDesde" (selectionChange)="elegirhorario($event, 'sabadoDesde')"  [disabled]="!editar">
+                                                  @for (hora of horariosSabado; track hora) {
+                                                    <mat-option value="{{hora}}">{{hora}}</mat-option>
+                                                  }
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center flex-row pt-2 pb-2">
+                                            <h3 class="d-flex aling-items-center">Fin de la jornada (L a V): </h3>
+                                            <mat-form-field>
+                                                <mat-label>Hasta:</mat-label>
+                                                <mat-select [value]="usuario?.horarioSabadoHasta" (selectionChange)="elegirhorario($event, 'sabadoHasta')"  [disabled]="!editar">
+                                                  @for (hora of horariosSabado; track hora) {
+                                                    <mat-option value="{{hora}}">{{hora}}</mat-option>
+                                                  }
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

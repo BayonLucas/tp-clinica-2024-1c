@@ -11,6 +11,11 @@ export interface Usuario {
     fotoPerfil_1: string,
     fotoPerfil_2: string | null,
     especialidad: string[] | null,
+    diasLaborales: string[] | null,
+    horarioSemanaDesde: string | null,
+    horarioSemanaHasta: string | null,
+    horarioSabadoDesde: string | null,
+    horarioSabadoHasta: string | null,
     obraSocial: string | null,
-    adminValidation: boolean | null,
+    adminValidation: boolean,
 }

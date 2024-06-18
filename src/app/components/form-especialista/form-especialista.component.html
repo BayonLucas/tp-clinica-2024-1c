@@ -61,13 +61,25 @@
                         </select>  -->
                         <mat-form-field>
                             <mat-label>Especialidades</mat-label>
-                            <mat-select formControlName="especialidad" multiple>
+                            <mat-select formControlName="especialidad" multiple required>
                               @for (esp of especialidades; track esp) {
                                 <mat-option [value]="esp">{{esp}}</mat-option>
                               }
                             </mat-select>
                           </mat-form-field>
-                        <label for="floatingInput">Especialidad</label>
+                          <!-- <div class="alert alert-danger p-1" 
+                            *ngIf="form.controls?.['especialidad']?.invalid && 
+                            (form.controls?.['especialidad']?.dirty || 
+                            form.controls?.['especialidad']?.touched)">
+                            <mat-error *ngIf="form.controls?.['especialidad']?.errors?.['required']">
+                                La especialidad es requerido
+                            </mat-error>
+                        </div> -->
+
+                            <!-- @if (form.hasError('pattern') && !form.hasError('required')) {
+                                Your selection is invalid</mat-error>
+                            } -->
+                        <!-- <label for="floatingInput">Especialidad</label> -->
                     </div>
                 </div>
                 <div class="col-1">

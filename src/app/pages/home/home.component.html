@@ -2,6 +2,10 @@
     <div class="pantalla d-flex flex-column">
         <div *ngIf="usuarioLogueado">
             <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>
+            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Mis turnos</button>
+            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Turnos</button>
+            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Solicitar Turno</button>
+            <button  class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">Mi perfil</button>
         </div>
         <div class="bienvenida" *ngIf="!usuarioLogueado">
             <div class="row encabezado">

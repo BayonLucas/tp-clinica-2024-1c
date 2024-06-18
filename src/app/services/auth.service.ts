@@ -1,16 +1,20 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, signOut, user } from '@angular/fire/auth';
 import { UserModel } from '../models/user';
+import { Usuario } from '../models/usuario';
+import { StoreService } from './store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private auth:Auth = inject(Auth);
-  currentUserModel:UserModel | null = null; 
+  private storeServ:StoreService = inject(StoreService);
+  private currentUserModel:UserModel | null = null; 
   user$ = user(this.auth);
   currentUser = signal<UserModel | null | undefined>(undefined)
 
+  usuario:Usuario | null = null;
 
   constructor() { }
 
@@ -24,7 +28,9 @@ export class AuthService {
         throw new Error("El correo no ha sido verificado.");
       }
 
-      
+      this.storeServ.getUsuarioPorEmail(data.user.email!).subscribe( (data) => {
+        this.usuario = data;
+      })
 
       let userCredential:UserModel = {
         uid:data.user.uid,
@@ -57,6 +63,7 @@ export class AuthService {
     return await signOut(this.auth)
       .then( res => {
         this.currentUserModel = null;
+        this.usuario = null;
         localStorage.removeItem("userCredential");
       });
   }

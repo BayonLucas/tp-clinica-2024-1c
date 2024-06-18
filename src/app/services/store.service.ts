@@ -83,6 +83,11 @@ export class StoreService {
     setDoc(registro, usuario);
   }
 
+  updateUsuario(usuario:Usuario){
+    const registro = doc(this.users, usuario.id!);
+    setDoc(registro, usuario);
+  }
+
   //#endregion
 
   //#region Obras Sociales
