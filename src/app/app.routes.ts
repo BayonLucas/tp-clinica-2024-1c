@@ -14,7 +14,7 @@ export const routes: Routes = [
     },
     { path:'seccion_usuarios', 
         loadComponent: () => import('./pages/seccion-usuarios/seccion-usuarios.component').then(mod => mod.SeccionUsuariosComponent),
-        canActivate: [adminGuard] 
+        // canActivate: [adminGuard] 
     },
     { path:'mi-perfil', 
         loadComponent: () => import('./pages/mi-perfil/mi-perfil.component').then(mod => mod.MiPerfilComponent),

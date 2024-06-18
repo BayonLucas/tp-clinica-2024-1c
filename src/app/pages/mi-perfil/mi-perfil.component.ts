@@ -52,7 +52,7 @@ export class MiPerfilComponent implements OnInit {
   actualizarUsuario(){
     // this.usuario!.diasLaborales = this.diasSelectos;
     // this.storeServ.updateUsuario(this.usuario!);
-    this.turnoServ.generarTurnosProximosDosMeses(this.usuario!);
+    // this.turnoServ.generarTurnosProximosDosMeses(this.usuario!);
   }
 
   elegirDiaLaboral(event:any){

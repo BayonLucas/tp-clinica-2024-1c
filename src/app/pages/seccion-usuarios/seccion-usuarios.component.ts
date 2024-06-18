@@ -37,7 +37,7 @@ export class SeccionUsuariosComponent implements OnInit{
   ngOnInit(): void {
     this.storeServ.getUsuarios().subscribe( (data) => {
       this.usuarios = data;
-      console.log(data)
+      // console.log(data)
     });
     this.authServ.user$.subscribe( (data) => {
       this.usuarioLogueado = data?.email!;

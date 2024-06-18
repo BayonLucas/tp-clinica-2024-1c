@@ -20,7 +20,7 @@
                 </ng-container>
         
                 <ng-container *ngIf="opcionSelecta == 'usuarios'" >
-                    <div *ngIf="opcionSelecta == 'usuarios' " class="d-flex m-5">
+                    <div *ngIf="opcionSelecta == 'usuarios' " class="d-flex flex-wrap m-5">
                         <div *ngFor="let item of usuarios">
                             <div *ngIf="usuarioLogueado != item.email" class="col-lg-4 col-6">
                                 <card-usuario [usuario]="item"></card-usuario>

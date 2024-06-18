@@ -34,59 +34,67 @@ export class TurnoService {
   //   if(usuario.rol == 'especialista'){
   //     const today = new Date();
   //     let primerDiaLaboral = today;
-  
   //     while (!usuario.diasLaborales?.includes(format(primerDiaLaboral, 'EEEE'))) {
   //       primerDiaLaboral.setDate(primerDiaLaboral.getDate() + 1);
   //     }
-
-
   //   }  
   //   else{
   //     throw new Error('El usuario no es un especialista');
   //   }
-
-
   // }
-  async generarTurnosProximosDosMeses(especialista: Usuario): Promise<void> {
-    debugger;
-    const { diasLaborales, horarioSemanaDesde, horarioSemanaHasta, horarioSabadoDesde, horarioSabadoHasta } = especialista;
-    const horariosSemana = this.generarHorarios(horarioSemanaDesde, horarioSemanaHasta);
-    const horariosSabado = this.generarHorarios(horarioSabadoDesde, horarioSabadoHasta);
 
-    const hoy = new Date();
-    const dosMesesDespues = addDays(hoy, 5);
-    const diasIntervalo = eachDayOfInterval({ start: hoy, end: dosMesesDespues });
+  // async generarTurnosProximosDosMeses(especialista: Usuario): Promise<void> {
+  //   debugger;
+  //   const { diasLaborales, horarioSemanaDesde, horarioSemanaHasta, horarioSabadoDesde, horarioSabadoHasta } = especialista;
+  //   const horariosSemana = this.generarHorarios(horarioSemanaDesde, horarioSemanaHasta);
+  //   const horariosSabado = this.generarHorarios(horarioSabadoDesde, horarioSabadoHasta);
 
-    for (const dia of diasIntervalo) {
-      const diaSemana = format(dia, 'EEEE'); // Obtener el nombre del día en español
+  //   const hoy = new Date();
+  //   const dosMesesDespues = addDays(hoy, 5);
+  //   const diasIntervalo = eachDayOfInterval({ start: hoy, end: dosMesesDespues });
 
-      if (diasLaborales?.includes(diaSemana)) {
-        const horarios = diaSemana === 'Sábado' ? horariosSabado : horariosSemana;
+  //   for (const dia of diasIntervalo) {
+  //     const diaSemana = format(dia, 'EEEE'); // Obtener el nombre del día en español
 
-        for (const hora of horarios) {
-          const turnoFecha = setHours(setMinutes(dia, parseInt(hora.split(':')[1], 10)), parseInt(hora.split(':')[0], 10));
+  //     if (diasLaborales?.includes(diaSemana)) {
+  //       const horarios = diaSemana === 'Sábado' ? horariosSabado : horariosSemana;
+
+  //       for (const hora of horarios) {
+  //         const turnoFecha = setHours(setMinutes(dia, parseInt(hora.split(':')[1], 10)), parseInt(hora.split(':')[0], 10));
           
-          const turno = <Turno>{
-            especialista: `${especialista.nombre} ${especialista.apellido}`,
-            especialidad: especialista.especialidad?.join(', ') || '',
-            dia: format(dia, 'EEEE'),
-            mes: format(dia, 'MMMM'),
-            anio: format(dia, 'yyyy'),
-            hora,
-            fecha: turnoFecha,
-            estado: 'Disponible',
-            paciente: null,
-            calificacion: null,
-            resenia: null,
-            encuesta: null,
-            comentario: null,
-          };
+  //         const turno = <Turno>{
+  //           especialista: `${especialista.nombre} ${especialista.apellido}`,
+  //           especialidad: especialista.especialidad?.join(', ') || '',
+  //           dia: format(dia, 'EEEE'),
+  //           mes: format(dia, 'MMMM'),
+  //           anio: format(dia, 'yyyy'),
+  //           hora,
+  //           fecha: turnoFecha,
+  //           estado: 'Disponible',
+  //           paciente: null,
+  //           calificacion: null,
+  //           resenia: null,
+  //           encuesta: null,
+  //           comentario: null,
+  //         };
 
-          this.setTurno(turno);
-        }
-      }
+  //         this.setTurno(turno);
+  //       }
+  //     }
+  //   }
+  // }
+
+  crearTurnosUnMes(user:Usuario, especialidad:string){
+    if(user.rol == 'especialista' && user.diasLaborales?.length != 0){
+      user.diasLaborales!.forEach(dia =>{
+        
+      });
+
+
+
     }
   }
+
 
   async setTurno(turno:Turno){
     if(turno){

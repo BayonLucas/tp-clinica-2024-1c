@@ -5,7 +5,8 @@
         </div>
     </ng-container>
     <ng-container *ngIf="!loading"> -->
-        <img [src]="usuario.fotoPerfil_1" class="card-img-top foto" alt="...">
+        <img *ngIf="usuario.fotoPerfil_1" [src]="usuario.fotoPerfil_1" class="card-img-top foto" alt="...">
+        <img *ngIf="!usuario.fotoPerfil_1" src="../../../assets/img/incognito.jpg" class="card-img-top foto" alt="...">
         <div class="card-body">
             <h2 class="card-title">{{usuario.apellido}} {{usuario.nombre}}</h2>
             <p class="card-text data"><b>DNI:</b> {{usuario.dni}} - <b>Edad: </b>{{usuario.edad}}</p>

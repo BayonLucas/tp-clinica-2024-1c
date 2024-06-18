@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit{
         let usuarioLogueado$ = this.storeServ.getUsuarioPorEmail(user.email)
         usuarioLogueado$.subscribe( (data:any) => {
           this.usuarioLogueado = data;
-          console.log(this.usuarioLogueado)
+          // console.log(this.usuarioLogueado)
         });
       }
     });
