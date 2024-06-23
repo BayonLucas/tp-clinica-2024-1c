@@ -84,10 +84,28 @@ export class TurnoService {
   //   }
   // }
 
-  crearTurnosUnMes(user:Usuario, especialidad:string){
+  crearTurnosPorDias(user:Usuario, especialidad:string, totalDias:number){
+    console.log('Usuario:', user);
+    console.log('Especialidad:', especialidad);
+    console.log('Total dias:', totalDias);
+    
     if(user.rol == 'especialista' && user.diasLaborales?.length != 0){
-      user.diasLaborales!.forEach(dia =>{
+      user.diasLaborales!.forEach(diaLaboral =>{
+        let diaBase = new Date();
         
+        for(let i = 1; i <= totalDias; i++){
+          let auxDia = addDays(diaBase, i);
+          let diaSemana = format(auxDia, 'EEEE');
+          console.log(diaSemana);
+          if(diaLaboral == diaSemana){
+            let horarios = diaSemana === 'Sábado' ? this.horariosSabado : this.horariosSemana;
+            
+            
+          }
+        }
+        
+
+
       });
 
 

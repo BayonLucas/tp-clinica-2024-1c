@@ -51,7 +51,7 @@ export class LoginComponent {
         // usuario$.pipe( take(1) ).subscribe( async (data) => {
         usuario$.subscribe( async (data) => {
           if(data.rol == 'especialista' && !data.adminValidation){
-            // this.authServ.singOutUser();
+            // this.authServ.cerrarSesionUsuario();
             throw new Error('El especialista no tiene la validación del administrador. Aguarde a ser validado');
           }
           else{

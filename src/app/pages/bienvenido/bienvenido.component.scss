@@ -10,14 +10,8 @@
     padding: 20px;
 }
 
-.btn-custom{
-    background-color: #22cbd1;
-    color: black;
-    width: 250px;
-    height: 200px;
-    border-radius: 25px;
-    font-size: 25px;
-    font-weight: bolder;
+.titulo{
+    font-size: 70px;
 }
 
 .bienvenida{
@@ -26,26 +20,26 @@
     background: url('../../../assets/iconos/fav3.ico') no-repeat center ;
     background-size: contain;
 }
+
 .encabezado{
     padding: 10px;
     border-radius: 25px;
     width: auto;
     background-color: rgba(0, 0, 0, 0.493);
     h1{
-        padding-top: 10px;
+        padding: 10px;
+        margin-top: 5px;
         color: white;
     }
     h2{
         color: white;
     }
 }
+
 .btn{
     margin: 10px;
     color: black;
     font-weight: bold;
     font-size: 50px;
     background-color: #fea43dcc;
-}
-.titulo{
-    font-size: 70px;
 }

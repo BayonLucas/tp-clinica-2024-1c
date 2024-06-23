@@ -1,37 +1,25 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink, CommonModule, ReactiveFormsModule
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
 })
-export class NavBarComponent implements OnInit{
+export class NavBarComponent{
   authServ:AuthService = inject(AuthService);
   private router:Router = inject(Router);
 
   CerrarSesion(){
-    this.authServ.singOutUser().then(() => this.router.navigateByUrl('/home'));
+    this.authServ.cerrarSesionUsuario().then(() => this.router.navigateByUrl('/bienvenido'));
   }
 
-  ngOnInit(): void {
-    this.authServ.user$.subscribe( user => {
-      if(user){
-        this.authServ.currentUser!.set({
-          uid: user.uid,
-          email: user.email!,
-        });
-      }
-      else{
-        this.authServ.currentUser!.set(null);
-      }
-    });
-  
-  }
 }

@@ -1,31 +1,12 @@
 <div class="container-fluid d-flex justify-content-center aling-content-center">
     <div class="pantalla d-flex flex-column">
         <div *ngIf="usuarioLogueado">
-            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>
-            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Mis turnos</button>
-            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Turnos</button>
-            <button *ngIf="usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Solicitar Turno</button>
-            <button  class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">Mi perfil</button>
+            <button class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>
+            <button class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">Mis turnos</button>
+            <button class="btn btn-primary btn-custom" [routerLink]="['/turnos']">Turnos</button>
+            <button class="btn btn-primary btn-custom" [routerLink]="['/solicitar-turno']">Solicitar Turno</button>
+            <button class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">Mi perfil</button>
         </div>
-        <div class="bienvenida" *ngIf="!usuarioLogueado">
-            <div class="row encabezado">
-                <h1 class="d-flex justify-content-center titulo">Clínica OnLine</h1>
-                <h2 class="d-flex justify-content-center">Especialistas en salud</h2>
-            </div>
-            <div class="row h-75 ">
-                <div class="col-6 d-flex justify-content-center">
-                    <button class="btn btn-primary btn-lg w-75 h-75 m-5" [routerLink]="['/login']" routerLinkActive="router-link-active">Iniciar Sesión</button>  
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <button class="btn btn-primary btn-lg w-75 h-75 m-5" [routerLink]="['/register']" routerLinkActive="router-link-active">Registrase</button>
-                </div>
-            </div>
-        </div>
-        
-
-
-
-
     </div>
 </div>
 

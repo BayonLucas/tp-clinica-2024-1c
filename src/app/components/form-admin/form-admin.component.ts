@@ -84,7 +84,7 @@ export class FormAdminComponent implements OnInit{
 
   async registrar(){
     if(this.form.valid && this.captchaResolve){
-      await this.authServ.registerUser(this.email, this.password).then( async (result) => {
+      await this.authServ.registrarUsuario(this.email, this.password).then( async (result) => {
 
       const nuevoUsuario = <Usuario>{
         uid: result.user.uid,

@@ -14,6 +14,7 @@ import { StorageService } from '../../services/storage.service';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { HorarioService } from '../../services/horario.service';
 
 // import { CaptchaService } from '../../services/captcha.service';
 
@@ -30,6 +31,7 @@ export class FormEspecialistaComponent implements OnInit {
   private authServ:AuthService = inject(AuthService);
   private storeServ: StoreService = inject(StoreService);
   private storageServ:StorageService = inject(StorageService);
+  private horarioServ:HorarioService = inject(HorarioService);
   // private captchaServ:CaptchaService = inject(CaptchaService);
   private router:Router = inject(Router);
 
@@ -102,7 +104,7 @@ export class FormEspecialistaComponent implements OnInit {
 
   async registrar(){
     if(this.form.valid && this.captchaResolve){
-      await this.authServ.registerUser(this.email, this.password).then( async (result) => {
+      await this.authServ.registrarUsuario(this.email, this.password).then( async (result) => {
 
       const nuevoUsuario = <Usuario>{
         uid: result.user.uid,
@@ -128,6 +130,7 @@ export class FormEspecialistaComponent implements OnInit {
         showConfirmButton: false,
         timer: 2500 
         }).then( () => {
+          this.horarioServ.generarHorariosDefault(nuevoUsuario);
           this.router.navigateByUrl(this.redirectTo);
         });
       });
