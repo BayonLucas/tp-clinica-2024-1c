@@ -1,0 +1,13 @@
+<div class="especialidadadesContainer">
+    <div *ngFor="let item of especialidades" (click)="onEnviarEspecialidadSelecta(item)" class="opcionEspecialidad">
+        <ng-container *ngIf="this.doctor.especialidad?.includes(item.especialidad)">
+            <div class="card text-bg-dark">
+                <img *ngIf="item.img" [src]="item.img" alt="Especialidad" class="card-img">
+                <img *ngIf="!item.img" src="../../../assets/img/extra.jpg" alt="Especialidad" class="card-img">
+                <div class="card-img-overlay">
+                  <h1 class="card-title">{{item.especialidad}}</h1>
+                </div>
+              </div>
+        </ng-container>
+    </div>
+</div>

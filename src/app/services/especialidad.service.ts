@@ -14,9 +14,14 @@ export class EspecialidadService {
     this.especialidades = collection(this.db, 'especialidades');
   }
 
-  getEspecialidades(): Observable<string[]> {
+  getEspecialidades(): Observable<any[]> {
     return collectionData(this.especialidades).pipe(
       map((especialidades: any[]) => especialidades.map(e => e.especialidad))
+    );
+  }
+  getEspecialidadesconImagenes(): Observable<any[]> {
+    return collectionData(this.especialidades).pipe(
+      map(especialidades => especialidades as EspecialidadModel[])
     );
   }
 

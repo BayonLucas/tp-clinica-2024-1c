@@ -27,7 +27,7 @@
                                     <mat-form-field>
                                         <mat-label>Desde:</mat-label>
                                         <mat-select [(ngModel)]="horario.desde" [disabled]="!editar">
-                                            @if(dia != 'Sabado'){
+                                            @if(dia != 'sábado'){
                                                 <mat-option [value]="null"></mat-option>
                                                 @for (hora of horariosSemana; track hora) {
                                                   <mat-option value="{{hora}}">{{hora}}</mat-option>
@@ -44,7 +44,7 @@
                                         <mat-label>Hasta:</mat-label>
                                         <mat-select [(ngModel)]="horario.hasta" [disabled]="!editar">
                                             <mat-option [value]="null"></mat-option>
-                                            @if(dia != 'Sabado'){
+                                            @if(dia != 'sábado'){
                                                 @for (hora of horariosSemana; track hora) {
                                                     <mat-option value="{{hora}}">{{hora}}</mat-option>
                                                 }

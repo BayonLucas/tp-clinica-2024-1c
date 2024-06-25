@@ -3,7 +3,7 @@ import { CollectionReference, Firestore, addDoc, collection, collectionData, doc
 import { Observable, map } from 'rxjs';
 import { Horario } from '../models/horario';
 import { Usuario } from '../models/usuario';
-// import { HorariosEspecialista } from '../models/horarios_especialista';
+import { DIAS_LABORABLES } from '../constantes';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class HorarioService {
   private db:Firestore = inject(Firestore);
   private horarios!:CollectionReference;
   
-  diasLaborables = [ 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', ];
+  diasLaborables = DIAS_LABORABLES
 
   constructor() { 
     this.horarios = collection(this.db, 'horarios_especialistas');
@@ -22,6 +22,27 @@ export class HorarioService {
     let qry = query(
       this.horarios,
       where('uid', '==', uid)
+    );
+    return collectionData(qry).pipe( 
+      map( horarios => horarios as Horario[] ));
+  }
+  
+  getHorarioLaboralPorUidYEspecialidad(uid:string, especialidad:string): Observable<Horario[]> {
+    let qry = query(
+      this.horarios,
+      where('uid', '==', uid),
+      where('especialidad', '==', especialidad)
+    );
+    return collectionData(qry).pipe( 
+      map( horarios => horarios as Horario[] ));
+  }
+
+  getHorarioLaboralEspecifico(uid:string, especialidad:string, dia:string): Observable<Horario[]> {
+    let qry = query(
+      this.horarios,
+      where('uid', '==', uid),
+      where('especialidad', '==', especialidad),
+      where('dia', '==', dia)
     );
     return collectionData(qry).pipe( 
       map( horarios => horarios as Horario[] ));
@@ -72,13 +93,4 @@ export class HorarioService {
       });
     }
   }
-
-  // setHorarioLaboral(horario:string){
-  //   if(horario && horario != ''){
-  //     addDoc(this.horarios, <HorariosEspecialista>{
-  //       horario: horario.toLocaleUpperCase()
-  //     }).catch( (error) => { throw error } );
-  //   }
-  // }
-
 }

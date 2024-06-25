@@ -1,0 +1,6 @@
+<div class="doctoresContainer">
+    <div *ngFor="let doc of doctores" (click)="onClickEnviarUsuario(doc)" class="opcionDoctor">
+        <h2>{{doc.apellido}}, {{doc.nombre}}</h2>
+        <img [src]="doc.fotoPerfil_1" alt="Doctor/a">
+    </div>
+</div>

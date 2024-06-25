@@ -1,1 +1,66 @@
-<p>solicitar-turno works!</p>
+<div class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="pantalla d-flex flex-column">
+        <div style="width: 100%;">
+            <div class="row titulo">
+                <h1 class="d-flex justify-content-center align-items-center">Solicitar Turno</h1>
+            </div>
+            <div class="row">
+                <div class="col-3 d-flex justify-content-center align-items-center"> <!-- Especialistas -->
+                    <lista-doctores 
+                        (enviarUsuario)="onRecibirUsuario($event)" 
+                    ></lista-doctores>
+                </div>
+                <div class="col-3 d-flex justify-content-center align-items-center"> <!-- Especialidades -->
+                    <lista-especialidades 
+                        *ngIf="doctorElegido" [doctor]="this.doctorElegido" 
+                        (enviarEspecialidadSelecta)="onRecibirEspecialidad($event)"
+                    ></lista-especialidades>
+                </div>
+                <div class="col-3 d-flex justify-content-center align-items-center"> <!-- Dias -->
+                    <lista-dias 
+                        class="w-100"
+                        *ngIf="this.especialidadElegida"
+                        [usuario]="this.doctorElegido"
+                        [especialidad]="this.especialidadElegida.especialidad"
+                        (enviarDia)="onRecibirDia($event)"
+                    ></lista-dias>
+                </div>
+                <div class="col-3 d-flex justify-content-center align-items-center"> <!-- Horarios -->
+                    <lista-horarios 
+                        class="w-100"   
+                        *ngIf="this.diaElegido"
+                        [usuario]="this.doctorElegido"
+                        [especialidad]="this.especialidadElegida!.especialidad"
+                        [dia]="this.diaElegido"
+                        (enviarHorario)="onRecibirHorario($event)"
+                    ></lista-horarios>
+                </div>
+            </div>
+            <div class="row"> <!-- Tomar Turno -->
+                <div class="col-4">
+                    <div class="d-flex justify-content-center flex-column resumen">
+                        <h2 *ngIf="this.doctorElegido">Doctor/a: {{this.doctorElegido.apellido}} {{this.doctorElegido.nombre}}</h2>
+                        <h2 *ngIf="this.especialidadElegida">Especialidad: {{this.especialidadElegida!.especialidad}}</h2>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-center flex-column resumen">
+                        <h2 *ngIf="this.diaElegido">Dia: {{this.diaElegido | customDate: ''}}</h2>
+                        <h2 *ngIf="this.horarioElegido">Horario: {{this.horarioElegido | date: 'H:mm' }} Hs</h2>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-center align-content-center">
+                    <div class="d-flex justify-content-center align-content-center">
+                        <button 
+                        *ngIf="this.doctorElegido && this.especialidadElegida && this.diaElegido && this.horarioElegido"
+                        class="btn btn-primary"
+                        (click)="registrarTurno()">
+                            Solicitar Turno
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

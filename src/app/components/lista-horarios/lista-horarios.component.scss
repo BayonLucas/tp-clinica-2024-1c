@@ -1,0 +1,23 @@
+.horarioContainer{
+    max-height: 50rem;
+    overflow-y: auto;
+}
+.horario{
+    padding: 15px 20px 15px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    max-height: auto;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    button{
+        width: 100px;
+        height: 100px;
+        font-weight: bold;
+        font-size: 30px;
+        background-color: #fda53c;
+    }
+    button:hover{
+        background-color: #22cbd1;
+    }
+}

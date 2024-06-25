@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HorarioService } from '../../services/horario.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { DIAS_LABORABLES, HORARIOS_SABADO, HORARIOS_SEMANA } from '../../constantes';
 
 @Component({
   selector: 'mis-horarios',
@@ -24,9 +25,9 @@ export class MisHorariosComponent implements OnInit{
   horarios:Horario[] = [];
   horariosBackUp:Horario[] = [];
   
-  diasLaborables = [ 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', ];
-  horariosSemana = [ '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00' ];
-  horariosSabado = [ '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00' ];
+  diasLaborables = DIAS_LABORABLES;
+  horariosSemana = HORARIOS_SEMANA;
+  horariosSabado = HORARIOS_SABADO;
     
   onClickEditar(){
     this.editar = !this.editar;

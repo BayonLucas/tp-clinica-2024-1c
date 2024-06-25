@@ -1,0 +1,19 @@
+<div class="horarioContainer">
+    <div *ngFor="let horario of horariosPosibles" 
+        (click)="onEnviarHorarioSelecto(horario)" 
+        class="horario">
+        @if(this.turnosOcupados.length > 0){
+            <ng-container *ngFor="let item of turnosOcupados">
+                <button [disabled]="item.fecha == horario"
+                    class="btn btn-secondary ">{{ horario | date: 'H:mm' }}
+                </button>
+            </ng-container>
+        }
+        @else{
+            <button 
+                class="btn btn-secondary ">{{ horario | date: 'H:mm' }}
+            </button>
+        }
+        
+    </div>
+</div>

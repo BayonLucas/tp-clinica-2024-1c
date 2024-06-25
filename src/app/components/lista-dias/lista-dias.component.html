@@ -1,0 +1,9 @@
+<div class="fechaContainer">
+    <div *ngFor="let dia of diasPosiblesSegunEspecialista" 
+        (click)="onEnviarDiaSelecto(dia)" 
+        class="fecha">
+        <button
+            class="btn btn-secondary ">{{ dia | date: 'YYYY/MM/dd' }}
+        </button>
+    </div>
+</div>
