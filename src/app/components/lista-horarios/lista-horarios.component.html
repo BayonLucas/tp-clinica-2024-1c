@@ -4,7 +4,7 @@
         class="horario">
         @if(this.turnosOcupados.length > 0){
             <ng-container *ngFor="let item of turnosOcupados">
-                <button [disabled]="item.fecha == horario"
+                <button [disabled]="item.fecha == horario.toString()"
                     class="btn btn-secondary ">{{ horario | date: 'H:mm' }}
                 </button>
             </ng-container>

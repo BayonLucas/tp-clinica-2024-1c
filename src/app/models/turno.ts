@@ -5,7 +5,7 @@ export interface Turno {
     uid_doctor: string,
     uid_paciente: string,
     especialidad: string, 
-    fecha: Date,
+    fecha: string,
     dia: number,
     mes:number,
     anio:number,

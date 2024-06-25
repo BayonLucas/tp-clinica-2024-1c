@@ -69,25 +69,25 @@ export class SolicitarTurnoComponent implements OnInit{
 
       console.log(this.horarioElegido);
 
-      // const nuevoTurno = <Turno>{
-      //   id: '',
-      //   uid_doctor: this.doctorElegido.uid,
-      //   uid_paciente: this.usuario.uid,
-      //   especialidad: this.especialidadElegida?.especialidad,
-      //   fecha: this.horarioElegido,
-      //   dia: getDate(this.horarioElegido),
-      //   mes: getMonth(this.horarioElegido) + 1,
-      //   anio: getYear(this.horarioElegido),
-      //   hora: format(this.horarioElegido, 'HH:mm'),
-      //   estado: 'Esperando confirmación',
-      //   calificacion: null,
-      //   resenia: null,
-      //   encuesta: null,
-      //   comentario: null
-      // }
-      // this.turnoServ.setTurno(nuevoTurno).then( () => {
-      //   this.router.navigateByUrl('/home');
-      // })
+      const nuevoTurno = <Turno>{
+        id: '',
+        uid_doctor: this.doctorElegido.uid,
+        uid_paciente: this.usuario.uid,
+        especialidad: this.especialidadElegida?.especialidad,
+        fecha: this.horarioElegido.toString(),
+        dia: getDate(this.horarioElegido),
+        mes: getMonth(this.horarioElegido) + 1,
+        anio: getYear(this.horarioElegido),
+        hora: format(this.horarioElegido, 'HH:mm'),
+        estado: 'Esperando confirmación',
+        calificacion: null,
+        resenia: null,
+        encuesta: null,
+        comentario: null
+      }
+      this.turnoServ.setTurno(nuevoTurno).then( () => {
+        this.router.navigateByUrl('/home');
+      })
 
     }
   }
