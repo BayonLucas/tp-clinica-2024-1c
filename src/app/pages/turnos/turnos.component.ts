@@ -13,15 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 import { FiltroService } from '../../services/filtro.service';
 
 @Component({
-  selector: 'app-mis-turnos',
+  selector: 'app-turnos',
   standalone: true,
   imports: [
     FormsModule, ReactiveFormsModule, CommonModule, TurnoComponent, MatFormFieldModule, MatInputModule
   ],
-  templateUrl: './mis-turnos.component.html',
-  styleUrl: './mis-turnos.component.scss'
+  templateUrl: './turnos.component.html',
+  styleUrl: './turnos.component.scss'
 })
-export class MisTurnosComponent implements OnInit{
+export class TurnosComponent implements OnInit{
   private authServ:AuthService = inject(AuthService);
   private userServ:UsuarioService = inject(UsuarioService);
   private turnoServ:TurnoService = inject(TurnoService);
@@ -31,39 +31,13 @@ export class MisTurnosComponent implements OnInit{
   turnos:Turno[] = [];
   turnosFiltrados:Turno[] = [];
   filtro:string='';
-
   usuario$:Observable<Usuario | null>;
-
-
+  
   constructor(){
     this.usuario = this.authServ.usuario;
     this.usuario$ = new BehaviorSubject<Usuario | null>(this.usuario).asObservable(); 
   }
   
-  private fetchTurnosForUser(usuario: Usuario | null): void {
-    if (usuario && usuario.rol === 'paciente') {
-      this.turnoServ.getTurnosPorPaciente(usuario.uid).subscribe((data) => {
-        this.turnos = this.filtroServ.ordenarPorFecha(data);
-        this.turnosFiltrados = this.turnos;
-      });
-    } else if (usuario && usuario.rol === 'especialista') {
-      this.turnoServ.getTurnosPorEspecialista(usuario.uid).subscribe((data) => {
-        this.turnos = this.filtroServ.ordenarPorFecha(data);
-        this.turnosFiltrados = this.turnos;
-      });
-    }
-    else{
-      this.turnoServ.getTurnos().subscribe((data) => {
-        this.turnos = this.filtroServ.ordenarPorFecha(data);
-        this.turnosFiltrados = this.turnos;
-      });
-    }
-  }
-
-  ordenarSegunFiltro(){
-    this.turnosFiltrados = this.filtroServ.filtrarTurnosPorSujeto_Especialiadad_HistClinica(this.turnos, this.filtro, this.usuario?.rol!)
-  }
-
   ngOnInit(): void {
     this.usuario$.subscribe((usuario: Usuario | null) => {
       if (usuario === null) {
@@ -78,5 +52,19 @@ export class MisTurnosComponent implements OnInit{
         this.fetchTurnosForUser(this.usuario);
       }
     });
-  }   
+  }
+
+  private fetchTurnosForUser(usuario: Usuario | null): void {
+    if (usuario && usuario.rol === 'admin') {
+      this.turnoServ.getTurnos().subscribe((data) => {
+        this.turnos = this.filtroServ.ordenarPorFecha(data);
+        this.turnosFiltrados = this.turnos;
+      });
+    }
+  }
+
+  ordenarSegunFiltro(){
+    this.turnosFiltrados = this.filtroServ.filtrarTurnosPorSujeto_Especialiadad(this.turnos, this.filtro, this.usuario?.rol!)
+  }
+
 }

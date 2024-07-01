@@ -25,6 +25,7 @@ export class SeccionUsuariosComponent implements OnInit{
   
   usuarioLogueado:string = '';
   usuarios:Usuario[] = [];
+  usuariosfiltrados:Usuario[] = [];
   opcionSelecta:string = '';
   
   

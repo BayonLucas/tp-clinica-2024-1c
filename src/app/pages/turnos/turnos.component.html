@@ -1,0 +1,32 @@
+<div class="container-fluid d-flex justify-content-center aling-content-center">
+    <div class="pantalla d-flex flex-column">
+        <div class="row w-100">
+            <div class="d-flex flex-row justify-content-around">
+                <h1 class="titulo">Turnos</h1>
+                <mat-form-field >
+                    <mat-label>Filtro:</mat-label>
+                    <input matInput [(ngModel)]="filtro" (input)="ordenarSegunFiltro()">
+                </mat-form-field>        
+            </div>
+        </div>
+        <div class="row">
+            @if(turnos.length > 0){
+                @if(turnosFiltrados.length > 0){
+                    <ng-container *ngFor="let turno of turnosFiltrados">
+                        <app-turno 
+                            [quienConsulta]="this.usuario?.rol!" 
+                            [turno]="turno"
+                            class="d-flex justify-content-center"
+                        ></app-turno>
+                    </ng-container>
+                }
+                @else{
+                    <p class="msj">No posee turnos correspondientes al filtro aplicado</p>
+                }
+            }
+            @else{
+                <p class="msj">No posee turnos</p>
+            }
+        </div>
+    </div>
+</div>

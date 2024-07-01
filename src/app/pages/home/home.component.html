@@ -2,10 +2,12 @@
     <div class="pantalla d-flex flex-column">
         <div *ngIf="usuarioLogueado">
             <button *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>
-            <button  class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">Mis turnos</button>
+            <button *ngIf="this.usuarioLogueado.rol == 'especialista'" class="btn btn-primary btn-custom" [routerLink]="['/pacientes']">Pacientes</button>
+            <button *ngIf="this.usuarioLogueado.rol != 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">Mis turnos</button>
             <button *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/turnos']">Turnos</button>
-            <button  class="btn btn-primary btn-custom" [routerLink]="['/solicitar-turno']">Solicitar Turno</button>
+            <button *ngIf="this.usuarioLogueado.rol != 'especialista'" class="btn btn-primary btn-custom" [routerLink]="['/solicitar-turno']">Solicitar Turno</button>
             <button  class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">Mi perfil</button>
+            <button *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/graficos-y-estadisticas']">Gráficos y estadísticas</button>
         </div>
     </div>
 </div>

@@ -34,8 +34,23 @@ export const routes: Routes = [
         // canActivate: [adminValidationGuard] 
         // canActivate: [adminGuard] 
     },
+    { path:'turnos', 
+        loadComponent: () => import('./pages/turnos/turnos.component').then(mod => mod.TurnosComponent),
+        // canActivate: [adminValidationGuard] 
+        // canActivate: [adminGuard] 
+    },
     { path:'mis-turnos', 
         loadComponent: () => import('./pages/mis-turnos/mis-turnos.component').then(mod => mod.MisTurnosComponent),
+        // canActivate: [adminValidationGuard] 
+        // canActivate: [adminGuard] 
+    },
+    { path:'pacientes', 
+        loadComponent: () => import('./pages/pacientes/pacientes.component').then(mod => mod.PacientesComponent),
+        // canActivate: [adminValidationGuard] 
+        // canActivate: [adminGuard] 
+    },
+    { path:'mis-turnos', 
+        loadComponent: () => import('./pages/graficos-y-estadisticas/graficos-y-estadisticas.component').then(mod => mod.GraficosYEstadisticasComponent),
         // canActivate: [adminValidationGuard] 
         // canActivate: [adminGuard] 
     },

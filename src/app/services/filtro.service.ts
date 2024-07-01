@@ -56,6 +56,50 @@ export class FiltroService {
     });
   }
 
+  filtrarTurnosPorSujeto_Especialiadad_HistClinica(listaTurnos:Turno[], filtro:string, rol:string){
+    return listaTurnos.filter( (turno) => {
+      let resultados:boolean[] = [];
+      const lowerFiltro = filtro.toLowerCase();
+      
+      const matchEspecialidad = turno.especialidad.toLowerCase().includes(lowerFiltro);
+      resultados.push(matchEspecialidad);
+      
+      let sujeto:Usuario;
+      if(rol == 'admin' || rol == 'paciente'){
+        sujeto = this.allEspecialistas.find(doc => doc.uid === turno.uid_doctor)!;
+      }
+      else{
+        sujeto = this.allPacientes.find(pac => pac.uid === turno.uid_paciente)!;
+
+      }
+      
+      const matchSujeto = sujeto!.apellido.toLowerCase().includes(lowerFiltro) || sujeto!.nombre.toLowerCase().includes(lowerFiltro);
+      resultados.push(matchSujeto);
+
+      if(turno.historiaClinica){
+        const matchAltura = turno.historiaClinica?.altura.toString().includes(lowerFiltro);
+        const matchPeso = turno.historiaClinica?.peso.toString().includes(lowerFiltro);
+        const matchTemp = turno.historiaClinica?.temperatura.toString().includes(lowerFiltro);
+        const matchPresion = turno.historiaClinica?.presion.toString().includes(lowerFiltro);
+        
+        resultados.push(matchAltura);
+        resultados.push(matchPeso);
+        resultados.push(matchTemp);
+        resultados.push(matchPresion);
+        
+        if(turno.historiaClinica.dinamicos && turno.historiaClinica.dinamicos.length > 0){
+          const matchDinamicos = turno.historiaClinica?.dinamicos.some( (dinamic) => {
+            return (dinamic.clave.toLowerCase().includes(lowerFiltro) || dinamic.valor.toLowerCase().includes(lowerFiltro))
+          });
+          resultados.push(matchDinamicos);
+        }
+
+      }
+
+      return resultados.some(res => res);
+    });
+  }
+
 
 
 }
