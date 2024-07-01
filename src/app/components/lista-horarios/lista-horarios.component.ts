@@ -75,6 +75,13 @@ export class ListaHorariosComponent implements OnInit, OnChanges{
   }
 
 
+  verificarOcupado(horario:Date){
+    return this.turnosOcupados.some( (item) => {
+      return item.fecha == horario.toString();
+    });
+  }
+
+
   ngOnInit(): void {
     this.obtenerHorariosTurno();
   }

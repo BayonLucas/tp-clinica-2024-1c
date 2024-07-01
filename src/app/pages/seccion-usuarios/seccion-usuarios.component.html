@@ -2,6 +2,17 @@
     <div class="pantalla d-flex flex-column position-relative">
         <div *ngIf="opcionSelecta == '' || opcionSelecta == 'usuarios'" class="row mt-2">
             <h1 class="titulo">Sección usuarios</h1>
+            <ng-container  *ngIf="opcionSelecta == 'usuarios'">
+                <mat-form-field>
+                    <mat-label>Roles</mat-label>
+                    <mat-select [(value)]="filtro" (valueChange)="aplicarFiltro($event)">
+                        <mat-option mat-option selected value="Todos">Todos</mat-option>
+                        <mat-option mat-option value="paciente">Pacientes</mat-option>
+                        <mat-option mat-option value="especialista">Especialistas</mat-option>
+                        <mat-option mat-option value="admin">Admins</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </ng-container>
         </div>
         <button *ngIf="opcionSelecta != ''" class="btn btn-danger position-absolute top-0 start-0 m-2 backOpcion" (click)="elegirOpcion('')">
             <img src="../../../assets/iconos/volver-flecha.png" alt="">
@@ -21,7 +32,7 @@
         
                 <ng-container *ngIf="opcionSelecta == 'usuarios'" >
                     <div *ngIf="opcionSelecta == 'usuarios' " class="d-flex flex-wrap m-5">
-                        <div *ngFor="let item of usuarios">
+                        <div *ngFor="let item of usuariosfiltrados">
                             <div *ngIf="usuarioLogueado != item.email" class="col-lg-4 col-6">
                                 <card-usuario [usuario]="item"></card-usuario>
                             </div>

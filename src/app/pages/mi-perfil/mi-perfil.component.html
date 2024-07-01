@@ -16,7 +16,7 @@
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img [src]="usuario!.fotoPerfil_1" class="d-block w-100" alt="...">
+                <img [src]="usuario!.fotoPerfil_1" class="d-block w-100 active" alt="...">
               </div>
               <div class="carousel-item">
                 <img [src]="usuario!.fotoPerfil_2" class="d-block w-100" alt="...">
@@ -37,7 +37,10 @@
 
         <div class="col-md-8">
           <div class="card-body">
-            <h1 class="card-title">{{usuario?.nombre}} {{usuario?.apellido}}</h1>
+            <div class="d-flex justify-content-between">
+              <h1 class="card-title">{{usuario?.nombre}} {{usuario?.apellido}}</h1>
+              <button class="btn btn-info" (click)="openHistorialClinico()">Historial Clínico</button>
+            </div>
             <p class="card-text">Rol: {{usuario?.rol}}</p>
             <p class="card-text">Email: {{usuario?.email}}</p>
             <p class="card-text">Edad: {{usuario?.edad}}</p>

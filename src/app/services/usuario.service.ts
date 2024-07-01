@@ -91,4 +91,14 @@ export class UsuarioService {
     const registro = doc(this.users, usuario.id!);
     setDoc(registro, usuario);
   }
+
+  getEspecialistasSegunPaciente(uids:string[]){
+    let qry = query(
+      this.users, 
+      where('uid', 'in', uids)
+    );
+    return collectionData(qry).pipe(
+      map( usuarios => usuarios as Usuario[] ));
+  }
+
 }

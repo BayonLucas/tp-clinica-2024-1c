@@ -1,0 +1,62 @@
+<div class="modal-header w-100 d-flex justify-content-around">
+    <h1 class="modal-title">Historial Clínico</h1>
+    <ng-container *ngIf="this.usuario.rol == 'paciente' && this.filtro.length > 1">
+          <select class="form-select w-50 mx-5" (change)="aplicarFiltro($event)">
+            <option selected value="todos">Todos</option>
+            <ng-container *ngFor="let item of filtro; let i = index">
+                <option value={{i}}>{{item.apellido}}, {{item.nombre}}</option>
+            </ng-container>
+            
+          </select>
+    </ng-container>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body w-100">
+    @if(this.historialClinico.length > 0){
+        @if(this.historialClinicoFiltrado.length > 0){
+            <div *ngFor="let item of this.historialClinicoFiltrado">
+                <div *ngIf="item.estado == 'Realizado' && item.historiaClinica" class="hcContainer">
+                    <h1 class="fecha">{{item.fecha | customDate}}</h1>
+                    <div class="d-flex justify-content-between">
+                        <h2>Especialidad: {{item.especialidad}}</h2>
+                        @if(this.filtroElegido == 'todos'){
+                            <ng-container *ngFor="let u of filtro">
+                                <h2 *ngIf="u.uid == item.uid_doctor">Doctor/a: {{u.apellido}}, {{u.nombre}}</h2>
+                            </ng-container>
+                        }
+                        @else {
+                            <h2>Doctor/a: {{filtroElegido.apellido}}, {{filtroElegido.nombre}}</h2>
+                        }
+                    </div>
+                    <hr>
+                    <h3><b>Reseña del Dr/a:</b> {{item.resenia}}</h3>
+                    <hr>
+                    <div class="d-flex flex-wrap justify-content-center datos">
+                        <h3 class="p-1 m-1 w-auto"><b>Altura:</b>  {{item.historiaClinica.altura}}</h3>
+                        <h3 class="p-1 m-1 w-auto"><b>Peso:</b>  {{item.historiaClinica.peso}}</h3>
+                        <h3 class="p-1 m-1 w-auto"><b>Presión:</b>  {{item.historiaClinica.presion}}</h3>
+                        <h3 class="p-1 m-1 w-auto"><b>Temperatura:</b>  {{item.historiaClinica.temperatura}}</h3>
+                        <ng-container *ngFor="let dina of item.historiaClinica.dinamicos">
+                            <h3 class="p-1 m-1 w-auto"><b>{{dina.clave}}:</b>  {{dina.valor}}</h3>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        }
+        @else{
+            <p class="msj">No posee historia clínica correspondiente al filtro aplicado</p>
+        }
+    }
+    @else{
+        <p class="msj">No posee Historial Clínico</p>
+    }
+</div>
+<div class="modal-footer w-100 d-flex justify-content-around">
+    <img class="export" 
+        src="../../../assets/modalBtn/pdf.png" 
+        alt="exportPDF" 
+        title="Exportar a PDF" 
+        (click)="this.pdfServ.generarHistoriaClinicaPDF(this.historialClinicoFiltrado, this.usuario, this.filtro)"
+        *ngIf="this.usuario.rol == 'paciente'">
+    <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>

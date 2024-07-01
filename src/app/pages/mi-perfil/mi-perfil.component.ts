@@ -9,12 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Usuario } from '../../models/usuario';
 import { MisHorariosComponent } from '../../components/mis-horarios/mis-horarios.component';
 import { UsuarioService } from '../../services/usuario.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalHistorialClinicoComponent } from '../../components/modal-historial-clinico/modal-historial-clinico.component';
 
 @Component({
   selector: 'app-mi-perfil',
   standalone: true,
   imports: [
-    RouterLink, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, MisHorariosComponent
+    RouterLink, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, MisHorariosComponent, ModalHistorialClinicoComponent
   ],
   templateUrl: './mi-perfil.component.html',
   styleUrl: './mi-perfil.component.scss'
@@ -22,9 +24,28 @@ import { UsuarioService } from '../../services/usuario.service';
 export class MiPerfilComponent implements OnInit {
   private authServ:AuthService = inject(AuthService);
   private userServ:UsuarioService = inject(UsuarioService);
+  private modalService = inject(NgbModal);
+
   usuario:Usuario | null = this.authServ.usuario;
 
   constructor() { }
+
+
+
+
+
+
+  openHistorialClinico() {
+		const modalRef = this.modalService.open(ModalHistorialClinicoComponent, { centered: true, size: 'lg' });
+		modalRef.componentInstance.usuario = this.usuario;
+	}
+
+
+
+
+
+
+
 
   ngOnInit(): void {
     this.authServ.user$.subscribe( (data) => {
@@ -34,6 +55,7 @@ export class MiPerfilComponent implements OnInit {
           this.usuario = res;
         });
       }
+      
     });
   }
 }

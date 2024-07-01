@@ -21,12 +21,12 @@ export class FiltroService {
     });
   }
 
-  ordenarPorFecha(turnos:Turno[]){
+  ordenarPorFecha(turnos:Turno[], asc:boolean = true){
     return turnos.sort((a, b) => {
       const dateA = new Date(a.fecha).getTime();
       const dateB = new Date(b.fecha).getTime();
 
-      return dateA - dateB;
+      return asc? dateA - dateB : dateB - dateA;
     });
   }
 

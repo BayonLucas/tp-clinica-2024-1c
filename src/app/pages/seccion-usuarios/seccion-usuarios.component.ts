@@ -9,12 +9,14 @@ import { Usuario } from '../../models/usuario';
 import { CardUsuarioComponent } from '../../components/card-usuario/card-usuario.component';
 import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-seccion-usuarios',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink
+    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink, MatFormFieldModule, MatSelectModule
   ],
   templateUrl: './seccion-usuarios.component.html',
   styleUrl: './seccion-usuarios.component.scss'
@@ -24,21 +26,33 @@ export class SeccionUsuariosComponent implements OnInit{
   private authServ:AuthService = inject(AuthService);
   
   usuarioLogueado:string = '';
-  usuarios:Usuario[] = [];
-  usuariosfiltrados:Usuario[] = [];
   opcionSelecta:string = '';
   
-  
+  usuarios:Usuario[] = [];
+  usuariosfiltrados:Usuario[] = [];
+  filtro:string = 'Todos';
+
+
   elegirOpcion(op:string){
     this.opcionSelecta = op;
     // this.usuarios = []; 
   }
   
+  aplicarFiltro(event:any){
+    if(event == 'todos'){
+      this.usuariosfiltrados = this.usuarios;
+    }
+    else{
+      this.usuariosfiltrados = this.usuarios.filter( (user) => {
+        return user.rol == event; 
+      });
+    }
+  }
   
   ngOnInit(): void {
     this.storeServ.getUsuarios().subscribe( (data) => {
       this.usuarios = data;
-      // console.log(data)
+      this.usuariosfiltrados = this.usuarios;
     });
     this.authServ.user$.subscribe( (data) => {
       this.usuarioLogueado = data?.email!;

@@ -12,8 +12,8 @@ import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from '../../models/usuario';
 import { StorageService } from '../../services/storage.service';
 
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { HorarioService } from '../../services/horario.service';
 
 // import { CaptchaService } from '../../services/captcha.service';

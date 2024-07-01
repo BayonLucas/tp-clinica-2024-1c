@@ -64,7 +64,17 @@ export class TurnoService {
     );
     return collectionData(qry).pipe( 
       map( turnos => turnos as Turno[] ));
-    }
+  }
+  getTurnosConHistoriaClinicaPorPaciente(uid_paciente:string): Observable<Turno[]>{
+    let qry = query(
+      this.turnos,
+      where('uid_paciente', '==', uid_paciente),
+      where('estado', '==', 'Realizado'),
+      where('historiaClinica', '!=', null),
+    );
+    return collectionData(qry).pipe( 
+      map( turnos => turnos as Turno[] ));
+  }
     
   getTurnosPorEstado(estado:EstadoTurno): Observable<Turno[]>{      
       let qry = query(
@@ -102,4 +112,5 @@ export class TurnoService {
     const registro = doc(this.turnos, turno.id!);
     await setDoc(registro, turno);
   }
+
 }
