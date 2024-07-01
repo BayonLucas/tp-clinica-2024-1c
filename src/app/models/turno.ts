@@ -1,3 +1,4 @@
+import { HistorialClinico } from "./historiaClinica";
 import { EstadoTurno } from "./types";
 
 export interface Turno {
@@ -15,4 +16,5 @@ export interface Turno {
     resenia: string | null,
     encuesta: string | null,
     comentario: string | null,
+    historiaClinica: HistorialClinico | null
 }

@@ -28,11 +28,29 @@ export class UsuarioService {
       map( usuarios => usuarios[0] as Usuario ));
   }
 
+  getUsuarioPorUid(uid:string): Observable<Usuario> {
+    let qry = query(
+      this.users,
+      where('uid', '==', uid)
+    );
+    return collectionData(qry).pipe( take(1),
+      map( usuarios => usuarios[0] as Usuario ));
+  }
+
   getUsuariosAdmitidosPorRol(rol:string): Observable<Usuario[]> {
     let qry = query(
       this.users,
       where('rol', '==', rol),
       where('adminValidation', '==', true)
+    );
+    return collectionData(qry).pipe(
+      map( usuarios => usuarios as Usuario[] ));
+  }
+
+  getUsuariosPorRol(rol:string): Observable<Usuario[]> {
+    let qry = query(
+      this.users,
+      where('rol', '==', rol),
     );
     return collectionData(qry).pipe(
       map( usuarios => usuarios as Usuario[] ));

@@ -22,7 +22,7 @@ export const routes: Routes = [
     { path:'seccion_usuarios', 
         loadComponent: () => import('./pages/seccion-usuarios/seccion-usuarios.component').then(mod => mod.SeccionUsuariosComponent),
         // canActivate: [adminValidationGuard] 
-        canActivate: [adminGuard] 
+        // canActivate: [adminGuard] 
     },
     { path:'mi-perfil', 
         loadComponent: () => import('./pages/mi-perfil/mi-perfil.component').then(mod => mod.MiPerfilComponent),
@@ -31,6 +31,11 @@ export const routes: Routes = [
     },
     { path:'solicitar-turno', 
         loadComponent: () => import('./pages/solicitar-turno/solicitar-turno.component').then(mod => mod.SolicitarTurnoComponent),
+        // canActivate: [adminValidationGuard] 
+        // canActivate: [adminGuard] 
+    },
+    { path:'mis-turnos', 
+        loadComponent: () => import('./pages/mis-turnos/mis-turnos.component').then(mod => mod.MisTurnosComponent),
         // canActivate: [adminValidationGuard] 
         // canActivate: [adminGuard] 
     },

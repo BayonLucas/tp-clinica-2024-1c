@@ -1,11 +1,11 @@
 <div class="container-fluid d-flex justify-content-center aling-content-center">
     <div class="pantalla d-flex flex-column">
         <div *ngIf="usuarioLogueado">
-            <button class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>
-            <button class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">Mis turnos</button>
-            <button class="btn btn-primary btn-custom" [routerLink]="['/turnos']">Turnos</button>
-            <button class="btn btn-primary btn-custom" [routerLink]="['/solicitar-turno']">Solicitar Turno</button>
-            <button class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">Mi perfil</button>
+            <button *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>
+            <button  class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">Mis turnos</button>
+            <button *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/turnos']">Turnos</button>
+            <button  class="btn btn-primary btn-custom" [routerLink]="['/solicitar-turno']">Solicitar Turno</button>
+            <button  class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">Mi perfil</button>
         </div>
     </div>
 </div>

@@ -71,7 +71,6 @@ export class ListaHorariosComponent implements OnInit, OnChanges{
 
     this.turnoServ.getTurnosPorDia(this.usuario!.uid, this.especialidad, dia, mes + 1, anio).subscribe( data => {
       this.turnosOcupados = data;
-      console.log(this.turnosOcupados);
     });
   }
 

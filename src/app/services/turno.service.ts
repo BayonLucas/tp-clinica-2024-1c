@@ -98,4 +98,8 @@ export class TurnoService {
     }
   }
 
+  async updateTurno(turno:Turno){
+    const registro = doc(this.turnos, turno.id!);
+    await setDoc(registro, turno);
+  }
 }

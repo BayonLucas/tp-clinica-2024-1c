@@ -8,3 +8,16 @@
 // }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.pantalla{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 90%;
+    width: 80%;
+    border-radius: 20px;
+    padding: 20px;
+}
+

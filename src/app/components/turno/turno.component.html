@@ -1,0 +1,86 @@
+<div class="row d-flex justify-content-center turnoContainer">
+    <div class="row w-100 d-flex flex-row justify-content-center">
+        <div class="col-9">
+            <div class="d-flex flex-row justify-content-between">
+                <div>
+                    <h2>{{turno.fecha | customDate }}</h2>
+                    <ng-container *ngIf="dr">
+                        <h3 *ngIf="quienConsulta == 'admin' || quienConsulta == 'paciente' ">{{turno.especialidad}} - Dr/a: {{dr.apellido}}, {{dr.nombre}}</h3>
+                    </ng-container>
+                    <ng-container *ngIf="paciente">
+                        <h3 *ngIf="quienConsulta == 'admin' || quienConsulta == 'especialista' ">{{turno.especialidad}} - Paciente: {{paciente.apellido}}, {{paciente.nombre}}</h3>
+                    </ng-container>
+                </div>
+                <h1 class="d-flex justify-content-center align-items-center estado">{{turno.estado}}</h1>
+            </div>
+            <div class="d-flex flex-row justify-content-between">
+                <h4>{{turno.hora}} hs</h4>
+                <div class="d-flex flex-row ">
+                    <img *ngIf="(quienConsulta == 'paciente' && (turno.estado != 'Realizado' && turno.estado != 'Rechazado')) 
+                        || ((quienConsulta == 'especialista' || quienConsulta == 'admin') && turno.estado == 'Esperando confirmación')"
+                        class="btn-turno"
+                        (click)="cancelar_rechazarTurno()" 
+                        src="../../../assets/turno/cancelar.png" 
+                        alt="cancelar turno"
+                        title="Cancelar/Rechazar Turno">
+    
+                    <img *ngIf="turno.comentario || turno.resenia" 
+                        class="btn-turno"
+                        (click)="verReseniaComentarioClick()" 
+                        src="../../../assets/turno/buena-resena.png" 
+                        alt="ver reseña"
+                        title="Ver reseña/comentario">
+    
+                    <img *ngIf="quienConsulta == 'paciente' && turno.estado == 'Realizado' && turno.resenia && !turno.encuesta" 
+                        class="btn-turno" 
+                        (click)="completarEncuesta()"
+                        src="../../../assets/turno/evaluacion.png" 
+                        alt="completar encuesta"
+                        title="Completar encuesta">
+                     
+                    <img *ngIf="quienConsulta == 'paciente' && turno.estado == 'Realizado' && !turno.calificacion" 
+                        class="btn-turno"
+                        (click)="calificarAtencion()" 
+                        src="../../../assets/turno/calificar.png" 
+                        alt="calificar atencion"
+                        title="Calificar atención">
+                   
+                    <img *ngIf="quienConsulta == 'especialista' && turno.estado == 'Esperando confirmación' " 
+                        class="btn-turno"
+                        (click)="aceptarTurno()" 
+                        src="../../../assets/turno/aceptar.png" 
+                        alt="aceptar turno"
+                        title="Aceptar turno">
+    
+                    <img *ngIf="quienConsulta == 'especialista' && turno.estado == 'Aceptado' " 
+                        class="btn-turno" 
+                        (click)="openFinalizar()"
+                        src="../../../assets/turno/finalizar.png" 
+                        alt="finalzar turno"
+                        title="Finalizar turno">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="verReseniaComentario" class="row d-flex justify-content-center">
+        <div class="col-9">
+            <div *ngIf="turno.resenia">
+                <h2>Reseña</h2>
+                <textarea class="w-100" readonly>{{turno.resenia}}</textarea>
+            </div>
+            <div *ngIf="turno.comentario">
+                <h2>Comentario:</h2>
+                <textarea class="w-100" readonly>{{turno.comentario}}</textarea>
+            </div>
+            <div *ngIf="turno.calificacion">
+                <h2 class="w-100">Calificación dada: {{turno.calificacion}}</h2>
+            </div>
+            <div *ngIf="turno.encuesta">
+                <h2>Encuesta completada:</h2>
+                <textarea class="w-100" style="height: 100px;" readonly>{{turno.encuesta | encuesta}}</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+
