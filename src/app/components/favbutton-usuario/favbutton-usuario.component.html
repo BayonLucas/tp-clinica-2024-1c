@@ -1,0 +1,65 @@
+<div class="w-100 d-flex justify-content-center flex-column favBtnContainer" >
+    <div class="w-100 d-flex justify-content-center flex-column" >
+        <!-- <ngb-carousel class="favButton"> -->
+            <!-- <ng-template ngbSlide>
+                <div class="picsum-img-wrapper">
+                    <img [src]="fotosUsuario[0]" alt="" class="imgFav"/>
+                </div>
+            </ng-template> -->
+            <!-- <ng-template ngbSlide >
+                <div class="picsum-img-wrapper">
+                    <img [src]="fotosUsuario[1]" alt="" class="imgFav"/>
+                </div>
+            </ng-template> -->
+        <!-- </ngb-carousel> -->
+        <img class="favButton m-auto" [src]="fotosUsuario[0]" alt="" (click)="onClickFavButton()"  >
+        <h1 class="d-flex justify-content-center" (click)="onExportarTurnosUsuario()">{{this.usuario.apellido}}, {{this.usuario.nombre}}</h1>
+    </div>
+    <div *ngIf="quienConsulta == 'admin'" class="w-100">
+        <!-- <h2 class="">{{usuario.apellido}} {{usuario.nombre}}</h2> -->
+        <p class=" data"><b>DNI:</b> {{usuario.dni}} - <b>Edad: </b>{{usuario.edad}}</p>
+        <p class=" data"><b>Email: </b>{{usuario.email}}</p>
+        <p class=" data"><b>Rol: </b>{{usuario.rol}}</p>
+        <ng-container *ngIf="usuario.rol == 'paciente'">
+            <p class=""><b>Obra social: </b>{{usuario.obraSocial}}</p>
+        </ng-container>
+        <ng-container *ngIf="usuario.rol == 'especialista'">
+            <p class=""><b>Especialidad/es: </b></p>
+            <ul class="list-group list-group-flush">
+                <ng-container *ngFor="let item of usuario.especialidad">
+                    <li class="list-group-item">{{item}}</li>   
+                </ng-container>
+            </ul>
+            <div class="form-check form-switch d-flex justify-content-center aling-items-center pt-2">
+                <input class="form-check-input" (change)="onChangeAutorizacionAdmin($event)" [checked]="usuario.adminValidation" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Autorización</label>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf="this.showInfo" class="w-100 d-flex flex-column">
+        <div *ngFor="let item of turnos" class="d-flex justify-content-between flex-row">
+            <h3 class="p-1">{{item.dia}}/{{item.mes + 1}}/{{item.anio}}</h3>
+            <button class="btn btn-sm btn-info m-1" (click)="this.openLg(content, item)" >Reseña</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Historia Clínica y Reseña</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>{{this.modalInfo.resenia}}</p>
+		<p>Altura: {{this.modalInfo.historiaClinica?.altura}}</p>
+		<p>Peso: {{this.modalInfo.historiaClinica?.peso}}</p>
+		<p>Presión: {{this.modalInfo.historiaClinica?.presion}}</p>
+		<p>Temperatura: {{this.modalInfo.historiaClinica?.temperatura}}</p>
+        <ng-container *ngFor="let item of this.modalInfo.historiaClinica?.dinamicos">
+            <p>{{item.clave}}: {{item.valor}}</p>
+        </ng-container>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+	</div>
+</ng-template>

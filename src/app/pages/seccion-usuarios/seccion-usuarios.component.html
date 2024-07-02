@@ -1,7 +1,10 @@
 <div class="container-fluid d-flex justify-content-center aling-content-center">
     <div class="pantalla d-flex flex-column position-relative">
         <div *ngIf="opcionSelecta == '' || opcionSelecta == 'usuarios'" class="row mt-2">
-            <h1 class="titulo">Sección usuarios</h1>
+            <div class="d-flex flex-row justify-content-between">
+                <h1 class="titulo">Sección usuarios</h1>
+                <img *ngIf="opcionSelecta == 'usuarios'" style="width: 35px; height: 35px;" src="../../../assets/modalBtn/excel.png" alt="" (click)="exportarUsuariosExcel()">
+            </div>
             <ng-container  *ngIf="opcionSelecta == 'usuarios'">
                 <mat-form-field>
                     <mat-label>Roles</mat-label>
@@ -33,8 +36,13 @@
                 <ng-container *ngIf="opcionSelecta == 'usuarios'" >
                     <div *ngIf="opcionSelecta == 'usuarios' " class="d-flex flex-wrap m-5">
                         <div *ngFor="let item of usuariosfiltrados">
-                            <div *ngIf="usuarioLogueado != item.email" class="col-lg-4 col-6">
-                                <card-usuario [usuario]="item"></card-usuario>
+                            <div *ngIf="usuarioLogueado != item.email" class="m-2">
+                                <!-- <card-usuario [usuario]="item"></card-usuario> -->
+                                <favbutton-usuario
+                                    class="m-2"
+                                    [usuario]="item"
+                                    [quienConsulta]="'admin'"
+                                ></favbutton-usuario>
                             </div>
                         </div>
                     </div>

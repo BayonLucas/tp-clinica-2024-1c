@@ -100,6 +100,22 @@ export class FiltroService {
     });
   }
 
-
+  obtenerUidDeOpuestosSegunRol(rol:string, turnos:Turno[]){
+    const uidSujetosSet = new Set<string>();
+    
+    turnos.forEach(turno => {
+      let uid;
+      if(rol == 'paciente'){
+        uid = turno.uid_doctor;
+      }
+      else
+      {
+        uid = turno.uid_paciente;
+      }
+      uidSujetosSet.add(uid);
+    });
+    
+    return Array.from(uidSujetosSet);
+  }
 
 }

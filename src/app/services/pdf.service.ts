@@ -30,9 +30,10 @@ export class PdfService {
       doc.rect(125, 5, 70, 40)
       doc.setFontSize(12);
       doc.text("Paciente: " + paciente.apellido + ', ' + paciente.nombre, 127, 10);
-      doc.text("Dni: " + paciente.dni, 127, 15);
+      doc.text("DNI: " + paciente.dni, 127, 15);
       doc.text("Edad: " + paciente.edad, 127, 20);
       doc.text("Email: " + paciente.email, 127, 25);
+      doc.text("Obra social: " + paciente.obraSocial, 127, 30);
 
       doc.line( 10, 50, 200, 50); 
 

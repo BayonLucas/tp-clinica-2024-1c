@@ -1,1 +1,18 @@
-<p>pacientes works!</p>
+<div class="container-fluid d-flex justify-content-center aling-content-center">
+    <div class="pantalla d-flex flex-column position-relative">
+        <div class="row mt-2">
+            <h1 class="titulo">Pacientes</h1>
+        </div>
+        <div class="row">
+            @if(this.pacientes && this.pacientes.length > 0){
+                <ng-container *ngFor="let item of pacientes">
+                    <favbutton-usuario
+                        [quienConsulta]="this.usuarioLogueado!.rol!"
+                        [usuario]="item"
+                    ></favbutton-usuario>
+                </ng-container>
+            }
+        </div>
+
+    </div>
+</div>

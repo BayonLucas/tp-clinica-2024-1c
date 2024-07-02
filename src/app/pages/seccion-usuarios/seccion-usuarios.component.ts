@@ -11,12 +11,15 @@ import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FavbuttonUsuarioComponent } from '../../components/favbutton-usuario/favbutton-usuario.component';
+import * as XLSX from 'xlsx'
+import { endOfDay } from 'date-fns';
 
 @Component({
   selector: 'app-seccion-usuarios',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink, MatFormFieldModule, MatSelectModule
+    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink, MatFormFieldModule, MatSelectModule, FavbuttonUsuarioComponent
   ],
   templateUrl: './seccion-usuarios.component.html',
   styleUrl: './seccion-usuarios.component.scss'
@@ -38,8 +41,30 @@ export class SeccionUsuariosComponent implements OnInit{
     // this.usuarios = []; 
   }
   
+  exportarUsuariosExcel(){
+    const aux = this.usuarios.map( (user) => ({
+      id: user.id,
+      uid: user.uid,
+      email: user.email,
+      rol: user.rol,
+      nombre: user.nombre,
+      aoellido: user.apellido,
+      dni: user.dni,
+      fotoPerfil_1: user.fotoPerfil_1,
+      fotoPerfil_2: user.fotoPerfil_2,
+      especialidad: JSON.stringify(user.especialidad),
+      obraSocial: user.obraSocial,
+      adminValidation: user.adminValidation
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(aux);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Placeholder');
+    XLSX.writeFile(wb, 'Usuarios.xlsx');
+  }
+
   aplicarFiltro(event:any){
-    if(event == 'todos'){
+    if(event == 'Todos'){
       this.usuariosfiltrados = this.usuarios;
     }
     else{

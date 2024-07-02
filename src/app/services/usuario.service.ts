@@ -101,4 +101,13 @@ export class UsuarioService {
       map( usuarios => usuarios as Usuario[] ));
   }
 
+  getPacientesSegunEspecialistas(uids:string[]){
+    let qry = query(
+      this.users, 
+      where('uid', 'in', uids)
+    );
+    return collectionData(qry).pipe(
+      map( usuarios => usuarios as Usuario[] ));
+  }
+
 }
