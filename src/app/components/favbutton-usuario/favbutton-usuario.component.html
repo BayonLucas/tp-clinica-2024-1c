@@ -37,7 +37,7 @@
         </ng-container>
     </div>
     <div *ngIf="this.showInfo" class="w-100 d-flex flex-column">
-        <div *ngFor="let item of turnos" class="d-flex justify-content-between flex-row">
+        <div *ngFor="let item of turnosConHC" class="d-flex justify-content-between flex-row">
             <h3 class="p-1">{{item.dia}}/{{item.mes + 1}}/{{item.anio}}</h3>
             <button class="btn btn-sm btn-info m-1" (click)="this.openLg(content, item)" >Reseña</button>
         </div>

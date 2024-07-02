@@ -27,6 +27,7 @@ export class FavbuttonUsuarioComponent implements OnInit{
 
   fotosUsuario:string[] = []
   turnos:Turno[] = [];
+  turnosConHC:Turno[] = [];
   showInfo:boolean = false;
   modalInfo!:Turno;
   private estadoAutorizadoanterior!:boolean;
@@ -81,6 +82,7 @@ export class FavbuttonUsuarioComponent implements OnInit{
   }
 
   onClickFavButton(){
+    if(this.usuario.rol != 'especialista')
          this.showInfo = !this.showInfo;
     
     // else if(this.quienConsulta == 'admin' && this.usuario.rol != 'admin'){
@@ -137,6 +139,9 @@ export class FavbuttonUsuarioComponent implements OnInit{
         });
       }
     }
+    this.turnoServ.getTurnosPorEstadoYPaciente(this.usuario.uid, 'Realizado').subscribe( (data) => {
+      this.turnosConHC = data;
+    });      
     if(this.usuario.rol == 'paciente'){
       this.fotosUsuario = [
         this.usuario.fotoPerfil_1,

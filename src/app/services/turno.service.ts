@@ -70,7 +70,7 @@ export class TurnoService {
     let qry = query(
       this.turnos,
       where('uid_paciente', '==', uid_paciente),
-      where('estado', '==', 'Realizado'),
+      where('estado', '==', estado),
     );
     return collectionData(qry).pipe( 
       map( turnos => turnos as Turno[] ));
