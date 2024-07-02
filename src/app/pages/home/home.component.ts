@@ -4,12 +4,13 @@ import { StoreService } from '../../services/store.service';
 import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../models/usuario';
 import { CommonModule } from '@angular/common';
+import { MenuBtnDirective } from '../../directives/menu-btn.directive';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule, RouterLink
+    CommonModule, RouterLink, MenuBtnDirective
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

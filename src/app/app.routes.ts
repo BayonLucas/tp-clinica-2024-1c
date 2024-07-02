@@ -49,7 +49,7 @@ export const routes: Routes = [
         // canActivate: [adminValidationGuard] 
         // canActivate: [adminGuard] 
     },
-    { path:'mis-turnos', 
+    { path:'graficos-y-estadisticas', 
         loadComponent: () => import('./pages/graficos-y-estadisticas/graficos-y-estadisticas.component').then(mod => mod.GraficosYEstadisticasComponent),
         // canActivate: [adminValidationGuard] 
         // canActivate: [adminGuard] 

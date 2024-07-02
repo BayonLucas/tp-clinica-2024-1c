@@ -1,0 +1,21 @@
+canvas{
+    background-color: white;
+    border-radius: 15px;
+    width: 80%;
+    margin: 5px;
+}
+.titulo{
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+.imgExport{
+    width: 45px;
+    height: 45px;
+    padding: 0;
+}
+
+.header{
+    flex-wrap: nowrap
+}

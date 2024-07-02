@@ -3,12 +3,13 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SizeOptionDirective } from '../../directives/size-option.directive';
 
 @Component({
   selector: 'lista-doctores',
   standalone: true,
   imports: [
-    FormsModule, ReactiveFormsModule, CommonModule
+    FormsModule, ReactiveFormsModule, CommonModule, SizeOptionDirective
   ],
   templateUrl: './lista-doctores.component.html',
   styleUrl: './lista-doctores.component.scss'

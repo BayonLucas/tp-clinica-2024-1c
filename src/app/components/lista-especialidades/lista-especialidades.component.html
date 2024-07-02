@@ -1,4 +1,4 @@
-<div class="especialidadadesContainer">
+<div class="especialidadadesContainer rotate-in-center">
     <div *ngFor="let item of especialidades" (click)="onEnviarEspecialidadSelecta(item)" class="opcionEspecialidad">
         <ng-container *ngIf="this.doctor.especialidad?.includes(item.especialidad)">
             <div class="card text-bg-dark">

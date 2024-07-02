@@ -11,12 +11,13 @@ import { MisHorariosComponent } from '../../components/mis-horarios/mis-horarios
 import { UsuarioService } from '../../services/usuario.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalHistorialClinicoComponent } from '../../components/modal-historial-clinico/modal-historial-clinico.component';
+import { LupaDirective } from '../../directives/lupa.directive';
 
 @Component({
   selector: 'app-mi-perfil',
   standalone: true,
   imports: [
-    RouterLink, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, MisHorariosComponent, ModalHistorialClinicoComponent
+    RouterLink, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, MisHorariosComponent, ModalHistorialClinicoComponent, LupaDirective
   ],
   templateUrl: './mi-perfil.component.html',
   styleUrl: './mi-perfil.component.scss'

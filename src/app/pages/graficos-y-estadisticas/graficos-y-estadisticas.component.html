@@ -1,1 +1,22 @@
-<p>graficos-y-estadisticas works!</p>
+<div class="container-fluid d-flex justify-content-center aling-content-center">
+    <div class="pantalla d-flex flex-column">
+        <div class="row d-flex flex-row justify-content-between header">
+            <h1 class="titulo">Gráficos y Estadísticas</h1>
+            <img class="imgExport" src="../../../assets/modalBtn/pdf.png" alt="" (click)="imprimirPdf()">
+        </div>
+        <div class="row">
+            <div class="col-6 w-100">
+                <canvas #canvasElement id="LinechartLog"></canvas>
+            </div>
+            <div class="col-6 w-100">
+                <canvas #canvasElement id="barchartTurnosEspecialidad"></canvas>
+            </div>
+            <div class="col-6 w-100">
+                <canvas #canvasElement id="barchartTurnosPorDia"></canvas>
+            </div>
+            <div class="col-6 w-100">
+                <!-- <canvas id="barchartTurnosEspecialista"></canvas> -->
+            </div>
+        </div>
+    </div>
+</div>

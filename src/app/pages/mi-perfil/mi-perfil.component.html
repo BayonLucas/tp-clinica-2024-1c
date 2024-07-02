@@ -39,17 +39,17 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <h1 class="card-title">{{usuario?.nombre}} {{usuario?.apellido}}</h1>
-              <button class="btn btn-info" (click)="openHistorialClinico()">Historial Clínico</button>
+              <button *ngIf="this.usuario?.rol == 'paciente'" class="btn btn-info" (click)="openHistorialClinico()">Historial Clínico</button>
             </div>
-            <p class="card-text">Rol: {{usuario?.rol}}</p>
-            <p class="card-text">Email: {{usuario?.email}}</p>
-            <p class="card-text">Edad: {{usuario?.edad}}</p>
-            <p class="card-text">DNI: {{usuario?.dni}}</p>
-            <p *ngIf="usuario?.rol == 'paciente'" class="card-text">Obra social: {{usuario?.obraSocial}}</p>
+            <p appLupa class="card-text">Rol: {{usuario?.rol}}</p>
+            <p appLupa class="card-text">Email: {{usuario?.email}}</p>
+            <p appLupa class="card-text">Edad: {{usuario?.edad}}</p>
+            <p appLupa class="card-text">DNI: {{usuario?.dni}}</p>
+            <p appLupa *ngIf="usuario?.rol == 'paciente'" class="card-text">Obra social: {{usuario?.obraSocial}}</p>
             <div *ngIf="usuario?.rol == 'especialista'">
-              <p class="card-text">Especialidades:</p>
+              <p appLupa class="card-text">Especialidades:</p>
               <ul class="list-group" *ngFor="let item of usuario?.especialidad">
-                <li class="list-group-item">{{item}}</li>
+                <li appLupa class="list-group-item">{{item}}</li>
               </ul>
               <hr>
               <mis-horarios [usuario]="this.usuario!" ></mis-horarios>

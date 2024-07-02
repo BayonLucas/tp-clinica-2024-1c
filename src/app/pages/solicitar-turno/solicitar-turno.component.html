@@ -12,6 +12,7 @@
                 </div>
                 <div class="col-3 d-flex justify-content-center align-items-center"> <!-- Especialidades -->
                     <lista-especialidades 
+                        class="scale-up-hor-left"
                         *ngIf="doctorElegido" [doctor]="this.doctorElegido" 
                         (enviarEspecialidadSelecta)="onRecibirEspecialidad($event)"
                     ></lista-especialidades>

@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { StoreService } from '../../services/store.service';
 import { take } from 'rxjs';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
   private authServ:AuthService = inject(AuthService);
   private storeServ:StoreService = inject(StoreService);
   private router:Router = inject(Router);
-  
+  private logServ:LogService = inject(LogService);
+
   get email(){
     return this.form.get('email')?.value;
   }
@@ -56,6 +58,7 @@ export class LoginComponent {
           }
           else{
             await this.authServ.loginUser(this.email, this.password);
+            this.logServ.setLogs(data.uid);
             this.router.navigateByUrl('/home');
           } 
         });
