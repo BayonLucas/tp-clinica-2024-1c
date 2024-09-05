@@ -66,15 +66,17 @@ export class FiltroService {
       
       let sujeto:Usuario;
       if(rol == 'admin' || rol == 'paciente'){
-        sujeto = this.allEspecialistas.find(doc => doc.uid === turno.uid_doctor)!;
+        sujeto = this.allEspecialistas.find(doc => doc.uid == turno.uid_doctor)!;
       }
       else{
-        sujeto = this.allPacientes.find(pac => pac.uid === turno.uid_paciente)!;
+        sujeto = this.allPacientes.find(pac => pac.uid == turno.uid_paciente)!;
 
       }
-      
-      const matchSujeto = sujeto!.apellido.toLowerCase().includes(lowerFiltro) || sujeto!.nombre.toLowerCase().includes(lowerFiltro);
-      resultados.push(matchSujeto);
+
+      if(sujeto){
+        const matchSujeto = sujeto!.apellido.toLowerCase().includes(lowerFiltro) || sujeto!.nombre.toLowerCase().includes(lowerFiltro);
+        resultados.push(matchSujeto);
+      }
 
       if(turno.historiaClinica){
         const matchAltura = turno.historiaClinica?.altura.toString().includes(lowerFiltro);

@@ -1,0 +1,45 @@
+.msj{
+    font-size: 30px;
+    color: white;
+}
+
+.hcContainer{
+    background-color: rgba(211, 144, 21, 0.733);
+    width: 100%;
+    padding: 30px;
+    margin: 5px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.datos{
+    border: 2px solid black;
+}
+
+.fecha{
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.export{
+    width: 45px;
+    height: 45px;
+}
+
+
+
+i {
+    font-size: 2.3rem;
+    padding-right: 0.1rem;
+    color: #b0c4de;
+}
+.filled {
+    color: #32abf1;
+}
+.low {
+    color: #ff9900;
+}
+.filled.low {
+    color: #ff1e1e;
+}

@@ -4,14 +4,23 @@
     align-items: center;
     margin-top: 15vh;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 90%;
-    width: 80%;
+    height: 80%;
+    width: 70%;
     border-radius: 25px;
     padding: 20px;
 }
+
+h1{
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    -webkit-text-stroke: 0.1px black;
+
+}
+
 .img-btn{
-    width: 650px; 
-    height: 650px;
+    width: 500px; 
+    height: 500px;
     border-radius: 25px;
     margin: 30px;
     img{
@@ -20,17 +29,16 @@
         height: 100%;
     } 
 }
+
 .subfondo{
     padding: 20px;
     border-radius: 25px;
 }
+
 .backOpcion{
     border-radius: 50px;
     img{
         width: 50px;
         height: 50px;
     }
-}
-form-esppecialista{
-    width: 80%!important;
 }

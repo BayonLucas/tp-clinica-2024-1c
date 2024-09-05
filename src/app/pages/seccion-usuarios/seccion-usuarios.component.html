@@ -23,45 +23,43 @@
         <button class="btn position-absolute top-0 end-0 backMenu m-2" [routerLink]="['/home']" routerLinkActive="router-link-active" >
             Volver al Menú
         </button>
-        <div class="row">
-            <ng-container >
+        <ng-container >
 
-                <ng-container *ngIf="opcionSelecta == '' ">
-                    <button class="btn btn-lg btn-primary p-3 m-3" (click)="elegirOpcion('usuarios')">Listado de usuarios</button>
-                    <button class="btn btn-lg btn-primary p-3 m-3" (click)="elegirOpcion('admin')">Alta Admin</button>
-                    <button class="btn btn-lg btn-primary p-3 m-3" (click)="elegirOpcion('paciente')">Alta Paciente</button>
-                    <button class="btn btn-lg btn-primary p-3 m-3" (click)="elegirOpcion('especialista')">Alta Especialista</button>
-                </ng-container>
-        
-                <ng-container *ngIf="opcionSelecta == 'usuarios'" >
-                    <div *ngIf="opcionSelecta == 'usuarios' " class="d-flex flex-wrap m-5">
-                        <div *ngFor="let item of usuariosfiltrados">
-                            <div *ngIf="usuarioLogueado != item.email" class="m-2">
-                                <!-- <card-usuario [usuario]="item"></card-usuario> -->
-                                <favbutton-usuario
-                                    class="m-2"
-                                    [usuario]="item"
-                                    [quienConsulta]="'admin'"
-                                ></favbutton-usuario>
-                            </div>
+            <ng-container *ngIf="opcionSelecta == '' ">
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('usuarios')">Listado de usuarios</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('admin')">Alta Admin</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('paciente')">Alta Paciente</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('especialista')">Alta Especialista</button>
+            </ng-container>
+    
+            <ng-container *ngIf="opcionSelecta == 'usuarios'" >
+                <div class="d-flex justify-content-center flex-wrap m-5">
+                    <div *ngFor="let item of usuariosfiltrados">
+                        <div *ngIf="usuarioLogueado != item.email" class="m-2">
+                            <!-- <card-usuario [usuario]="item"></card-usuario> -->
+                            <favbutton-usuario
+                                class="m-2"
+                                [usuario]="item"
+                                [quienConsulta]="'admin'"
+                            ></favbutton-usuario>
                         </div>
                     </div>
-                </ng-container>
-    
-                <ng-container *ngIf="opcionSelecta == 'admin' ">
-                    <form-admin [redirectTo]=" '/home' " [titulo]="' '" [subtitulo]="' '"></form-admin>
-                </ng-container>
-    
-                <ng-container *ngIf="opcionSelecta == 'paciente' ">
-                    <form-paciente [redirectTo]=" '/home' " [titulo]="''" [subtitulo]="''"></form-paciente>
-                </ng-container>
-                
-                <ng-container *ngIf="opcionSelecta == 'especialista' ">
-                    <form-especialista [redirectTo]=" '/home' " [titulo]="''" [subtitulo]="''"></form-especialista>
-                </ng-container>
-            
+                </div>
             </ng-container>
-        </div>
+
+            <ng-container *ngIf="opcionSelecta == 'admin' ">
+                <form-admin class="w-75" [redirectTo]=" '/home' " [titulo]="'Alta admin'" [subtitulo]="' '"></form-admin>
+            </ng-container>
+
+            <ng-container *ngIf="opcionSelecta == 'paciente' ">
+                <form-paciente class="w-75" [redirectTo]=" '/home' " [titulo]="'Alta Paciente'" [subtitulo]="''"></form-paciente>
+            </ng-container>
+            
+            <ng-container *ngIf="opcionSelecta == 'especialista' ">
+                <form-especialista class="w-75" [redirectTo]=" '/home' " [titulo]="'Alta Especialista'" [subtitulo]="''"></form-especialista>
+            </ng-container>
+        
+        </ng-container>
     </div>
 </div>
 

@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFinalizarTurnoComponent } from '../modal-finalizar-turno/modal-finalizar-turno.component';
 import { EncuestaPipe } from "../../pipes/encuesta.pipe";
+import { ModalEncuestaComponent } from '../modal-encuesta/modal-encuesta.component';
 
 
 @Component({
@@ -111,38 +112,40 @@ export class TurnoComponent implements OnInit{
 
   async completarEncuesta(){
     if(!this.turno.encuesta){
-      const { value: formValues } = await Swal.fire({
-        title: "Encuesta",
-        html: `
-          <p>Qué le pareció la atención dada?</p>
-          <input id="swal-input1" class="swal2-input">
-          <hr>
-          <p>Qué opina del establecimiento?</p>
-          <input id="swal-input2" class="swal2-input">
-          <hr>
-          <p>Recomendaría esta institución?</p>
-          <input id="swal-input3" class="swal2-input">
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          const input1 = document.getElementById("swal-input1") as HTMLInputElement;
-          const input2 = document.getElementById("swal-input2") as HTMLInputElement;
-          const input3 = document.getElementById("swal-input3") as HTMLInputElement;
+      const modalRef = this.modalService.open(ModalEncuestaComponent, { centered: true });
+      modalRef.componentInstance.turno = this.turno;
+      // const { value: formValues } = await Swal.fire({
+      //   title: "Encuesta",
+      //   html: `
+      //     <p>Qué le pareció la atención dada?</p>
+      //     <input id="swal-input1" class="swal2-input">
+      //     <hr>
+      //     <p>Qué opina del establecimiento?</p>
+      //     <input id="swal-input2" class="swal2-input">
+      //     <hr>
+      //     <p>Recomendaría esta institución?</p>
+      //     <input id="swal-input3" class="swal2-input">
+      //   `,
+      //   focusConfirm: false,
+      //   preConfirm: () => {
+      //     const input1 = document.getElementById("swal-input1") as HTMLInputElement;
+      //     const input2 = document.getElementById("swal-input2") as HTMLInputElement;
+      //     const input3 = document.getElementById("swal-input3") as HTMLInputElement;
   
-          return [
-            input1 ? {p: "Qué le pareció la atención dada?", r: input1.value} : null,
-            input2 ? {p: "Qué opina del establecimiento?", r: input2.value} : null,
-            input3 ? {p: "Recomendaría esta institución?", r: input3.value} : null,
+      //     return [
+      //       input1 ? {p: "Qué le pareció la atención dada?", r: input1.value} : null,
+      //       input2 ? {p: "Qué opina del establecimiento?", r: input2.value} : null,
+      //       input3 ? {p: "Recomendaría esta institución?", r: input3.value} : null,
+      //     ];
+      //   }
+      // });
+      // if (formValues) {
+      //   this.turno.encuesta = JSON.stringify(formValues);
+      //   await this.turnoServ.updateTurno(this.turno).then( () => {
+      //     this.resultadoMensaje(true, 'Encuesta completada', '');
+      //   });
+      // }
 
-          ];
-        }
-      });
-      if (formValues) {
-        this.turno.encuesta = JSON.stringify(formValues);
-        await this.turnoServ.updateTurno(this.turno).then( () => {
-          this.resultadoMensaje(true, 'Encuesta completada', '');
-        });
-      }
     }
   }
 

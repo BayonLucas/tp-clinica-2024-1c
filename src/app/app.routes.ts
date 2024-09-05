@@ -1,57 +1,53 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './guards/admin.guard';
-import { adminValidationGuard } from './guards/admin-validation.guard';
+import { usuarioLogueadoGuard } from './guards/usuario-logueado.guard';
+import { especialistaGuard } from './guards/especialista.guard';
+import { usuarioLogueadoDenegadoGuard } from './guards/usuario-logueado-denegado.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'bienvenido', pathMatch: 'full' },
     { path:'bienvenido', 
-        loadComponent: () => import('./pages/bienvenido/bienvenido.component').then(mod => mod.BienvenidoComponent)
-    },
-    { path:'home', 
-        loadComponent: () => import('./pages/home/home.component').then(mod => mod.HomeComponent),
-        // canActivate: [adminValidationGuard] 
+        loadComponent: () => import('./pages/bienvenido/bienvenido.component').then(mod => mod.BienvenidoComponent),
+        canActivate: [usuarioLogueadoDenegadoGuard]
     },
     { path:'login', 
         loadComponent: () => import('./pages/login/login.component').then(mod => mod.LoginComponent),
-        // canActivate: [adminGuard]         
+        canActivate: [usuarioLogueadoDenegadoGuard]
     },
     { path:'register', 
         loadComponent: () => import('./pages/registro/registro.component').then(mod => mod.RegistroComponent),
-        // canActivate: [adminGuard] 
+        canActivate: [usuarioLogueadoDenegadoGuard]
+    },
+    { path:'home', 
+        loadComponent: () => import('./pages/home/home.component').then(mod => mod.HomeComponent),
+        canActivate: [usuarioLogueadoGuard]
     },
     { path:'seccion_usuarios', 
         loadComponent: () => import('./pages/seccion-usuarios/seccion-usuarios.component').then(mod => mod.SeccionUsuariosComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canMatch: [usuarioLogueadoGuard, adminGuard]
     },
     { path:'mi-perfil', 
         loadComponent: () => import('./pages/mi-perfil/mi-perfil.component').then(mod => mod.MiPerfilComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canActivate: [usuarioLogueadoGuard]
     },
     { path:'solicitar-turno', 
         loadComponent: () => import('./pages/solicitar-turno/solicitar-turno.component').then(mod => mod.SolicitarTurnoComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canActivate: [usuarioLogueadoGuard]
     },
     { path:'turnos', 
         loadComponent: () => import('./pages/turnos/turnos.component').then(mod => mod.TurnosComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canMatch: [usuarioLogueadoGuard, adminGuard]
     },
     { path:'mis-turnos', 
         loadComponent: () => import('./pages/mis-turnos/mis-turnos.component').then(mod => mod.MisTurnosComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canActivate: [usuarioLogueadoGuard]
     },
     { path:'pacientes', 
         loadComponent: () => import('./pages/pacientes/pacientes.component').then(mod => mod.PacientesComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canMatch: [usuarioLogueadoGuard, especialistaGuard]
     },
     { path:'graficos-y-estadisticas', 
         loadComponent: () => import('./pages/graficos-y-estadisticas/graficos-y-estadisticas.component').then(mod => mod.GraficosYEstadisticasComponent),
-        // canActivate: [adminValidationGuard] 
-        // canActivate: [adminGuard] 
+        canMatch: [usuarioLogueadoGuard, adminGuard]
     },
 ];

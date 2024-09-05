@@ -1,23 +1,16 @@
 .pantalla{
-    display: flex;
-    // justify-content: center;
-    align-items: center;
     margin-top: 10vh;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 85vh;
-    width: 80%;
-    max-height: 85vh;
+    height: 90vh!important;
+    width: 85%;
+    max-height: 88vh!important;
     border-radius: 20px;
     padding: 20px;
 }
 
 .titulo{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    h1{
-        color: white;
-        font-size: 50px;
-    }
+    color: white;
+    font-size: 50px;
 }
 
 .resumen{
@@ -29,38 +22,43 @@
         margin-bottom: 5px;
     }
 }
-.scale-up-hor-left {
-	-webkit-animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+
+.resumen-container{
+    border-radius: 25px;
+    border: solid 1px orange 
 }
-@-webkit-keyframes scale-up-hor-left {
-    0% {
-      -webkit-transform: scaleX(0.4);
-              transform: scaleX(0.4);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-    100% {
-      -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-  }
-  @keyframes scale-up-hor-left {
-    0% {
-      -webkit-transform: scaleX(0.4);
-              transform: scaleX(0.4);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-    100% {
-      -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-      -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-    }
-  }
+// .scale-up-hor-left {
+// 	-webkit-animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+// 	        animation: scale-up-hor-left 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+// }
+// @-webkit-keyframes scale-up-hor-left {
+//     0% {
+//       -webkit-transform: scaleX(0.4);
+//               transform: scaleX(0.4);
+//       -webkit-transform-origin: 0% 0%;
+//               transform-origin: 0% 0%;
+//     }
+//     100% {
+//       -webkit-transform: scaleX(1);
+//               transform: scaleX(1);
+//       -webkit-transform-origin: 0% 0%;
+//               transform-origin: 0% 0%;
+//     }
+//   }
+//   @keyframes scale-up-hor-left {
+//     0% {
+//       -webkit-transform: scaleX(0.4);
+//               transform: scaleX(0.4);
+//       -webkit-transform-origin: 0% 0%;
+//               transform-origin: 0% 0%;
+//     }
+//     100% {
+//       -webkit-transform: scaleX(1);
+//               transform: scaleX(1);
+//       -webkit-transform-origin: 0% 0%;
+//               transform-origin: 0% 0%;
+//     }
+//   }
   
 // *ngIf="this.doctorElegido"
 // *ngIf="this.especialidadElegida"

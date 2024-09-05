@@ -1,7 +1,9 @@
 .fechaContainer{
-    max-height: 50rem;
+    max-height: 40rem;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
+
 .fecha{
     padding: 15px 20px 15px 20px;
     margin: 5px;
@@ -9,7 +11,7 @@
     max-height: auto;
     overflow-y: auto;
     button{
-        width: 100%;
+        width: 75%;
         height: 100px;
         font-weight: bold;
         font-size: 30px;

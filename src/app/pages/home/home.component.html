@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex justify-content-center aling-content-center">
+<div class="container-fluid d-flex justify-content-center aling-content-center bounce-in-top">
     <div class="pantalla d-flex flex-column">
         <div *ngIf="usuarioLogueado">
             <button appMenuBtn *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">Usuarios</button>

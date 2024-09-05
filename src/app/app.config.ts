@@ -10,15 +10,18 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { firebaseConfig } from '../../environment';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideToastr } from 'ngx-toastr';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), 
+    provideRouter(routes),
+    provideToastr({preventDuplicates: true, positionClass: 'toast-bottom-center'}), 
     provideFirebaseApp(() => initializeApp(firebaseConfig)), 
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage()),
-    provideHttpClient(), provideAnimationsAsync()
+    provideHttpClient(), 
+    provideAnimationsAsync()
   ]
 };

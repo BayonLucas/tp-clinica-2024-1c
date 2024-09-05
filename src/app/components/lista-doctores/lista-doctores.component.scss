@@ -5,8 +5,8 @@
     align-items: center;
     padding: 10px;
     img{
-        width: 250px;
-        height: 250px;
+        width: 150px;
+        height: 150px;
         border-radius: 100%;
     }
     h2{
@@ -16,6 +16,7 @@
     }
 }
 .doctoresContainer {
-    max-height: 50rem;
+    max-height: 40rem;
     overflow-y: auto;
+    scrollbar-width: thin;
 }

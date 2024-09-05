@@ -1,0 +1,45 @@
+<div class="container">
+    <div *ngIf="!randomCaptcha" class="w-100 h-100 d-flex justify-content-center align-items-center">
+      <mat-spinner [color]="'accent'"></mat-spinner>
+    </div>
+  
+    <div *ngIf="randomCaptcha" class="captcha-container">
+      <mat-checkbox [disabled]="resultado" [(ngModel)]="deshabilitar" (change)="validarCaptcha()">Deshabilitar</mat-checkbox>
+  
+      <ng-container *ngIf="!loading">
+        
+        <form *ngIf="!resultado && !deshabilitar && !mostrarError" [formGroup]="form" (ngSubmit)="validarCaptcha()">
+          <div class="captcha">
+            <p class="premisa">{{ randomCaptcha.premisa }}</p>
+            <div class="operaciones">
+              <img *ngFor="let item of randomCaptcha.operaciones; let i = index" class="operacion" appMiCaptchaReveled [src]="item" [alt]="i">
+            </div>
+            <div class="respuestas">
+              <mat-form-field class="ms-2 me-1 w-75">
+                <mat-label>Ingrese su respuesta</mat-label>
+                <input matInput formControlName="captcha" type="text" class="pl-2 w-75">
+                <mat-error *ngIf="form.controls['captcha']?.invalid && (form.controls['captcha']?.dirty || form.controls['captcha']?.touched) && form.controls['captcha']?.errors?.['required']">
+                  Resolver el captcha es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+          </div>
+        </form>
+  
+        <div *ngIf="resultado" class="d-flex justify-content-center align-items-center">
+          <img src="../../../assets/iconos/ok.png" alt="ok" style="width: 150px; height: 150px;">
+        </div>
+  
+        <div *ngIf="mostrarError" class="d-flex justify-content-center align-items-center">
+          <img src="../../../assets/iconos/error.png" alt="error" style="width: 150px; height: 150px;">
+        </div>
+  
+      </ng-container>
+  
+      <div *ngIf="loading" class="w-100 h-100 d-flex justify-content-center align-items-center">
+        <mat-spinner [color]="'accent'"></mat-spinner>
+      </div>
+    </div>
+  </div>
+  

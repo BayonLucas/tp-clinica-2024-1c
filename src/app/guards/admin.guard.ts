@@ -1,19 +1,24 @@
-import { CanActivateFn } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { StoreService } from '../services/store.service';
-import { Usuario } from '../models/usuario';
-import { firstValueFrom, map } from 'rxjs';
+import { ToastService } from '../services/toast.service';
 
 export const adminGuard: CanActivateFn = async (route, state) => {
-  const authServ:AuthService = inject(AuthService);
-  const usuario:Usuario | null = authServ.usuario
+  const customToastServ:ToastService = inject(ToastService)
+  const router:Router = inject(Router);
+
+  const usuario = JSON.parse(localStorage.getItem('usuario')!);
   
-  debugger;
-  console.log(usuario);
-  if(usuario && usuario.rol == 'admin'){
-    return true
+  // if(!usuario){
+  //   customToastServ.showCustomToast('info', 'Acceso denegado', 'Debe ser Admin para poder acceder.');
+  //   router.navigateByUrl('/bienvenido')
+  //   return false;
+  // }
+
+  if(usuario && usuario.rol != 'admin'){
+    customToastServ.showCustomToast('info', 'Acceso denegado', 'Debe ser Admin para poder acceder.');
+    router.navigateByUrl('/home')
+    return false
   }
 
-  return false;
+  return true;  
 };

@@ -49,14 +49,15 @@ export class MiPerfilComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.authServ.user$.subscribe( (data) => {
-      this.usuario = this.authServ.usuario;
-      if(!this.usuario){
-        this.userServ.getUsuarioPorEmail(data?.email!).subscribe( res => {
-          this.usuario = res;
-        });
-      }
+    // this.authServ.user$.subscribe( (data) => {
+    //   this.usuario = this.authServ.usuario;
+    //   if(!this.usuario){
+    //     this.userServ.getUsuarioPorEmail(data?.email!).subscribe( res => {
+    //       this.usuario = res;
+    //     });
+    //   }
       
-    });
+    // });
+    this.usuario = JSON.parse(localStorage.getItem('usuario')!);
   }
 }

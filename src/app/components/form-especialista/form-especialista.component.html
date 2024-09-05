@@ -6,29 +6,31 @@
     <div class="row">
         <form [formGroup]="form" (ngSubmit)="registrar()">
             <div class="row">
-                <div class="col-4"> <!-- nombre -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1"> <!-- nombre -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="text" class="form-control" id="floatingInput1" formControlName="nombre"  placeholder="">
                         <label for="floatingInput1">Nombre</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['nombre']?.invalid && (form.controls?.['nombre']?.dirty || form.controls?.['nombre']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" 
+                            *ngIf="form.controls?.['nombre']?.invalid && 
+                            (form.controls?.['nombre']?.dirty || form.controls?.['nombre']?.touched)">
                             <div *ngIf="form.controls?.['nombre']?.errors?.['required']">El nombre es requerido</div>
                         </div>                          
                     </div>
                 </div>
-                <div class="col-4"> <!-- apellido -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1"> <!-- apellido -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="text" class="form-control" id="floatingInput2" formControlName="apellido" placeholder="">
                         <label for="floatingInput2">Apellido</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['apellido']?.invalid && (form.controls?.['apellido']?.dirty || form.controls?.['apellido']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" *ngIf="form.controls?.['apellido']?.invalid && (form.controls?.['apellido']?.dirty || form.controls?.['apellido']?.touched)">
                             <div *ngIf="form.controls?.['apellido']?.errors?.['required']">El apellido es requerido</div>
                         </div> 
                     </div>                         
                 </div>
-                <div class="col-4"> <!-- edad -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1"> <!-- edad -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="number" min="21" max="85" id="floatingInput3" class="form-control"  formControlName="edad" placeholder=""/>
                         <label for="deck-name" for="floatingInput3">Edad</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['edad']?.invalid && (form.controls?.['edad']?.dirty || form.controls?.['edad']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" *ngIf="form.controls?.['edad']?.invalid && (form.controls?.['edad']?.dirty || form.controls?.['edad']?.touched)">
                             <div *ngIf="form.controls?.['edad']?.errors?.['required']">La edad es requerido</div>
                             <div *ngIf="form.controls?.['edad']?.errors?.['min']">Debe ser mayor o igual a 21 años</div>
                             <div *ngIf="form.controls?.['edad']?.errors?.['max']">Debe ser menor o igual a 85 años</div>
@@ -37,28 +39,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4"> <!-- dni -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1"> <!-- dni -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="text" class="form-control" id="floatingInput4" formControlName="dni"  placeholder="">
                         <label for="floatingInput4">DNI</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['dni']?.invalid && (form.controls?.['dni']?.dirty || form.controls?.['dni']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" *ngIf="form.controls?.['dni']?.invalid && (form.controls?.['dni']?.dirty || form.controls?.['dni']?.touched)">
                             <div *ngIf="form.controls?.['dni']?.errors?.['required']">El DNI es requerido</div>
                             <div *ngIf="form.controls?.['dni']?.errors?.['minlength']">El DNI debe tener al menos 6 digitos</div>
                             <div *ngIf="form.controls?.['dni']?.errors?.['maxlength']">El DNI debe tener máximo 8 digitos</div>
                         </div>                          
                     </div>
                 </div>
-                <div class="col-7"> <!-- Especialidad -->
-                    <div class="form-floating mb-3">
-                        <!-- <select class="form-select" aria-label="Default select example" formControlName="especialidad">
-                            <option selected disabled value="">Elija una especialiadad</option>
-                            <ng-container *ngFor="let item of especialidades">
-                                <option value="{{item}}">{{item}}</option>
-                                <div class="alert alert-danger p-1" *ngIf="form.controls?.['especialidad']?.invalid && (form.controls?.['especialidad']?.dirty || form.controls?.['especialidad']?.touched)">
-                                    <div *ngIf="form.controls?.['especialidad']?.errors?.['required']">La especialidad es requerido</div>
-                                </div> 
-                            </ng-container>
-                        </select>  -->
+                <div class="col-7 p-1"> <!-- Especialidad -->
+                    <div class="form-floating mb-5 position-relative">
                         <mat-form-field>
                             <mat-label>Especialidades</mat-label>
                             <mat-select formControlName="especialidad" multiple required>
@@ -66,53 +59,40 @@
                                 <mat-option [value]="esp">{{esp}}</mat-option>
                               }
                             </mat-select>
-                          </mat-form-field>
-                          <!-- <div class="alert alert-danger p-1" 
-                            *ngIf="form.controls?.['especialidad']?.invalid && 
-                            (form.controls?.['especialidad']?.dirty || 
-                            form.controls?.['especialidad']?.touched)">
-                            <mat-error *ngIf="form.controls?.['especialidad']?.errors?.['required']">
-                                La especialidad es requerido
-                            </mat-error>
-                        </div> -->
-
-                            <!-- @if (form.hasError('pattern') && !form.hasError('required')) {
-                                Your selection is invalid</mat-error>
-                            } -->
-                        <!-- <label for="floatingInput">Especialidad</label> -->
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="col-1">
-                    <button class="btn btn-success" type="button" (click)="agregarNuevaEspecialidad()">+</button>
+                    <button class="btn btn-lg btn-success d-flex justify-content-center align-items-center m-2 " type="button" (click)="agregarNuevaEspecialidad()">+</button>
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">  <!-- Email -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1">  <!-- Email -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="email" class="form-control" id="floatingInput5" formControlName="email" placeholder="" autocomplete="off">
                         <label for="floatingInput5">Email</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['email']?.invalid && (form.controls?.['email']?.dirty || form.controls?.['email']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" *ngIf="form.controls?.['email']?.invalid && (form.controls?.['email']?.dirty || form.controls?.['email']?.touched)">
                             <div *ngIf="form.controls?.['email']?.errors?.['required']">El correo es requerido</div>
                             <div *ngIf="form.controls?.['email']?.errors?.['email']">El correo es inválido</div>
                         </div>                          
                     </div>
                 </div>
-                <div class="col-4"> <!-- Contraseña -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1"> <!-- Contraseña -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="password" class="form-control" id="floatingInput6" formControlName="password" placeholder="" autocomplete="off">
                         <label for="floatingInput6">Contraseña</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['password']?.invalid && (form.controls?.['password']?.dirty || form.controls?.['password']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" *ngIf="form.controls?.['password']?.invalid && (form.controls?.['password']?.dirty || form.controls?.['password']?.touched)">
                             <div *ngIf="form.controls?.['password']?.errors?.['required']">La contraseña es requerida</div>
                             <div *ngIf="form.controls?.['password']?.errors?.['minlength']">La contraseña debe contener al menos 6 caracteres</div>
                             <div *ngIf="form.controls?.['password']?.errors?.['password']">La contraseña es inválida</div>
                         </div>   
                     </div>                         
                 </div>
-                <div class="col-4"> <!-- ReContraseña -->
-                    <div class="form-floating mb-3">
+                <div class="col-4 p-1"> <!-- ReContraseña -->
+                    <div class="form-floating mb-5 position-relative">
                         <input type="password" class="form-control" id="floatingInput7" formControlName="confirmPassword" placeholder="" autocomplete="off">
                         <label for="floatingInput7">Contraseña</label>
-                        <div class="alert alert-danger p-1" *ngIf="form.controls?.['confirmPassword']?.invalid && (form.controls?.['confirmPassword']?.dirty || form.controls?.['confirmPassword']?.touched)">
+                        <div class="alert alert-danger p-1 position-absolute w-100" *ngIf="form.controls?.['confirmPassword']?.invalid && (form.controls?.['confirmPassword']?.dirty || form.controls?.['confirmPassword']?.touched)">
                             <div *ngIf="form.controls?.['confirmPassword']?.errors?.['required']">La contraseña es requerida</div>
                             <div *ngIf="form.controls?.['confirmPassword']?.errors?.['noCoincide']">Las contraseña no coinciden</div>
                         </div>   
@@ -120,19 +100,31 @@
                 </div>
             </div>
             <div class="row"> <!-- Foto -->
-                <div class="input-group d-flex flex-column">
-                    <div class="d-flex flex-row">
-                        <label class="input-group-text" for="inputGroupFile01">Foto de perfil</label>
-                        <input type="file" accept=".jpg,.jpeg,.png," class="form-control" id="inputGroupFile01" formControlName="fotoPerfil" (change)="onFileChange($event)">
+                <div class="col-12">
+                    <div class="input-group mb-5 position-relative">
+                        <div class="d-flex flex-row w-100 align-items-center">
+                            <label class="input-group-text" for="inputGroupFile01">Foto de perfil</label>
+                            <input type="file" accept=".jpg,.jpeg,.png," class="form-control" id="inputGroupFile01" formControlName="fotoPerfil" (change)="onFileChange($event)">
+                        </div>
+                        <div class="alert alert-danger p-1 position-absolute w-100" 
+                            style="top: 100%; left: 0; z-index: 10;" 
+                            *ngIf="form.controls?.['fotoPerfil']?.invalid && (form.controls?.['fotoPerfil']?.dirty || form.controls?.['fotoPerfil']?.touched)">
+                            <div *ngIf="form.controls?.['fotoPerfil']?.errors?.['required']">Debe cargar una foto de perfil</div>
+                        </div>   
                     </div>
-                    <div class="alert alert-danger p-1" 
-                        *ngIf="form.controls?.['fotoPerfil']?.invalid && (form.controls?.['fotoPerfil']?.dirty || form.controls?.['fotoPerfil']?.touched)">
-                        <div *ngIf="form.controls?.['fotoPerfil']?.errors?.['required']">Debe cargar una foto de perfil</div>
-                    </div>   
                 </div>
             </div>
-            <div class="row d-flex justify-content-center m-5">
-                <div class="col-5"> <!-- captcha -->
+            <div class="row ">
+                <div class="col-12 d-flex flex-column justify-content-center align-items-center m-3 position-relative">
+                    <mi-captcha class="d-flex" (enviarCaptchaResult)="obtenerResultCaptcha($event)"></mi-captcha>
+                    @if(this.error != ''){
+                        <div class="d-flex justify-content-center align-items-center alert alert-danger p-1 w-25 position-absolute"
+                        style="top: 100%; left: auto; z-index: 10;">
+                            <div>{{this.error}}</div>
+                        </div>   
+                    }
+                </div>
+                <!-- <div class="col-5"> Captcha Google
                     <ngx-recaptcha2 #captchaElem
                     [siteKey]="siteKey"
                     required="true"
@@ -142,8 +134,7 @@
                     <div class="alert alert-danger p-1" *ngIf="form.controls?.['recaptcha']?.invalid && (form.controls?.['recaptcha']?.dirty || form.controls?.['recaptcha']?.touched)">
                         <div *ngIf="form.controls?.['recaptcha']?.errors?.['required']">Captcha es requerido</div>
                     </div>  
-                </div>
-
+                </div> -->
             </div>
             <div class="row d-flex justify-content-center p-3 m-3 ">
                 <button type="submit" class="btn btn-primary btn-lg"> Registrarse </button>

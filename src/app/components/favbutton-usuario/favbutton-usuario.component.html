@@ -1,4 +1,4 @@
-<div class="w-100 d-flex justify-content-center flex-column favBtnContainer slide-in-right" >
+<div class=" d-flex justify-content-center flex-column favBtnContainer slide-in-right" >
     <div class="w-100 d-flex justify-content-center flex-column" >
         <!-- <ngb-carousel class="favButton"> -->
             <!-- <ng-template ngbSlide>
@@ -38,7 +38,7 @@
     </div>
     <div *ngIf="this.showInfo" class="w-100 d-flex flex-column">
         <div *ngFor="let item of turnosConHC" class="d-flex justify-content-between flex-row">
-            <h3 class="p-1">{{item.dia}}/{{item.mes + 1}}/{{item.anio}}</h3>
+            <h3 class="p-1">{{item.dia}}/{{item.mes + 1}}/{{item.anio}} - {{item.especialidad}}</h3>
             <button class="btn btn-sm btn-info m-1" (click)="this.openLg(content, item)" >Reseña</button>
         </div>
     </div>

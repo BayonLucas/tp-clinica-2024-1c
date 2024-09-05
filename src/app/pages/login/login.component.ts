@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { BtnInicioRapidoComponent } from '../../components/btn-inicio-rapido/btn-inicio-rapido.component';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BtnInicioRapidoComponent } from '../../components/btn-inicio-rapido/btn-inicio-rapido.component';
 import { StoreService } from '../../services/store.service';
-import { take } from 'rxjs';
 import { LogService } from '../../services/log.service';
+import { ToastService } from '../../services/toast.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,9 @@ import { LogService } from '../../services/log.service';
 export class LoginComponent {
   private authServ:AuthService = inject(AuthService);
   private storeServ:StoreService = inject(StoreService);
-  private router:Router = inject(Router);
   private logServ:LogService = inject(LogService);
+  private router:Router = inject(Router);
+  private customToastServ:ToastService = inject(ToastService)
 
   get email(){
     return this.form.get('email')?.value;
@@ -31,9 +33,8 @@ export class LoginComponent {
   }
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, /*Validators.pattern()*/]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)/*Validators.pattern()*/]),
-    // recaptcha: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email,]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
 
@@ -45,28 +46,34 @@ export class LoginComponent {
   }
 
   iniciarSesion(){
-    try{
-
+    try {
       if(this.form.valid){
-  
         let usuario$ = this.storeServ.getUsuarioPorEmail(this.email);
-        // usuario$.pipe( take(1) ).subscribe( async (data) => {
-        usuario$.subscribe( async (data) => {
+        usuario$.pipe( take(1) ).subscribe( async (data) => {
           if(data.rol == 'especialista' && !data.adminValidation){
-            // this.authServ.cerrarSesionUsuario();
-            throw new Error('El especialista no tiene la validación del administrador. Aguarde a ser validado');
+            // throw new Error('(auth/no-validacion-admin)');
+            this.customToastServ.showToast('error', '(auth/no-validacion-admin)');
+
           }
-          else{
-            await this.authServ.loginUser(this.email, this.password);
-            this.logServ.setLogs(data.uid);
-            this.router.navigateByUrl('/home');
+          else {
+            await this.authServ.loguearUsuario(this.email, this.password).then( (data:any)  => {
+              if(data != undefined){
+                this.logServ.setLogs(data.uid);
+                this.router.navigateByUrl('/home');
+              }
+            }).catch( (e) => {
+              this.customToastServ.showToast('error', e.message);
+            });
           } 
         });
       }
+      else{
+        this.form.markAllAsTouched()
 
+      }
     }
     catch(error:any){
-    
+      this.customToastServ.showToast('error', error.message);
     }
   }
 

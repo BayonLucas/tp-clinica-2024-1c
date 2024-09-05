@@ -6,23 +6,13 @@
         </button>
         @if(formElegido == ''){
             <div class="row subfondo">
-                <!-- <div class="col-6 d-flex justify-content-center">
-                    <div class="img-btn" (click)="elegirForm('paciente')">
-                        <img src="../../../assets/botones/personas.jpeg" alt="">
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="img-btn" (click)="elegirForm('especialista')">
-                        <img src="../../../assets/botones/doctores.jpeg" alt="">
-                    </div>
-                </div> -->
-                <div class="card text-bg-dark img-btn" (click)="elegirForm('paciente')">
+                <div class="card p-0 text-bg-dark img-btn" (click)="elegirForm('paciente')">
                     <img src="../../../assets/botones/personas.jpeg" alt="paciente">
                     <div class="card-img-overlay d-flex justify-content-center align-items-end ">
                         <h1 class="card-title mb-0">Paciente</h1>
                     </div>
                 </div>
-                <div class="card text-bg-dark img-btn" (click)="elegirForm('especialista')">
+                <div class="card p-0 text-bg-dark img-btn" (click)="elegirForm('especialista')">
                     <img src="../../../assets/botones/doctores.jpeg" alt="especialista">
                     <div class="card-img-overlay d-flex justify-content-center align-items-end ">
                         <h1 class="card-title mb-0">Doctor</h1>
@@ -32,10 +22,10 @@
         }
         @else {
             @if(formElegido == 'paciente'){
-                <form-paciente [redirectTo]="'/home'"></form-paciente>
+                <form-paciente class="w-75" [redirectTo]="'/bienvenido'"></form-paciente>
             }
             @else{
-                <form-especialista [redirectTo]="'/home'"></form-especialista>
+                <form-especialista class="w-75" [redirectTo]="'/bienvenido'"></form-especialista>
             }
         }
     </div>

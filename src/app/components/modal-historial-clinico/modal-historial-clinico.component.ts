@@ -39,17 +39,18 @@ export class ModalHistorialClinicoComponent implements OnInit{
   
   
   aplicarFiltro(event:any){
-    if(event.target.value != 'todos'){
-      this.filtroElegido = this.filtro[event.target.value];
+    const index = event.target.value;
+
+    if(index == 'todos'){
+        this.historialClinicoFiltrado = this.historialClinico;
     }
-    if(this.filtroElegido == 'todos'){
-      this.historialClinicoFiltrado = this.historialClinico;
-    } 
     else{
+      this.filtroElegido = this.filtro[index]
+      console.log('Entré al else')
       this.historialClinicoFiltrado = this.historialClinico.filter( item => {
         return item.uid_doctor == this.filtroElegido.uid;
       });
-    } 
+    }
   }
 
   private obtenerUidEspecialistas(turnos:Turno[]){

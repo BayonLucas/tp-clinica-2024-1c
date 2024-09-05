@@ -1,22 +1,43 @@
 <div class="container-fluid d-flex justify-content-center aling-content-center">
-    <div class="pantalla d-flex flex-column">
+    <div class="pantalla d-flex flex-column p-4">
         <div class="row d-flex flex-row justify-content-between header">
             <h1 class="titulo">Gráficos y Estadísticas</h1>
             <img class="imgExport" src="../../../assets/modalBtn/pdf.png" alt="" (click)="imprimirPdf()">
         </div>
-        <div class="row">
-            <div class="col-6 w-100">
+        <div class="row d-flex justify-content-center w-100">
+            <div class="col-12 m-4">
+                <h1 class="text-light">Log de ingresos al sistema. Indicando el usuario, día y horario que ingreso al sistema.</h1>
                 <canvas #canvasElement id="LinechartLog"></canvas>
             </div>
-            <div class="col-6 w-100">
+            <div class="col-12 m-4" style="height: 600px;">
+                <h1 class="text-light">Cantidad de turnos por especialidad.</h1>
                 <canvas #canvasElement id="barchartTurnosEspecialidad"></canvas>
             </div>
-            <div class="col-6 w-100">
+            <div class="col-12 m-4" style="height: 600px;">
+                <h1 class="text-light">Cantidad de turnos por día.</h1>
                 <canvas #canvasElement id="barchartTurnosPorDia"></canvas>
             </div>
-            <div class="col-6 w-100">
-                <!-- <canvas id="barchartTurnosEspecialista"></canvas> -->
+            <!-- <div class="col-12">
+                <h1 class="text-light">Cantidad de turnos solicitado por médico en un lapso de tiempo.</h1>
+
             </div>
+            <div class="col-12">
+                <h1 class="text-light">Cantidad de turnos finalizados por médico en un lapso de tiempo.</h1>
+
+            </div> -->
+            
+            <!-- <mat-tab-group #tabRef [preserveContent]="true" (selectedTabChange)="mostrarGraficoTab(tabRef.selectedIndex)">
+                <mat-tab onfocus="mostrarGraficoTab(0)" label="Ingresos al sistema">
+                    <canvas #canvasElement id="LinechartLog"></canvas>
+                </mat-tab>
+                <mat-tab label="Cant. turnos por especialidad">
+                    <canvas #canvasElement id="barchartTurnosEspecialidad"></canvas>
+                </mat-tab>
+                <mat-tab label="Cant. turnos por día">
+                    <canvas #canvasElement id="barchartTurnosPorDia"></canvas>
+                </mat-tab>
+            </mat-tab-group>    -->
+            <!-- <canvas id="barchartTurnosEspecialista"></canvas> -->
         </div>
     </div>
 </div>

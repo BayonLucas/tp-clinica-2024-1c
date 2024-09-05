@@ -1,3 +1,6 @@
+@import 'ngx-toastr/toastr';
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 /* You can add global styles to this file, and also import other style files */
 // body{
 //     // background-image: url('./assets/backgrounds/principal2.jpg');
@@ -13,7 +16,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15vh;
+    margin-top: 7%;
     background-color: rgba(0, 0, 0, 0.5);
     height: 90%;
     width: 80%;

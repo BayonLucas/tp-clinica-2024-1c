@@ -12,12 +12,13 @@ import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from '../../models/usuario';
 import { StorageService } from '../../services/storage.service';
 // import { CaptchaService } from '../../services/captcha.service';
+import { MiCaptchaComponent } from '../mi-captcha/mi-captcha.component';
 
 @Component({
   selector: 'form-admin',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast 
+    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MiCaptchaComponent
   ],
   templateUrl: './form-admin.component.html',
   styleUrl: './form-admin.component.scss'
@@ -47,7 +48,7 @@ export class FormAdminComponent implements OnInit{
     email: new FormControl('', [Validators.required, Validators.email, /*Validators.pattern()*/]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)/*Validators.pattern()*/]),
     confirmPassword: new FormControl('', [Validators.required,/*Validators.pattern()*/]),
-    recaptcha: new FormControl('', [Validators.required]),
+    // recaptcha: new FormControl('', [Validators.required]),
   }, {
     validators: [
       confirmarClaveValidator(), 
@@ -73,21 +74,23 @@ export class FormAdminComponent implements OnInit{
     return this.form.get('password')?.value;
   }
 
-  resolve(event:any){
-    // this.captchaServ.resolveCaptcha(event).subscribe( (data:any) => {
-    //   console.log(event);
-    //   this.captchaResolve = data.success
-    //   console.log(this.captchaResolve);
-    // });
-    this.captchaResolve = true
+  obtenerResultCaptcha(event:any){
+    this.captchaResolve = event;
+    if(event){
+      this.error = '';
+    }
   }
 
   async registrar(){
+    this.error = '';
+    if(!this.captchaResolve){
+      this.error = 'Debe resolver el captcha';
+    }
     if(this.form.valid && this.captchaResolve){
-      await this.authServ.registrarUsuario(this.email, this.password).then( async (result) => {
+      const result = await this.authServ.crearCuentaDeTerceros(this.email, this.password);
 
       const nuevoUsuario = <Usuario>{
-        uid: result.user.uid,
+        uid: result,
         email: this.email,
         password: this.password,
         dni: this.dni,
@@ -98,7 +101,7 @@ export class FormAdminComponent implements OnInit{
         adminValidation: true
       }
       this.storeServ.setUsuario(nuevoUsuario);
-      this.authServ.validarCorreo(result.user);
+      this.authServ.validarCorreo(this.email);
 
       await Swal.fire({
         position: "center",
@@ -106,20 +109,18 @@ export class FormAdminComponent implements OnInit{
         title: `Bienvenido ${nuevoUsuario.nombre}`,
         showConfirmButton: false,
         timer: 2500 
-        }).then( () => {
-          this.router.navigateByUrl(this.redirectTo);
-        });
       });
+      this.router.navigateByUrl(this.redirectTo);
     }
     else{
+      this.form.markAllAsTouched()
       Swal.fire({
         position: "center",
         icon: "error",
         title: "Ocurrió un problema. Intentelo nuevamente",
         showConfirmButton: false,
         timer: 1500
-        });
-        console.log(this.form.get('recaptcha')?.value)
+      });
     }
   }
   

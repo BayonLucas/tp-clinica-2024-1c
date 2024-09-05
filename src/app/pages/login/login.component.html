@@ -11,11 +11,11 @@
                     <form [formGroup]="form" class="form" (ngSubmit)="iniciarSesion()">
                         <div class="row">
                             <div class="col-12"> <!-- Email -->
-                                <div class="form-floating mb-3">
+                                <div class="form-floating mb-3 position-relative">
                                     <input type="email" class="form-control" id="floatingInput5" formControlName="email"
                                         placeholder="" autocomplete="off">
                                     <label for="floatingInput5">Email</label>
-                                    <div class="alert alert-danger p-1"
+                                    <div class="alert alert-danger p-1 position-absolute w-100"
                                         *ngIf="form.controls?.['email']?.invalid && (form.controls?.['email']?.dirty || form.controls?.['email']?.touched)">
                                         <div *ngIf="form.controls?.['email']?.errors?.['required']">El correo es requerido
                                         </div>
@@ -27,11 +27,11 @@
     
                         <div class="row">
                             <div class="col-12"> <!-- Contraseña -->
-                                <div class="form-floating mb-3">
+                                <div class="form-floating mb-3 position-relative">
                                     <input type="password" class="form-control" id="floatingInput6"
                                         formControlName="password" placeholder="" autocomplete="off">
                                     <label for="floatingInput6">Contraseña</label>
-                                    <div class="alert alert-danger p-1"
+                                    <div class="alert alert-danger p-1 position-absolute w-100"
                                         *ngIf="form.controls?.['password']?.invalid && (form.controls?.['password']?.dirty || form.controls?.['password']?.touched)">
                                         <div *ngIf="form.controls?.['password']?.errors?.['required']">La contraseña es
                                             requerida</div>

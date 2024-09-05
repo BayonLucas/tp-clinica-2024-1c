@@ -28,19 +28,61 @@
             </mat-form-field>
     
             <button class="btn btn-sm btn-info m-2" type="button" (click)="agregarDatoDinamico()">Agregar Dato Dinámico</button>
+            <button class="btn btn-sm btn-info m-2" type="button" (click)="agregarDatoDinamicoEspecial()">Agregar Dato Dinámico Especial</button>
     
-            <div formArrayName="dinamicos">
-                <div *ngFor="let dinamico of dinamicos.controls; let i = index" [formGroupName]="i" class="row d-flex justify-content-center flex-row">
-                    <div class="col-5">
-                        <mat-form-field class="">
+            <div formArrayName="dinamicosEspeciales">
+                <div *ngFor="let dinamico of dinamicosEspeciales.controls; let i = index" [formGroupName]="i" class="row d-flex justify-content-center align-items-center flex-row">
+                    <div class="col-5 d-flex justify-content-center">
+                        <mat-form-field class="w-auto">
                             <mat-label>Clave:</mat-label>
-                            <input matInput type="text" placeholder="clave" formControlName="clave" class="w-75">
+                            <input matInput type="text" placeholder="clave" formControlName="clave" class="">
                         </mat-form-field>
                     </div>
-                    <div class="col-5">
-                        <mat-form-field class="">
+                    <div class="col-5 ">
+                        @switch (dinamico.get('tipo')!.value) {
+                            @case ('range') {
+                                <div class="d-flex justify-content-center flex-column">
+                                    <div class="d-flex justify-content-between">
+                                        <label id="example-name-label" class="example-name-label">Value</label>
+                                        <label class="example-value-label">{{slider.value}}</label>
+                                    </div>
+                                    <mat-slider class="d-flex justify-content-center w-auto" [max]="100" [min]="0" [showTickMarks]="">
+                                        <input matSliderThumb formControlName="valor" #slider>
+                                    </mat-slider>
+                                </div>
+                            }
+                            @case ('numeric') {
+                                <mat-form-field class="w-auto">
+                                    <mat-label>Valor:</mat-label>
+                                    <input matInput type="number" min="0" placeholder="valor" formControlName="valor" class="w-100">
+                                </mat-form-field>
+                            }
+                            @case ('boolean') {
+                                <div class="d-flex justify-content-center align-items-center flex-column" >
+                                    <mat-label>Valor:</mat-label>
+                                    <mat-slide-toggle class="w-auto" placeholder="valor" formControlName="valor"></mat-slide-toggle>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center p-0 m-0">
+                        <img src="../../../assets/modalBtn/quitar.png" style="width: 25px;" alt="" (click)="eliminarDatoDinamicoEspecial(i)">
+                    </div>
+                </div>
+            </div>
+                
+            <div formArrayName="dinamicos">
+                <div *ngFor="let dinamico of dinamicos.controls; let i = index" [formGroupName]="i" class="row d-flex justify-content-center flex-row">
+                    <div class="col-5 d-flex justify-content-center">
+                        <mat-form-field class="w-auto">
+                            <mat-label>Clave:</mat-label>
+                            <input matInput type="text" placeholder="clave" formControlName="clave" class="">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-5 d-flex justify-content-center">
+                        <mat-form-field class="w-auto">
                             <mat-label>Valor:</mat-label>
-                            <input matInput type="text" placeholder="valor" formControlName="valor" class="w-75">
+                            <input matInput type="text" placeholder="valor" formControlName="valor" class="">
                         </mat-form-field>
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center p-0 m-0">

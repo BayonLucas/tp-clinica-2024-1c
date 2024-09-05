@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { StoreService } from '../../services/store.service';
-import { Usuario } from '../../models/usuario';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { StoreService } from '../../services/store.service';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'btn-inicio-rapido',
@@ -21,7 +21,13 @@ export class BtnInicioRapidoComponent implements OnInit{
   @Input() email!:string;
   @Input() clave!:Usuario;
   @Output() onClick = new EventEmitter<{}>(); 
-  
+
+  constructor(){
+    this.storeServ.getUsuarioInicioRapido().subscribe( (data) => {
+      this.usuarios = data
+    });
+  }
+
   enviar(user:any){
     return this.onClick.emit({
       email: user.email,
@@ -30,8 +36,5 @@ export class BtnInicioRapidoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.storeServ.getUsuarioInicioRapido().subscribe( (data) => {
-      this.usuarios = data
-    })
   }
 }

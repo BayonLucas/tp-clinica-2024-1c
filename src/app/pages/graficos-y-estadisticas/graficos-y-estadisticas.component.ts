@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TurnoService } from '../../services/turno.service';
 import { LogService } from '../../services/log.service';
@@ -15,18 +15,21 @@ import { UsuarioService } from '../../services/usuario.service';
 import { FiltroService } from '../../services/filtro.service';
 import { Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
 import html2canvas from 'html2canvas';
+import { MatTabsModule } from '@angular/material/tabs';
+import { firstValueFrom } from 'rxjs';
+
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-graficos-y-estadisticas',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, FormsModule 
+    CommonModule, ReactiveFormsModule, FormsModule, MatTabsModule
   ],
   templateUrl: './graficos-y-estadisticas.component.html',
   styleUrl: './graficos-y-estadisticas.component.scss'
 })
-export class GraficosYEstadisticasComponent implements OnInit{
+export class GraficosYEstadisticasComponent implements OnInit, AfterViewInit{
   private turnoServ:TurnoService = inject(TurnoService);
   private especialidadesServ:EspecialidadService = inject(EspecialidadService);
   private logServ:LogService = inject(LogService);
@@ -36,7 +39,6 @@ export class GraficosYEstadisticasComponent implements OnInit{
   @ViewChild('content') content!: ElementRef;
   @ViewChildren('canvasElement') canvasElements!: QueryList<ElementRef<HTMLCanvasElement>>;
 
-
   logs:Log[] = [];
   especialidades:EspecialidadModel[] = [];
   doctores:Usuario[] = [];
@@ -45,8 +47,6 @@ export class GraficosYEstadisticasComponent implements OnInit{
   chartTurnosPorEspecialidad!:any;
   chartTurnosPorDia!:any;
   LinechartLog!:any;
-
-
 
   colores:string[] = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
   backgroundColor: string[] =[
@@ -60,37 +60,54 @@ export class GraficosYEstadisticasComponent implements OnInit{
   ];
   
   constructor(){
-    this.turnoServ.getTurnos().subscribe( data => {
-      this.turnos = data;
-      this.renderizarBarchartTurnosEspecialidades();
-      this.renderizarBarchartTurnosPorDia();
-      this.renderizarLinechartLogsDiaYHorario();
+    // this.turnoServ.getTurnos().subscribe( data => {
+    //   this.turnos = data;
+    //   this.renderizarBarchartTurnosEspecialidades();
+    //   this.renderizarBarchartTurnosPorDia();
+    //   this.renderizarLinechartLogsDiaYHorario();
       
-    });
-    this.logServ.getLogs().subscribe( data => {
-      this.logs = data;
-      this.renderizarBarchartTurnosEspecialidades();
-      this.renderizarBarchartTurnosPorDia();
-      this.renderizarLinechartLogsDiaYHorario();
+    // });
+    // this.logServ.getLogs().subscribe( data => {
+    //   this.logs = data;
+    //   this.renderizarBarchartTurnosEspecialidades();
+    //   this.renderizarBarchartTurnosPorDia();
+    //   this.renderizarLinechartLogsDiaYHorario();
 
-    });
-    this.especialidadesServ.getEspecialidadesconImagenes().subscribe( data => {
-      this.especialidades = data;
-      this.renderizarBarchartTurnosEspecialidades();
-      this.renderizarBarchartTurnosPorDia();
-      this.renderizarLinechartLogsDiaYHorario();
+    // });
+    // this.especialidadesServ.getEspecialidadesconImagenes().subscribe( data => {
+    //   this.especialidades = data;
+    //   this.renderizarBarchartTurnosEspecialidades();
+    //   this.renderizarBarchartTurnosPorDia();
+    //   this.renderizarLinechartLogsDiaYHorario();
 
-    });
-    this.usuarioServ.getUsuariosPorRol('especialista').subscribe( data => {
-      this.doctores = data;
-      this.renderizarBarchartTurnosEspecialidades();
-      this.renderizarBarchartTurnosPorDia();
-      this.renderizarLinechartLogsDiaYHorario();
+    // });
+    // this.usuarioServ.getUsuariosPorRol('especialista').subscribe( data => {
+    //   this.doctores = data;
+    //   this.renderizarBarchartTurnosEspecialidades();
+    //   this.renderizarBarchartTurnosPorDia();
+    //   this.renderizarLinechartLogsDiaYHorario();
 
-    });
+    // });
   }
 
 
+
+  mostrarGraficoTab(index:any){
+    switch(index){
+      case 0:
+        this.renderizarLinechartLogsDiaYHorario();
+        break;
+      case 1:
+        this.renderizarBarchartTurnosEspecialidades();
+        break;
+      case 2:
+        this.renderizarBarchartTurnosPorDia();
+;        break;
+      case 3:
+        break;
+
+    }
+  }
 
   renderizarBarchartTurnosEspecialidades(){
     if(this.chartTurnosPorEspecialidad){
@@ -130,7 +147,6 @@ export class GraficosYEstadisticasComponent implements OnInit{
       }
     });
   }
-
 
   renderizarLinechartLogsDiaYHorario(){
     if(this.LinechartLog){
@@ -199,7 +215,6 @@ export class GraficosYEstadisticasComponent implements OnInit{
     });
   }
 
-
   renderizarBarchartTurnosPorDia(){
     if(this.chartTurnosPorDia){
       this.chartTurnosPorDia.destroy();
@@ -253,6 +268,7 @@ export class GraficosYEstadisticasComponent implements OnInit{
 
     return '';
   }
+
   async agregarGraficoAlPdf(pdf: PdfMakeWrapper, chartId: string, titulo: string): Promise<void> {
     const imagenBase64 = await this.capturarGraficoComoImagen(chartId);
     const logo = await new Img(imagenBase64).absolutePosition(30,20).fit([40,40]).build();
@@ -265,6 +281,7 @@ export class GraficosYEstadisticasComponent implements OnInit{
       );
     }
   }
+
   obtenerImagenesBase64DeCanvas(): Promise<string[]> {
     const imagenesBase64: string[] = [];
   
@@ -310,8 +327,20 @@ export class GraficosYEstadisticasComponent implements OnInit{
     pdf.create().download('estadisticas.pdf');
     pdf.create().open();
   }
-  
-  ngOnInit(): void {
 
+  
+  async ngOnInit() {
+    this.turnos = await firstValueFrom(this.turnoServ.getTurnos());
+    this.logs = await firstValueFrom(this.logServ.getLogs());
+    this.especialidades = await firstValueFrom(this.especialidadesServ.getEspecialidadesconImagenes());
+    this.doctores = await firstValueFrom(this.usuarioServ.getUsuariosPorRol('especialista'));
+    
+    this.renderizarBarchartTurnosEspecialidades();
+    this.renderizarBarchartTurnosPorDia();
+    this.renderizarLinechartLogsDiaYHorario();
   }
+
+  ngAfterViewInit(): void {
+  }
+
 }

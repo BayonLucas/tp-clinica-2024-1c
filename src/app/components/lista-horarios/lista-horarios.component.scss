@@ -1,6 +1,7 @@
 .horarioContainer{
-    max-height: 50rem;
+    max-height: 40rem;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
 .horario{
     padding: 15px 20px 15px 20px;

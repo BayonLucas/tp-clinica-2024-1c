@@ -1,0 +1,61 @@
+<div class="bounce-in-top">
+
+    <div class="modal-header w-100 d-flex justify-content-around  align-items-center">
+        <h1 class="modal-title p-0 m-0">Encuesta</h1>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body w-100">
+        <form [formGroup]="form">
+            <div class="col-12 mb-4">
+                <section class="example-section">
+                    <h4 class="fs-5">En qué aspectos cree que destacamos?</h4>
+                    <div class="d-flex flex-wrap" >
+                        <p><mat-checkbox name="disponibilidad" (change)="onCheckboxChange($event)">Disponibilidad</mat-checkbox></p>
+                        <p><mat-checkbox name="eficiencia" (change)="onCheckboxChange($event)">Eficiencia</mat-checkbox></p>
+                        <p><mat-checkbox name="instalaciones" (change)="onCheckboxChange($event)">Instalaciones</mat-checkbox></p>
+                        <p><mat-checkbox name="atencion" (change)="onCheckboxChange($event)">Atención</mat-checkbox></p>
+                        <p><mat-checkbox name="confiabilidad" (change)="onCheckboxChange($event)">Confiabilidad</mat-checkbox></p>
+                        <p><mat-checkbox name="tecnologia" (change)="onCheckboxChange($event)">Tecnología</mat-checkbox></p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-12 mb-4">
+                <div class="d-flex justify-content-between">
+                    <label id="example-name-label" class="fs-5">Del 1 al 10, califiqué la cordialidad del Dr.:</label>
+                    <label class="example-value-label">{{slider.value}}</label>
+                </div>
+                <mat-slider class="d-flex justify-content-center w-auto" [max]="10" [min]="1" [showTickMarks]="">
+                    <input matSliderThumb formControlName="satisf_Atencion" #slider>
+                </mat-slider>
+            </div>
+            <div class="col-12 mb-4 justify-content-center align-items-center">
+                <mat-radio-group class="d-flex flex-column align-items-center" formControlName="recomendable">
+                    <mat-label class="fs-5">Nos recomendarías?</mat-label>
+                    <div>
+                        <mat-radio-button [value]="true">Si</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </div>
+                </mat-radio-group>
+            </div>
+            <div class="col-12 mb-4 d-flex flex-column align-items-center">
+                <mat-label class="fs-5">Valoranos</mat-label>
+                <ngb-rating formControlName="calificacion" [(rate)]="rating" [max]="5">
+                    <ng-template let-fill="fill" let-index="index">
+                        <i class="bi-star{{ fill === 100 ? '-fill' : '' }}" [class.filled]="fill === 100" [class.low]="index < 1"></i>
+                    </ng-template>
+                </ngb-rating>
+            </div>
+            <div class="col-12 mb-4">
+                <mat-form-field class="w-100">
+                    <mat-label class="fs-5">Comentario</mat-label>
+                    <textarea #message maxlength="256" formControlName="comentario" matInput placeholder="Dejenos algun comentario..."></textarea>    .
+                    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                  </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer w-100 d-flex justify-content-around">
+        <button type="button" class="btn btn-outline-success" (click)="finalizarEncuesta()">Terminar Encuesta</button>
+        <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Cerrar</button>
+    </div>
+</div>
