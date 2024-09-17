@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-around align-items-center">
+    <h1 class="text-light">Turnos y estados <strong>por paciente</strong>.</h1>
+    <div class="d-flex align-items-center">
+        <form>
+            <mat-form-field class="my-2" style="width: 500px;">
+                <mat-label>Pacientes</mat-label>
+                <input 
+                    type="text" 
+                    placeholder="Elija un paciente" 
+                    matInput 
+                    [formControl]="myControl" 
+                    [matAutocomplete]="auto"
+                >
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="_showPaciente" (optionSelected)="_selectPaciente()">
+                    @for (pac of listaFiltradaPacientes | async; track pac) {
+                        <mat-option [value]="pac">{{pac.apellido}} {{pac.nombre}} - {{pac.dni}}</mat-option>  
+                    }
+                </mat-autocomplete>
+            </mat-form-field> 
+
+        </form>
+    </div>
+</div>
+<canvas class="w-100" #grafico id="barChartTurnosPorPaciente"></canvas>

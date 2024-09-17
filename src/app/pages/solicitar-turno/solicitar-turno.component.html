@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex justify-content-center align-items-center">
+<div class="container-fluid d-flex justify-content-center align-items-center slide-in-right">
     <div class="pantalla d-flex flex-column">
         <div class="w-100 h-100">
             <div class="row justify-content-center align-items-center d-flex flex-row">
@@ -11,7 +11,7 @@
                             matInput
                             [formControl]="myControl"
                             [matAutocomplete]="auto">
-                        <mat-autocomplete autoActiveFirstOption requireSelection #auto="matAutocomplete" [displayWith]="_showPaciente" (optionSelected)="_selectPaciente()">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="_showPaciente" (optionSelected)="_selectPaciente()">
                             @for (pac of listaFiltradaPacientes | async; track pac) {
                                 <mat-option [value]="pac">{{pac.apellido}} {{pac.nombre}} - {{pac.dni}}</mat-option>  
                             }

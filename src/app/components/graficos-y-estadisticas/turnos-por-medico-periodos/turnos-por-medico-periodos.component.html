@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="text-light">Cantidad de turnos por médico en un lapso de tiempo.</h1>
+    <div class="d-flex align-items-center">
+      <button class="btn btn-info btn-sm m-1" style="border-radius: 50px;" type="button" (click)="resetFiltro()">
+        <img class="" style="width: 30px;" src="../../../../assets/botones/escoba.png" alt="">
+      </button>
+      <mat-form-field>
+        <mat-label>Ingrese un rango de fechas</mat-label>
+        <mat-date-range-input #pick [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate placeholder="Desde" formControlName="start">
+          <input matEndDate placeholder="Hasta" formControlName="end" (dateChange)="actualizarFiltroRangoDia($event)">
+        </mat-date-range-input>
+        <mat-hint style="color: white;">MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+    </div>
+</div>
+<canvas #grafico id="barChartTurnosPorMedicoPeriodo"></canvas>

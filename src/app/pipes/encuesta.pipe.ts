@@ -8,13 +8,14 @@ export class EncuestaPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     const data = JSON.parse(value);
-    console.log(data);
     
-    return 'p: ' + data[0].p + ' - r: ' + data[0].r + '\n' +
-      'p: ' + data[1].p + ' - r: ' + data[1].r + '\n' +
-      'p: ' + data[2].p + ' - r: ' + data[2].r + '\n';
+    const comment = "Comentario: " + data.comentario + "\n"; 
+    const recomend = "El paciente " + (!data.recomendable? 'NO ': '') + "recomienda la institución \n";
+    const calificacion = "Calificación: " + data.calificacion + " estrellas. \n";
+    const destacables = data.destacables.length > 0 ? "Los aspectos que mas destaca el paciente es/son: " + data.destacables.join(' - ') + '\n' : '';
+    const satisfaccion = "El grado de satisfacción en cuanto al Dr. que lo atendió es de: " + data.satisf_Atencion + "/10.\n"; 
 
-    
+    return comment + recomend + calificacion + destacables + satisfaccion;
   }
 
 }
