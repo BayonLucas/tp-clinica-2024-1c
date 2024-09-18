@@ -14,12 +14,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FavbuttonUsuarioComponent } from '../../components/favbutton-usuario/favbutton-usuario.component';
 import * as XLSX from 'xlsx'
 import { endOfDay } from 'date-fns';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-seccion-usuarios',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink, MatFormFieldModule, MatSelectModule, FavbuttonUsuarioComponent
+    ReactiveFormsModule, CommonModule, FormAdminComponent, FormPacienteComponent, FormEspecialistaComponent, CardUsuarioComponent, RouterLink, MatFormFieldModule, MatSelectModule, FavbuttonUsuarioComponent, TranslateModule
   ],
   templateUrl: './seccion-usuarios.component.html',
   styleUrl: './seccion-usuarios.component.scss'

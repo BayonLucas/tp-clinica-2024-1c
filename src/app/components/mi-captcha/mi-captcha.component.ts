@@ -10,12 +10,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MiCaptchaReveledDirective } from '../../directives/mi-captcha-reveled.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mi-captcha',
   standalone: true,
   imports: [
-    ReactiveFormsModule, FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule,MatCheckboxModule, MatProgressSpinnerModule, MiCaptchaReveledDirective
+    ReactiveFormsModule, FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule,MatCheckboxModule, MatProgressSpinnerModule, MiCaptchaReveledDirective, TranslateModule
   ],
   templateUrl: './mi-captcha.component.html',
   styleUrl: './mi-captcha.component.scss'

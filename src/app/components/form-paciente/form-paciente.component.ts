@@ -14,13 +14,14 @@ import { confirmarOSRequired } from '../../Validators/obra_social.validator';
 import { CaptchaService } from '../../services/captcha.service';
 import { MiCaptchaComponent } from '../mi-captcha/mi-captcha.component';
 import { ToastService } from '../../services/toast.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'form-paciente',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MiCaptchaComponent
+    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MiCaptchaComponent, TranslateModule
   ],
   templateUrl: './form-paciente.component.html',
   styleUrl: './form-paciente.component.scss'

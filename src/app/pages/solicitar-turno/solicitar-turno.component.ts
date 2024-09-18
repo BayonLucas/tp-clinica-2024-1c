@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { map, Observable, startWith } from 'rxjs';
 import { ToastService } from '../../services/toast.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-solicitar-turno',
@@ -25,7 +26,7 @@ import { ToastService } from '../../services/toast.service';
     templateUrl: './solicitar-turno.component.html',
     styleUrl: './solicitar-turno.component.scss',
     imports: [
-        FormsModule, ReactiveFormsModule, CommonModule, ListaDoctoresComponent, ListaEspecialidadesComponent, ListaDiasComponent, ListaHorariosComponent, CustomDatePipe, MatFormFieldModule, MatInputModule, MatAutocompleteModule
+        FormsModule, ReactiveFormsModule, CommonModule, ListaDoctoresComponent, ListaEspecialidadesComponent, ListaDiasComponent, ListaHorariosComponent, CustomDatePipe, MatFormFieldModule, MatInputModule, MatAutocompleteModule, TranslateModule
     ]
 })
 export class SolicitarTurnoComponent implements OnInit{

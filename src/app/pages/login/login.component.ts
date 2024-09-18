@@ -8,12 +8,13 @@ import { StoreService } from '../../services/store.service';
 import { LogService } from '../../services/log.service';
 import { ToastService } from '../../services/toast.service';
 import { take } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    BtnInicioRapidoComponent, ReactiveFormsModule, CommonModule
+    BtnInicioRapidoComponent, ReactiveFormsModule, CommonModule, TranslateModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -58,7 +59,7 @@ export class LoginComponent {
           else {
             await this.authServ.loguearUsuario(this.email, this.password).then( (data:any)  => {
               if(data != undefined){
-                this.logServ.setLogs(data.uid);
+                // this.logServ.setLogs(data.uid);
                 this.router.navigateByUrl('/home');
               }
             }).catch( (e) => {

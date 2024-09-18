@@ -2,17 +2,17 @@
     <div class="pantalla d-flex flex-column position-relative">
         <div *ngIf="opcionSelecta == '' || opcionSelecta == 'usuarios'" class="row mt-2">
             <div class="d-flex flex-row justify-content-between">
-                <h1 class="titulo">Sección usuarios</h1>
+                <h1 class="titulo">{{"seccionUsuarioTitulo" | translate}}</h1>
                 <img *ngIf="opcionSelecta == 'usuarios'" style="width: 35px; height: 35px;" src="../../../assets/modalBtn/excel.png" alt="" (click)="exportarUsuariosExcel()">
             </div>
             <ng-container  *ngIf="opcionSelecta == 'usuarios'">
                 <mat-form-field>
-                    <mat-label>Roles</mat-label>
+                    <mat-label>{{"roles"|translate}}</mat-label>
                     <mat-select [(value)]="filtro" (valueChange)="aplicarFiltro($event)">
-                        <mat-option mat-option selected value="Todos">Todos</mat-option>
-                        <mat-option mat-option value="paciente">Pacientes</mat-option>
-                        <mat-option mat-option value="especialista">Especialistas</mat-option>
-                        <mat-option mat-option value="admin">Admins</mat-option>
+                        <mat-option mat-option selected value="Todos">{{"todos" | translate}}</mat-option>
+                        <mat-option mat-option value="paciente">{{"pacientes" | translate}}</mat-option>
+                        <mat-option mat-option value="especialista">{{"especialistas" | translate}}</mat-option>
+                        <mat-option mat-option value="admin">{{"admins" | translate}}</mat-option>
                     </mat-select>
                   </mat-form-field>
             </ng-container>
@@ -21,15 +21,15 @@
             <img src="../../../assets/iconos/volver-flecha.png" alt="">
         </button>
         <button class="btn position-absolute top-0 end-0 backMenu m-2" [routerLink]="['/home']" routerLinkActive="router-link-active" >
-            Volver al Menú
+            {{"volverAlMenu" | translate}}
         </button>
         <ng-container >
 
             <ng-container *ngIf="opcionSelecta == '' ">
-                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('usuarios')">Listado de usuarios</button>
-                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('admin')">Alta Admin</button>
-                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('paciente')">Alta Paciente</button>
-                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('especialista')">Alta Especialista</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('usuarios')">{{"btnListadoUsuarios" | translate}}</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('admin')">{{"btnAltaAdmin" | translate}}</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('paciente')">{{"btnAltaPaciente" | translate}}</button>
+                <button class="btn btn-lg btn-primary p-3 m-3 w-75" (click)="elegirOpcion('especialista')">{{"btnAltaEspecialista" | translate}}</button>
             </ng-container>
     
             <ng-container *ngIf="opcionSelecta == 'usuarios'" >

@@ -2,15 +2,15 @@
     <div class="pantalla d-flex flex-column">
         <div class="bienvenida">
             <div class="row encabezado">
-                <h1 class="d-flex justify-content-center titulo">Clínica OnLine</h1>
-                <h2 class="d-flex justify-content-center">Especialistas en salud</h2>
+                <h1 class="d-flex justify-content-center titulo">{{'titulo' | translate}}</h1>
+                <h2 class="d-flex justify-content-center">{{'subTitulo' | translate}}</h2>
             </div>
             <div class="row h-75 ">
                 <div class="col-6 d-flex justify-content-center">
-                    <button class="btn btn-primary btn-lg w-75 h-75 m-5" [routerLink]="['/login']" routerLinkActive="router-link-active">Iniciar Sesión</button>  
+                    <button class="btn btn-primary btn-lg w-75 h-75 m-5" [routerLink]="['/login']" routerLinkActive="router-link-active">{{'btnIniciarSesion' | translate}}</button>  
                 </div>
                 <div class="col-6 d-flex justify-content-center">
-                    <button class="btn btn-primary btn-lg w-75 h-75 m-5" [routerLink]="['/register']" routerLinkActive="router-link-active">Registrase</button>
+                    <button class="btn btn-primary btn-lg w-75 h-75 m-5" [routerLink]="['/register']" routerLinkActive="router-link-active">{{'btnRegistrate' | translate}}</button>
                 </div>
             </div>
         </div>

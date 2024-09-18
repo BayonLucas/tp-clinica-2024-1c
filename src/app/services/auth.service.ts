@@ -5,6 +5,7 @@ import { StoreService } from './store.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthService {
   private router:Router = inject(Router);
   private storeServ:StoreService = inject(StoreService);
   private http:HttpClient = inject(HttpClient);
+  private logServ:LogService = inject(LogService);
 
   user$ = user(this.auth); 
   state$ = authState(this.auth);
@@ -63,7 +65,8 @@ export class AuthService {
 
     user_data.password = '';
     localStorage.setItem('usuario', JSON.stringify(user_data));
-    
+    this.logServ.setLogs(user_data.uid);
+
     return data;
   }
 

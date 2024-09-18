@@ -5,12 +5,13 @@ import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../models/usuario';
 import { CommonModule } from '@angular/common';
 import { MenuBtnDirective } from '../../directives/menu-btn.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule, RouterLink, MenuBtnDirective
+    CommonModule, RouterLink, MenuBtnDirective, TranslateModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

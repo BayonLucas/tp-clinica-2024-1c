@@ -4,25 +4,26 @@
     </div>
   
     <div *ngIf="randomCaptcha" class="captcha-container">
-      <mat-checkbox [disabled]="resultado" [(ngModel)]="deshabilitar" (change)="validarCaptcha()">Deshabilitar</mat-checkbox>
+      <mat-checkbox [disabled]="resultado" [(ngModel)]="deshabilitar" (change)="validarCaptcha()">{{"captcha_deshabilitar" | translate}}</mat-checkbox>
   
       <ng-container *ngIf="!loading">
         
         <form *ngIf="!resultado && !deshabilitar && !mostrarError" [formGroup]="form" (ngSubmit)="validarCaptcha()">
           <div class="captcha">
-            <p class="premisa">{{ randomCaptcha.premisa }}</p>
+            <p class="premisa">{{ randomCaptcha.premisa | translate}}</p>
             <div class="operaciones">
               <img *ngFor="let item of randomCaptcha.operaciones; let i = index" class="operacion" appMiCaptchaReveled [src]="item" [alt]="i">
             </div>
             <div class="respuestas">
               <mat-form-field class="ms-2 me-1 w-75">
-                <mat-label>Ingrese su respuesta</mat-label>
+                <mat-label>{{"captcha_ingresoRespuesta" | translate}}</mat-label>
                 <input matInput formControlName="captcha" type="text" class="pl-2 w-75">
                 <mat-error *ngIf="form.controls['captcha']?.invalid && (form.controls['captcha']?.dirty || form.controls['captcha']?.touched) && form.controls['captcha']?.errors?.['required']">
-                  Resolver el captcha es <strong>requerido</strong>
+                  <!-- Resolver el captcha es <strong>requerido</strong> -->
+                   {{"captcha_required" | translate}}
                 </mat-error>
               </mat-form-field>
-              <button type="submit" class="btn btn-primary">Enviar</button>
+              <button type="submit" class="btn btn-primary btn-sm">{{"captcha_enviar" | translate}}</button>
             </div>
           </div>
         </form>

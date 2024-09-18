@@ -9,10 +9,10 @@
                 <div class="col-4 p-1"> <!-- nombre -->
                     <div class="form-floating mb-5 position-relative">
                         <input type="text" class="form-control" id="floatingInput1" formControlName="nombre" placeholder="">
-                        <label for="floatingInput1">Nombre</label>
+                        <label for="floatingInput1">{{"form_nombre" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['nombre']?.invalid && (form.controls?.['nombre']?.dirty || form.controls?.['nombre']?.touched)">
-                            <div *ngIf="form.controls?.['nombre']?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="form.controls?.['nombre']?.errors?.['required']">{{"form_nombreRequired" | translate}}</div>
                         </div>
                     </div>
                 </div>
@@ -20,11 +20,10 @@
                     <div class="form-floating mb-5 position-relative">
                         <input type="text" class="form-control" id="floatingInput2" formControlName="apellido"
                             placeholder="">
-                        <label for="floatingInput2">Apellido</label>
+                        <label for="floatingInput2">{{"form_apellido" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['apellido']?.invalid && (form.controls?.['apellido']?.dirty || form.controls?.['apellido']?.touched)">
-                            <div *ngIf="form.controls?.['apellido']?.errors?.['required']">El apellido es requerido
-                            </div>
+                            <div *ngIf="form.controls?.['apellido']?.errors?.['required']">{{"form_apellidoRequired" | translate}}</div>
                         </div>
                     </div>
                 </div>
@@ -32,12 +31,12 @@
                     <div class="form-floating mb-5 position-relative">
                         <input type="number" min="21" max="85" id="floatingInput3" class="form-control"
                             formControlName="edad" placeholder="" />
-                        <label for="deck-name" for="floatingInput3">Edad</label>
+                        <label for="deck-name" for="floatingInput3">{{"form_edad" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['edad']?.invalid && (form.controls?.['edad']?.dirty || form.controls?.['edad']?.touched)">
-                            <div *ngIf="form.controls?.['edad']?.errors?.['required']">La edad es requerido</div>
-                            <div *ngIf="form.controls?.['edad']?.errors?.['min']">Debe ser mayor o igual a 21 años</div>
-                            <div *ngIf="form.controls?.['edad']?.errors?.['max']">Debe ser menor o igual a 85 años</div>
+                            <div *ngIf="form.controls?.['edad']?.errors?.['required']">{{"form_edadRequired" | translate}}</div>
+                            <div *ngIf="form.controls?.['edad']?.errors?.['min']">{{"form_edadMin" | translate}}</div>
+                            <div *ngIf="form.controls?.['edad']?.errors?.['max']">{{"form_edadMax" | translate}}</div>
                         </div>
                     </div>
                 </div>
@@ -46,31 +45,28 @@
                 <div class="col-4 p-1"> <!-- dni -->
                     <div class="form-floating mb-5 position-relative">
                         <input type="text" class="form-control" id="floatingInput4" formControlName="dni" placeholder="">
-                        <label for="floatingInput4">DNI</label>
+                        <label for="floatingInput4">{{"form_dni" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['dni']?.invalid && (form.controls?.['dni']?.dirty || form.controls?.['dni']?.touched)">
-                            <div *ngIf="form.controls?.['dni']?.errors?.['required']">El DNI es requerido</div>
-                            <div *ngIf="form.controls?.['dni']?.errors?.['minlength']">El DNI debe tener al menos 6
-                                digitos</div>
-                            <div *ngIf="form.controls?.['dni']?.errors?.['maxlength']">El DNI debe tener máximo 8
-                                digitos</div>
+                            <div *ngIf="form.controls?.['dni']?.errors?.['required']">{{"form_dniRequired" | translate}}</div>
+                            <div *ngIf="form.controls?.['dni']?.errors?.['minlength']">{{"form_dniMin" | translate}}</div>
+                            <div *ngIf="form.controls?.['dni']?.errors?.['maxlength']">{{"form_dniMax" | translate}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-7 p-1"> <!-- Obra Social -->
                     <div class="form-floating mb-5 position-relative">
                         <select class="form-select" aria-label="Default select example" formControlName="obra_social">
-                            <option selected disabled value="">Elija una obra social</option>
+                            <option selected disabled value="">{{"form_obraSocialLabel" | translate}}</option>
                             <ng-container *ngFor="let item of obras_sociales">
                                 <option value="{{item}}">{{item}}</option>
                                 <div class="alert alert-danger p-1 position-absolute w-100"
                                     *ngIf="form.controls?.['obra_social']?.invalid && (form.controls?.['obra_social']?.dirty || form.controls?.['obra_social']?.touched)">
-                                    <div *ngIf="form.controls?.['obra_social']?.errors?.['required']">La obra social es
-                                        requerido</div>
+                                    <div *ngIf="form.controls?.['obra_social']?.errors?.['required']">{{"form_obraSocialRequired" | translate}}</div>
                                 </div>
                             </ng-container>
                         </select>
-                        <label for="floatingInput">Obra Social</label>
+                        <label for="floatingInput">{{"form_obraSocial" | translate}}</label>
                     </div>
                 </div>
                 <div class="col-1">
@@ -82,11 +78,11 @@
                     <div class="form-floating mb-5 position-relative">
                         <input type="email" class="form-control" id="floatingInput5" formControlName="email"
                             placeholder="" autocomplete="off">
-                        <label for="floatingInput5">Email</label>
+                        <label for="floatingInput5">{{"form_email" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['email']?.invalid && (form.controls?.['email']?.dirty || form.controls?.['email']?.touched)">
-                            <div *ngIf="form.controls?.['email']?.errors?.['required']">El correo es requerido</div>
-                            <div *ngIf="form.controls?.['email']?.errors?.['email']">El correo es inválido</div>
+                            <div *ngIf="form.controls?.['email']?.errors?.['required']">{{"form_errorEmailRequired" | translate}}</div>
+                            <div *ngIf="form.controls?.['email']?.errors?.['email']">{{"form_errorEmail" | translate}}</div>
                         </div>
                     </div>
                 </div>
@@ -94,15 +90,12 @@
                     <div class="form-floating mb-5 position-relative">
                         <input type="password" class="form-control" id="floatingInput6" formControlName="password"
                             placeholder="" autocomplete="off">
-                        <label for="floatingInput6">Contraseña</label>
+                        <label for="floatingInput6">{{"form_contraseña" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['password']?.invalid && (form.controls?.['password']?.dirty || form.controls?.['password']?.touched)">
-                            <div *ngIf="form.controls?.['password']?.errors?.['required']">La contraseña es requerida
-                            </div>
-                            <div *ngIf="form.controls?.['password']?.errors?.['minlength']">La contraseña debe contener
-                                al menos 6 caracteres</div>
-                            <div *ngIf="form.controls?.['password']?.errors?.['password']">La contraseña es inválida
-                            </div>
+                            <div *ngIf="form.controls?.['password']?.errors?.['required']">{{"form_errorContraseñaRequired" | translate}}</div>
+                            <div *ngIf="form.controls?.['password']?.errors?.['minlength']">{{"form_errorContraseñaMinLength" | translate}}</div>
+                            <!-- <div *ngIf="form.controls?.['password']?.errors?.['password']">{{"" | translate}}</div> -->
                         </div>
                     </div>
                 </div>
@@ -110,13 +103,11 @@
                     <div class="form-floating mb-5 position-relative">
                         <input type="password" class="form-control" id="floatingInput7"
                             formControlName="confirmPassword" placeholder="" autocomplete="off">
-                        <label for="floatingInput7">Contraseña</label>
+                        <label for="floatingInput7">{{"form_confirmContraseña" | translate}}</label>
                         <div class="alert alert-danger p-1 position-absolute w-100"
                             *ngIf="form.controls?.['confirmPassword']?.invalid && (form.controls?.['confirmPassword']?.dirty || form.controls?.['confirmPassword']?.touched)">
-                            <div *ngIf="form.controls?.['confirmPassword']?.errors?.['required']">La contraseña es
-                                requerida</div>
-                            <div *ngIf="form.controls?.['confirmPassword']?.errors?.['noCoincide']">Las contraseña no
-                                coinciden</div>
+                            <div *ngIf="form.controls?.['confirmPassword']?.errors?.['required']">{{"form_confirmContraseñaRequired" | translate}}</div>
+                            <div *ngIf="form.controls?.['confirmPassword']?.errors?.['noCoincide']">{{"form_confirmContraseñaMatch" | translate}}</div>
                         </div>
                     </div>
                 </div>
@@ -125,32 +116,26 @@
                 <div class="col-6"> <!-- Foto 1 -->
                     <div class="input-group mb-5 position-relative">
                         <div class="d-flex flex-row w-100 align-items-center">
-                            <label class="input-group-text" for="inputGroupFile01">Foto de perfil - 1</label>
+                            <label class="input-group-text" for="inputGroupFile01">{{"form_fotoPerfil1" | translate}}</label>
                             <input type="file" accept=".jpg,.jpeg,.png," class="form-control" id="inputGroupFile01"
                                 formControlName="fotoPerfil" (change)="onFileChange($event)">
                         </div>
-                        <div class="alert alert-danger p-1 position-absolute w-100"
-                        style="top: 100%; left: 0; z-index: 10;" 
-
+                        <div class="alert alert-danger p-1 position-absolute w-100" style="top: 100%; left: 0; z-index: 10;" 
                             *ngIf="form.controls?.['fotoPerfil']?.invalid && (form.controls?.['fotoPerfil']?.dirty || form.controls?.['fotoPerfil']?.touched)">
-                            <div *ngIf="form.controls?.['fotoPerfil']?.errors?.['required']">Debe cargar una foto de
-                                perfil</div>
+                            <div *ngIf="form.controls?.['fotoPerfil']?.errors?.['required']">{{"form_fotoPerfil1Required" | translate}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-6"> <!-- Foto 2 -->
                     <div class="input-group mb-5 position-relative">
                         <div class="d-flex flex-row w-100 align-items-center">
-                            <label class="input-group-text" for="inputGroupFile02">Foto de perfil - 2</label>
+                            <label class="input-group-text" for="inputGroupFile02">{{"form_fotoPerfil2" | translate}}</label>
                             <input type="file" accept=".jpg,.jpeg,.png," class="form-control" id="inputGroupFile02"
                                 formControlName="fotoPerfil2" (change)="onFileChange($event)">
                         </div>
-                        <div class="alert alert-danger p-1 position-absolute w-100"
-                        style="top: 100%; left: 0; z-index: 10;" 
-
+                        <div class="alert alert-danger p-1 position-absolute w-100" style="top: 100%; left: 0; z-index: 10;" 
                             *ngIf="form.controls?.['fotoPerfil2']?.invalid && (form.controls?.['fotoPerfil2']?.dirty || form.controls?.['fotoPerfil2']?.touched)">
-                            <div *ngIf="form.controls?.['fotoPerfil2']?.errors?.['required']">Debe cargar una segunda
-                                foto de perfil</div>
+                            <div *ngIf="form.controls?.['fotoPerfil2']?.errors?.['required']">{{"form_fotoPerfil2Required" | translate}}</div>
                         </div>
                     </div>
                 </div>
@@ -180,7 +165,7 @@
 
                 </div>
                 <div class="row d-flex justify-content-center p-3 m-3 ">
-                    <button type="submit" class="btn btn-primary btn-lg"> Registrarse </button>
+                    <button type="submit" class="btn btn-primary btn-lg"> {{"form_btnRegistrarse" | translate}} </button>
                 </div>
             </div>
         </form>

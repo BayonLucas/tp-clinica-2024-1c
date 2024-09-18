@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormPacienteComponent } from "../../components/form-paciente/form-paciente.component";
 import { FormEspecialistaComponent } from "../../components/form-especialista/form-especialista.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-registro',
@@ -12,7 +13,7 @@ import { FormEspecialistaComponent } from "../../components/form-especialista/fo
     imports: [
         ReactiveFormsModule, CommonModule,
         FormPacienteComponent,
-        FormEspecialistaComponent
+        FormEspecialistaComponent, TranslateModule
     ]
 })
 export class RegistroComponent implements OnInit{

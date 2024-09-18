@@ -13,12 +13,13 @@ import { Usuario } from '../../models/usuario';
 import { StorageService } from '../../services/storage.service';
 // import { CaptchaService } from '../../services/captcha.service';
 import { MiCaptchaComponent } from '../mi-captcha/mi-captcha.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'form-admin',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MiCaptchaComponent
+    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MiCaptchaComponent, TranslateModule
   ],
   templateUrl: './form-admin.component.html',
   styleUrl: './form-admin.component.scss'

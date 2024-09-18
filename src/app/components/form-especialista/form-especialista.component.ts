@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HorarioService } from '../../services/horario.service';
 import { MiCaptchaComponent } from '../mi-captcha/mi-captcha.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 // import { CaptchaService } from '../../services/captcha.service';
 
@@ -23,7 +24,7 @@ import { MiCaptchaComponent } from '../mi-captcha/mi-captcha.component';
   selector: 'form-especialista',
   standalone: true,
   imports: [ 
-    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MatFormFieldModule, MatSelectModule, MiCaptchaComponent
+    ReactiveFormsModule, CommonModule, NgxCaptchaModule, NgbToast, MatFormFieldModule, MatSelectModule, MiCaptchaComponent, TranslateModule
   ],
   templateUrl: './form-especialista.component.html',
   styleUrl: './form-especialista.component.scss'
