@@ -111,7 +111,7 @@ export class FormEspecialistaComponent implements OnInit {
       const result = await this.authServ.crearCuentaDeTerceros(this.email, this.password);
 
       const nuevoUsuario = <Usuario>{
-        uid: result,
+        uid: result.localId,
         email: this.email,
         password: this.password,
         dni: this.dni,
@@ -124,7 +124,8 @@ export class FormEspecialistaComponent implements OnInit {
         adminValidation: false
       }
       this.storeServ.setUsuario(nuevoUsuario);
-      this.authServ.validarCorreo(this.email);
+      // this.authServ.validarCorreo(this.email);
+      await this.authServ.enviarVerificacionEmail(result.idToken);
 
       await Swal.fire({
         position: "center",

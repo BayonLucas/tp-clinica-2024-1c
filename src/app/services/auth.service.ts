@@ -98,7 +98,8 @@ export class AuthService {
     };
 
     //let url: string = 'https://www.googleapis.com/identitytoolkit/v3/accounts';
-    let url: string = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + this.auth.app.options.apiKey;
+    let urlSingUp: string = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + this.auth.app.options.apiKey;
+    let urlVerifyEmail: string = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" + this.auth.app.options.apiKey;
 
     const body = {
       email: email,
@@ -106,15 +107,35 @@ export class AuthService {
       returnSecureToken: true
     };
 
-    return firstValueFrom(this.http.post(url, body, { headers })).then( (response: any) => {
+    return firstValueFrom(this.http.post(urlSingUp, body, { headers })).then( (response: any) => {
+      console.log(response)
       const ID_USER: string = response.localId;
-      return ID_USER;
+      // const ID_TOKEN: string = response.tokenId;
+      
+      // const res = firstValueFrom(this.http.post(urlVerifyEmail, { requestType: "VERIFY_EMAIL", idToken:ID_USER}, { headers }));
+      // console.log(res)
+
+      return response;
       
     }).catch( (e) => {
       throw e.error
     });
   }
 
+  async enviarVerificacionEmail(id_token:any){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `key=${this.auth.app.options.apiKey}`
+    };
+    let urlVerifyEmail: string = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" + this.auth.app.options.apiKey;
+    const body = {
+      requestType: "VERIFY_EMAIL", 
+      idToken: id_token
+    };
+
+    const result =  await firstValueFrom(this.http.post(urlVerifyEmail, body, { headers }));
+    console.log(result)
+  }
 
 
 }

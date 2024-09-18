@@ -131,7 +131,7 @@
                         <div class="d-flex flex-row w-100 align-items-center">
                             <label class="input-group-text" for="inputGroupFile02">{{"form_fotoPerfil2" | translate}}</label>
                             <input type="file" accept=".jpg,.jpeg,.png," class="form-control" id="inputGroupFile02"
-                                formControlName="fotoPerfil2" (change)="onFileChange($event)">
+                                formControlName="fotoPerfil2" (change)="onFileChange2($event)">
                         </div>
                         <div class="alert alert-danger p-1 position-absolute w-100" style="top: 100%; left: 0; z-index: 10;" 
                             *ngIf="form.controls?.['fotoPerfil2']?.invalid && (form.controls?.['fotoPerfil2']?.dirty || form.controls?.['fotoPerfil2']?.touched)">

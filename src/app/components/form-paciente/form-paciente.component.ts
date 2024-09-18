@@ -115,9 +115,10 @@ export class FormPacienteComponent implements OnInit{
       }
       if(this.form.valid && this.captchaResolve){
         const result = await this.authServ.crearCuentaDeTerceros(this.email, this.password);
-        
+        await this.authServ.enviarVerificacionEmail(result.idToken);
+
         const nuevoUsuario = <Usuario>{
-          uid: result,
+          uid: result.localId,
           email: this.email,
           password: this.password,
           dni: this.dni,
@@ -131,7 +132,7 @@ export class FormPacienteComponent implements OnInit{
           adminValidation: true
         }
         this.storeServ.setUsuario(nuevoUsuario);
-        this.authServ.validarCorreo(this.email);
+        // this.authServ.validarCorreo(this.email);
   
         await Swal.fire({
           position: "center",

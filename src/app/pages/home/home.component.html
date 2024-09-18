@@ -3,7 +3,7 @@
         <div *ngIf="usuarioLogueado">
             <button appMenuBtn *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/seccion_usuarios']">{{ "btnHomeUsuarios" | translate }}</button>
             <button appMenuBtn *ngIf="this.usuarioLogueado.rol == 'especialista'" class="btn btn-primary btn-custom" [routerLink]="['/pacientes']">{{ "btnHomePacientes" | translate }}</button>
-            <button appMenuBtn *ngIf="this.usuarioLogueado.rol != 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">{{ "btnHomeMisturnos" | translate }}</button>
+            <button appMenuBtn *ngIf="this.usuarioLogueado.rol != 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/mis-turnos']">{{ "btnHomeMisTurnos" | translate }}</button>
             <button appMenuBtn *ngIf="this.usuarioLogueado.rol == 'admin'" class="btn btn-primary btn-custom" [routerLink]="['/turnos']">{{"btnHomeTurnos" | translate}}</button>
             <button appMenuBtn *ngIf="this.usuarioLogueado.rol != 'especialista'" class="btn btn-primary btn-custom" [routerLink]="['/solicitar-turno']">{{"btnHomeSolicitarTurno" | translate}}</button>
             <button appMenuBtn  class="btn btn-primary btn-custom" [routerLink]="['/mi-perfil']">{{"btnHomeMiPerfil" | translate}}</button>

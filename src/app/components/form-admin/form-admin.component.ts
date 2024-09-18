@@ -91,7 +91,7 @@ export class FormAdminComponent implements OnInit{
       const result = await this.authServ.crearCuentaDeTerceros(this.email, this.password);
 
       const nuevoUsuario = <Usuario>{
-        uid: result,
+        uid: result.localId,
         email: this.email,
         password: this.password,
         dni: this.dni,
@@ -102,7 +102,8 @@ export class FormAdminComponent implements OnInit{
         adminValidation: true
       }
       this.storeServ.setUsuario(nuevoUsuario);
-      this.authServ.validarCorreo(this.email);
+      // this.authServ.validarCorreo(this.email);
+      await this.authServ.enviarVerificacionEmail(result.idToken);
 
       await Swal.fire({
         position: "center",
