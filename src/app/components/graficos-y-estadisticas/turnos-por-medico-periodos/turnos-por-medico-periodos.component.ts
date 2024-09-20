@@ -7,10 +7,11 @@ import { TurnoService } from '../../../services/turno.service';
 import { Turno } from '../../../models/turno';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Usuario } from '../../../models/usuario';
-import { format, isWithinInterval } from 'date-fns';
+import { format, FormatOptions, isWithinInterval } from 'date-fns';
 import { Chart, ChartTypeRegistry, TooltipItem, registerables } from 'chart.js'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { es } from 'date-fns/locale/es';
 Chart.register(...registerables);
 
 @Component({
@@ -116,7 +117,7 @@ export class TurnosPorMedicoPeriodosComponent implements OnInit, OnChanges {
           },
           title: {
             display: true,
-            text: 'Cantidad de turnos solicitados por médico'
+            text: `Cantidad de turnos solicitados por médico ${this.start != null && this.end != null? `(${format(this.start!, 'dd/MM/yyyy')} - ${format(this.end!, 'dd/MM/yyyy')})` : ''}`
           },
         },
         animation: false,

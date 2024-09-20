@@ -27,14 +27,17 @@
             <div class="col-12 m-4">
                 <visitas-clinica #canvasElement ></visitas-clinica>
             </div>
-            <div class="col-12 m-4">
-                <turnos-por-paciente [turnos]="this.turnos" ></turnos-por-paciente>
-            </div>
             <div class="col-6" >
                 <pacientes-por-especialidad #canvasElement [turnos]="this.turnos"></pacientes-por-especialidad>
             </div>
             <div class="col-6" >
                 <medicos-por-especialidad #canvasElement ></medicos-por-especialidad>
+            </div>
+            <div class="col-12 m-4">
+                <encuestas [turnos]="this.turnos"></encuestas>
+            </div>
+            <div class="col-12 m-4">
+                <turnos-por-paciente [turnos]="this.turnos" ></turnos-por-paciente>
             </div>
 
         </div>

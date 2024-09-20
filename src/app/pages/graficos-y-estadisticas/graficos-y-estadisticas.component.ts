@@ -19,6 +19,7 @@ import { PacientesPorEspecialidadComponent } from '../../components/graficos-y-e
 import { MedicosPorEspecialidadComponent } from '../../components/graficos-y-estadisticas/medicos-por-especialidad/medicos-por-especialidad.component';
 import { VisitasClinicaComponent } from '../../components/graficos-y-estadisticas/visitas-clinica/visitas-clinica.component';
 import { TurnosPorPacienteComponent } from '../../components/graficos-y-estadisticas/turnos-por-paciente/turnos-por-paciente.component';
+import { EncuestasComponent } from '../../components/graficos-y-estadisticas/encuestas/encuestas.component';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import html2canvas from 'html2canvas';
 Chart.register(...registerables);
@@ -27,7 +28,7 @@ Chart.register(...registerables);
   selector: 'app-graficos-y-estadisticas',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, FormsModule, MatTabsModule, TablaLogsComponent, TurnosPorEspecialidadComponent, TurnosPorDiaComponent, TurnosPorMedicoPeriodosComponent, TurnosFinalizadosPorMedicoPeriodosComponent, PacientesPorEspecialidadComponent, MedicosPorEspecialidadComponent, VisitasClinicaComponent, TurnosPorPacienteComponent
+    CommonModule, ReactiveFormsModule, FormsModule, MatTabsModule, TablaLogsComponent, TurnosPorEspecialidadComponent, TurnosPorDiaComponent, TurnosPorMedicoPeriodosComponent, TurnosFinalizadosPorMedicoPeriodosComponent, PacientesPorEspecialidadComponent, MedicosPorEspecialidadComponent, VisitasClinicaComponent, TurnosPorPacienteComponent, EncuestasComponent
   ],
   templateUrl: './graficos-y-estadisticas.component.html',
   styleUrl: './graficos-y-estadisticas.component.scss'
@@ -88,8 +89,6 @@ export class GraficosYEstadisticasComponent implements OnInit{
   obtenerImagenesBase64DeCanvas(): Promise<string[]> {
     const imagenesBase64: string[] = [];
     this.canvasElements.forEach((canvasElementRef:any) => {
-      console.log(canvasElementRef);
-      // const canvasElement = canvasElementRef.nativeElement;
       const canvasElement = canvasElementRef.canvasElements.first.nativeElement;
       const imagenBase64 = canvasElement.toDataURL('image/png');
       imagenesBase64.push(imagenBase64);

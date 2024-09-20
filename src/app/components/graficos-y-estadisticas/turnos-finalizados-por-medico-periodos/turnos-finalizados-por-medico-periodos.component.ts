@@ -118,7 +118,7 @@ export class TurnosFinalizadosPorMedicoPeriodosComponent implements OnInit, OnCh
           },
           title: {
             display: true,
-            text: 'Cantidad de turnos finalizados por médico'
+            text: `Cantidad de turnos finalizados por médico ${this.start != null && this.end != null? `(${format(this.start!, 'dd/MM/yyyy')} - ${format(this.end!, 'dd/MM/yyyy')})` : ''}`
           },
         },
         animation: false,
