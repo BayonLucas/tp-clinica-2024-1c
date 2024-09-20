@@ -45,7 +45,7 @@ export class VisitasClinicaComponent implements OnInit {
   }
   
   async crearLineChartVisitasClinica(){
-    const data = await firstValueFrom(this.logServ.getLogsPorRangoDias(90));
+    const data = await firstValueFrom(this.logServ.getLogsPorRangoDias(35));
 
     this.chartVisitasClinica = new Chart("lineChartVisitasClinica", {
       type: 'line',

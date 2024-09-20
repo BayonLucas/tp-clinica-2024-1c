@@ -128,7 +128,7 @@ export class EncuestasComponent implements OnInit, OnChanges {
     });
 
     const data = {
-      labels: calificaciones,
+      labels: calificaciones.reverse(),
       datasets: [{
         label: 'Valoraciones (Estrellas)',
         data: calificaciones.map(item => estrellas[item] || 0), 
@@ -140,6 +140,7 @@ export class EncuestasComponent implements OnInit, OnChanges {
       type: 'bar',
       data: data,
       options:{
+        indexAxis: 'y',
         responsive: true,
         plugins: {
           legend: {

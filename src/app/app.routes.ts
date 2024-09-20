@@ -50,4 +50,8 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/graficos-y-estadisticas/graficos-y-estadisticas.component').then(mod => mod.GraficosYEstadisticasComponent),
         canMatch: [usuarioLogueadoGuard, adminGuard]
     },
+    { path:'data', 
+        loadComponent: () => import('./pages/data/data.component').then(mod => mod.DataComponent),
+        canMatch: [usuarioLogueadoGuard, adminGuard]
+    },
 ];

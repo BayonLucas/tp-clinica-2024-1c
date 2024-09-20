@@ -22,7 +22,7 @@ import { format } from 'date-fns';
 export class TablaLogsComponent implements OnInit{
   private logServ:LogService = inject(LogService);
 
-  displayedColumns: string[] = ['uid_usuario', 'fecha'];
+  displayedColumns: string[] = ['uid_usuario', 'email', 'fecha'];
   dataSource!:MatTableDataSource<Log>;
   logs:Log[] = [];
   titulo:string = 'Logs';
@@ -38,7 +38,8 @@ export class TablaLogsComponent implements OnInit{
       let fechaCompleta = format(fecha, 'dd/MM/yyyy HH:mm:ss');
       return {
         usuario: item.uid_usuario,
-        fecha: fechaCompleta
+        fecha: fechaCompleta,
+        email: item.email
       }
     });
 

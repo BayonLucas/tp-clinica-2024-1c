@@ -34,7 +34,7 @@ export class NavBarComponent implements OnInit{
   
 
   CerrarSesion(){
-    this.authServ.cerrarSesionUsuario().then(() => this.router.navigateByUrl('/bienvenido'));
+    this.authServ.cerrarSesionUsuario(true).then(() => this.router.navigateByUrl('/bienvenido'));
   }
   
   ngOnInit(): void {

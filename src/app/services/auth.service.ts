@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LogService } from './log.service';
+import { UsuarioService } from './usuario.service';
+import { getAuth } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,7 @@ export class AuthService {
   private auth:Auth = inject(Auth);
   private router:Router = inject(Router);
   private storeServ:StoreService = inject(StoreService);
+  private userServ:UsuarioService = inject(UsuarioService);
   private http:HttpClient = inject(HttpClient);
   private logServ:LogService = inject(LogService);
 
@@ -46,8 +49,8 @@ export class AuthService {
     
     if(!data.user.emailVerified){
       this.validarCorreo(data.user);
-      // this.cerrarSesionUsuario()
-      await signOut(this.auth);
+      this.cerrarSesionUsuario()
+      // await signOut(this.auth);
       throw new Error("(auth/no-verification)");
     }
 
@@ -65,7 +68,7 @@ export class AuthService {
 
     user_data.password = '';
     localStorage.setItem('usuario', JSON.stringify(user_data));
-    this.logServ.setLogs(user_data.uid);
+    this.logServ.setLogs(user_data.uid, user_data.email);
 
     return data;
   }
@@ -81,13 +84,15 @@ export class AuthService {
     return sendEmailVerification(user); 
   }
 
-  async cerrarSesionUsuario(){
+  async cerrarSesionUsuario(redirect:boolean = false){
     return await signOut(this.auth)
       .then( res => {
         localStorage.removeItem('usuario');
         this.currentUser = null;
         this.usuario = null;
-        this.router.navigateByUrl('/bienvenido');
+        if(redirect){
+          this.router.navigateByUrl('/bienvenido');
+        }
       });
   }
 
@@ -136,6 +141,5 @@ export class AuthService {
     const result =  await firstValueFrom(this.http.post(urlVerifyEmail, body, { headers }));
     console.log(result)
   }
-
 
 }
