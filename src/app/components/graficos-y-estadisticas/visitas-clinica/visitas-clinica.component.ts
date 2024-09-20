@@ -63,9 +63,9 @@ export class VisitasClinicaComponent implements OnInit {
   }
   
   async ngOnInit(){
-    this.logs = await firstValueFrom(this.logServ.getLogs());
-    if(this.logs.length > 0){
+    // this.logs = await firstValueFrom(this.logServ.getLogs());
+    // if(this.logs.length > 0){
       this.renderLineChart();
-    }
+    // }
   }
 }

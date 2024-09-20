@@ -13,11 +13,11 @@ export class DataComponent {
 
 
 
-  updateLogs(){
-    this.logsServ.agregarMailsLogs();
-  }
+  // updateLogs(){
+  //   this.logsServ.agregarMailsLogs();
+  // }
 
-  createLogs(dias:number){
-    this.logsServ.GenerarLogsPorCantDeDias(dias);
-  }
+  // createLogs(dias:number){
+  //   this.logsServ.GenerarLogsPorCantDeDias(dias);
+  // }
 }

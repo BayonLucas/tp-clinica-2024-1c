@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject, input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
-import { eachDayOfInterval, addDays, format } from 'date-fns';
+import { eachDayOfInterval, addDays, format, subDays } from 'date-fns';
 import { es } from 'date-fns/locale'
 import { HorarioService } from '../../services/horario.service';
 import { Horario } from '../../models/horario';
@@ -28,7 +28,8 @@ export class ListaDiasComponent implements OnInit, OnChanges{
   constructor(){
     const hoy = new Date()
     this.diasPosiblesSegunEspecialista = eachDayOfInterval({
-      start: hoy,
+      // start: hoy,
+      start: subDays(new Date(), 30),
       end: addDays(hoy, 15)
     });
   }
@@ -41,7 +42,8 @@ export class ListaDiasComponent implements OnInit, OnChanges{
     this.horarioServ.getHorarioLaboralPorUidYEspecialidad(this.usuario!.uid, this.especialidad!).subscribe( (data) => {
       this.horariosDelDoctor = data;
       this.diasPosiblesSegunEspecialista = eachDayOfInterval({
-        start: new Date(),
+        // start: new Date(),
+        start: subDays(new Date(), 30),
         end: addDays(new Date(), 15)
       })
       .filter( date => {

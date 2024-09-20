@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, orderBy, query, setDoc, where, writeBatch } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, limit, orderBy, query, setDoc, where, writeBatch } from '@angular/fire/firestore';
 import { Observable, firstValueFrom, map } from 'rxjs';
 import { Log } from '../models/log';
 import { format, setHours, setMinutes, setSeconds, subDays } from 'date-fns';
@@ -22,7 +22,8 @@ export class LogService {
   getLogs(): Observable<Log[]> {
     let qry = query(
       this.logs,
-      orderBy('fecha', 'desc')
+      orderBy('fecha', 'desc'),
+      limit(1000)
     );    return collectionData(qry).pipe( map( logs => logs as Log[] ));
   }
   
@@ -119,67 +120,67 @@ export class LogService {
   }
 
   //Generador de datos
-  async GenerarLogsPorCantDeDias(cantDias:number){
-    // Obtener usuarios de Firebase
-    const usuarios = await firstValueFrom(this.userServ.getUsuarios());
+  // async GenerarLogsPorCantDeDias(cantDias:number){
+  //   // Obtener usuarios de Firebase
+  //   const usuarios = await firstValueFrom(this.userServ.getUsuarios());
 
-    const diasAtras = cantDias;  // Cantidad de días hacia atrás desde hoy
+  //   const diasAtras = cantDias;  // Cantidad de días hacia atrás desde hoy
 
-    // Iterar sobre cada usuario
-    usuarios.forEach((usuario) => {
-      for (let i = 0; i < diasAtras; i++) {
-        // Obtener la fecha de hace 'i' días usando date-fns
-        if(i < 1){
-          continue;
-        }
-        const fechaLog = subDays(new Date(), i);  // Resta i días desde hoy
-        // const randomMax = Math.floor(Math.random() * 3) + 1;
+  //   // Iterar sobre cada usuario
+  //   usuarios.forEach((usuario) => {
+  //     for (let i = 0; i < diasAtras; i++) {
+  //       // Obtener la fecha de hace 'i' días usando date-fns
+  //       if(i < 1){
+  //         continue;
+  //       }
+  //       const fechaLog = subDays(new Date(), i);  // Resta i días desde hoy
+  //       // const randomMax = Math.floor(Math.random() * 3) + 1;
 
-        // Generar una cantidad random de logs entre 1 y 3
-        const cantidadLogs = Math.floor(Math.random() * 2) + 1;
+  //       // Generar una cantidad random de logs entre 1 y 3
+  //       const cantidadLogs = Math.floor(Math.random() * 2) + 1;
 
-        for (let j = 0; j < cantidadLogs; j++) {
-          // Generar una hora random para ese día (entre 00:00 y 23:59)
-          const horaRandom = Math.floor(Math.random() * 24);
-          const minutosRandom = Math.floor(Math.random() * 60);
+  //       for (let j = 0; j < cantidadLogs; j++) {
+  //         // Generar una hora random para ese día (entre 00:00 y 23:59)
+  //         const horaRandom = Math.floor(Math.random() * 24);
+  //         const minutosRandom = Math.floor(Math.random() * 60);
 
-          // Usar date-fns para establecer la hora y minutos en la fecha
-          const fechaConHora = setSeconds(setMinutes(setHours(fechaLog, horaRandom), minutosRandom), 0);
+  //         // Usar date-fns para establecer la hora y minutos en la fecha
+  //         const fechaConHora = setSeconds(setMinutes(setHours(fechaLog, horaRandom), minutosRandom), 0);
 
-          // Reutilizar el método setLogs para crear el log
-          this.setLogsConFecha(usuario.uid, usuario.email, fechaConHora);
-        }
-      }
-    });
+  //         // Reutilizar el método setLogs para crear el log
+  //         this.setLogsConFecha(usuario.uid, usuario.email, fechaConHora);
+  //       }
+  //     }
+  //   });
 
-    console.log('Logs generados correctamente para los últimos 45 días.');
-  }
+  //   console.log('Logs generados correctamente para los últimos 45 días.');
+  // }
 
-  async agregarMailsLogs(){
-    // Obtener usuarios y logs de Firebase
-    const usuarios = await firstValueFrom(this.userServ.getUsuarios());
-    const logs = await firstValueFrom(this.getLogs());
+  // async agregarMailsLogs(){
+  //   // Obtener usuarios y logs de Firebase
+  //   const usuarios = await firstValueFrom(this.userServ.getUsuarios());
+  //   const logs = await firstValueFrom(this.getLogs());
   
-    // Crear un mapa de usuarios por uid para fácil acceso
-    const userMap = new Map(usuarios.map(user => [user.uid, user]));
+  //   // Crear un mapa de usuarios por uid para fácil acceso
+  //   const userMap = new Map(usuarios.map(user => [user.uid, user]));
   
-    // Crear un batch para eficiencia
-    const batch = writeBatch(this.db);
+  //   // Crear un batch para eficiencia
+  //   const batch = writeBatch(this.db);
   
-    // Iterar sobre los logs y actualizar agregando el email
-    logs.forEach(log => {
-      const usuario = userMap.get(log.uid_usuario);
-      if (usuario) {
-        const logRef = doc(this.db, 'logs', log.id!);
+  //   // Iterar sobre los logs y actualizar agregando el email
+  //   logs.forEach(log => {
+  //     const usuario = userMap.get(log.uid_usuario);
+  //     if (usuario) {
+  //       const logRef = doc(this.db, 'logs', log.id!);
   
-        // Agregar el campo 'email' al documento del log
-        batch.update(logRef, { email: usuario.email });
-      }
-    });
+  //       // Agregar el campo 'email' al documento del log
+  //       batch.update(logRef, { email: usuario.email });
+  //     }
+  //   });
   
-    // Aplicar el batch para realizar las actualizaciones en una sola operación
-    await batch.commit();
-    console.log('Emails añadidos a los logs correctamente.');
-  }
+  //   // Aplicar el batch para realizar las actualizaciones en una sola operación
+  //   await batch.commit();
+  //   console.log('Emails añadidos a los logs correctamente.');
+  // }
 
 }
