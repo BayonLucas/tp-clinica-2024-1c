@@ -39,7 +39,7 @@
                             <h3 class="p-1 m-1 w-auto"><b>Presión:</b>  {{item.historiaClinica.presion}}</h3>
                             <h3 class="p-1 m-1 w-auto"><b>Temperatura:</b>  {{item.historiaClinica.temperatura}}</h3>
                             <ng-container *ngFor="let dina of item.historiaClinica.dinamicos">
-                                <h3 class="p-1 m-1 w-auto"><b>{{dina.clave}}:</b>  {{dina.valor}}</h3>
+                                <h3 class="p-1 m-1 w-auto"><b>{{dina.clave}}:</b>  {{dina.valor | boolToText}}</h3>
                             </ng-container>
                         </div>
                     </div>

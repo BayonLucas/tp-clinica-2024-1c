@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { UsuarioService } from '../../services/usuario.service';
 import { CustomDatePipe } from "../../pipes/custom-date.pipe";
 import { PdfService } from '../../services/pdf.service';
+import { BoolToTextPipe } from '../../pipes/bool-to-text.pipe';
 
 @Component({
     selector: 'modal-historial-clinico',
@@ -18,7 +19,7 @@ import { PdfService } from '../../services/pdf.service';
     templateUrl: './modal-historial-clinico.component.html',
     styleUrl: './modal-historial-clinico.component.scss',
     imports: [
-        FormsModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatSelectModule, CustomDatePipe
+        FormsModule, ReactiveFormsModule, CommonModule, MatFormFieldModule, MatSelectModule, CustomDatePipe, BoolToTextPipe
     ]
 })
 export class ModalHistorialClinicoComponent implements OnInit{
