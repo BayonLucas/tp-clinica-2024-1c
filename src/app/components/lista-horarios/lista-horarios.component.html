@@ -1,13 +1,8 @@
 <div class="horarioContainer">
     <div *ngFor="let horario of horariosPosibles" 
-        (click)="onEnviarHorarioSelecto(horario)" 
+        (click)="!this.verificarOcupado(horario)? onEnviarHorarioSelecto(horario) : ''"
         class="horario">
         @if(this.turnosOcupados.length > 0){
-            <!-- <ng-container *ngFor="let item of turnosOcupados">
-                <button [disabled]="item.fecha == horario.toString()"
-                    class="btn btn-secondary ">{{ horario | date: 'H:mm' }}
-                </button>
-            </ng-container> -->
             @if(this.verificarOcupado(horario)){
                 <button [disabled]="true" class="btn btn-secondary">{{ horario | date: 'H:mm' }}</button>
             }
