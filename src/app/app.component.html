@@ -1,4 +1,21 @@
+<!-- <app-nav-bar></app-nav-bar>
+@if(loadingService.loading$ | async){
+    <app-spinner></app-spinner>
+}@else {
+    <div class="pp">
+        <router-outlet/>
+    </div>
+} -->
+
 <app-nav-bar></app-nav-bar>
-<div class="pp">
-    <router-outlet/>
+
+<div class="loading-container" *ngIf="loadingService.loading$ | async">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="content-container">
+    <div class="pp">
+        <router-outlet/>
+    </div>
+
 </div>

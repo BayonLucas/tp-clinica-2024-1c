@@ -159,13 +159,15 @@ export class EncuestasComponent implements OnInit, OnChanges {
 
   crearBarChartSatisfaccionPorDoctor(){
     const valoraciones:any = {};
+    const totales:any = {};
 
     this.doctores.forEach( (doc:Usuario) => {
       const encuestasXdoc = this.encuestas.filter( item => item.uid_doctor == doc.uid);
+      totales[doc.uid] = encuestasXdoc.length;
       if(encuestasXdoc.length > 0){
         valoraciones[doc.uid] = encuestasXdoc.map( (turno:Turno) => {
           let enc = JSON.parse(turno.encuesta!);
-          return enc.satisf_Atencion;
+          return Number.parseInt(enc.satisf_Atencion);
         }).reduce( (p, c) => p + c, 0) / encuestasXdoc.length;
       }
       else{
@@ -179,7 +181,12 @@ export class EncuestasComponent implements OnInit, OnChanges {
         label: 'Promedios del grado de satisfacción por Doctor',
         data: this.doctores.map(item => valoraciones[item.uid]) || 0, 
         backgroundColor: this.backgroundColor
-      }]
+      },
+      {
+        label: 'Total de turnos con encuestas realizadas',
+        data: this.doctores.map(item => totales[item.uid]) || 0, 
+        backgroundColor: this.backgroundColor
+      }],
     };
 
     this.chartPuntajeDoctores = new Chart('barChartPromediosSatisfDoc', {
@@ -270,7 +277,7 @@ export class EncuestasComponent implements OnInit, OnChanges {
       this.renderRadarChart();
     }
   }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['turnos'])
       this.encuestas = this.turnos.filter( item => item.encuesta != null);

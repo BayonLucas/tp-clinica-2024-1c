@@ -23,7 +23,7 @@ export class LogService {
     let qry = query(
       this.logs,
       orderBy('fecha', 'desc'),
-      limit(1000)
+      limit(500)
     );    return collectionData(qry).pipe( map( logs => logs as Log[] ));
   }
   

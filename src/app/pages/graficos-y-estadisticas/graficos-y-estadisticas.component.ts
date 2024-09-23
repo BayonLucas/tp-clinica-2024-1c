@@ -22,6 +22,7 @@ import { TurnosPorPacienteComponent } from '../../components/graficos-y-estadist
 import { EncuestasComponent } from '../../components/graficos-y-estadisticas/encuestas/encuestas.component';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import html2canvas from 'html2canvas';
+import { SpinnerService } from '../../services/spinner.service';
 Chart.register(...registerables);
 
 @Component({
@@ -35,6 +36,7 @@ Chart.register(...registerables);
 })
 export class GraficosYEstadisticasComponent implements OnInit{
   private turnoServ:TurnoService = inject(TurnoService);
+  private spinnerServ:SpinnerService = inject(SpinnerService);
 
   @ViewChild('content') content!: ElementRef;
   @ViewChildren('canvasElement') canvasElements!: QueryList<ElementRef<HTMLCanvasElement>>;
@@ -134,6 +136,7 @@ export class GraficosYEstadisticasComponent implements OnInit{
   }
   
   async ngOnInit() {
+
     this.turnos = await firstValueFrom(this.turnoServ.getTurnos());
   }
 }

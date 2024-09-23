@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { LogService } from './log.service';
 import { UsuarioService } from './usuario.service';
 import { getAuth } from 'firebase/auth';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AuthService {
   private userServ:UsuarioService = inject(UsuarioService);
   private http:HttpClient = inject(HttpClient);
   private logServ:LogService = inject(LogService);
+  private spinnerServ:SpinnerService = inject(SpinnerService)
 
   user$ = user(this.auth); 
   state$ = authState(this.auth);
@@ -45,6 +47,7 @@ export class AuthService {
   }
 
   async loguearUsuario(email: string, password: string){
+    this.spinnerServ.show();
     const data = await signInWithEmailAndPassword(this.auth, email, password);
     
     if(!data.user.emailVerified){
@@ -70,6 +73,7 @@ export class AuthService {
     localStorage.setItem('usuario', JSON.stringify(user_data));
     this.logServ.setLogs(user_data.uid, user_data.email);
 
+    this.spinnerServ.hide();
     return data;
   }
 
@@ -85,6 +89,7 @@ export class AuthService {
   }
 
   async cerrarSesionUsuario(redirect:boolean = false){
+    this.spinnerServ.show();
     return await signOut(this.auth)
       .then( res => {
         localStorage.removeItem('usuario');
@@ -93,10 +98,14 @@ export class AuthService {
         if(redirect){
           this.router.navigateByUrl('/bienvenido');
         }
+      }).finally( () => {
+        this.spinnerServ.hide();
+
       });
   }
 
   async crearCuentaDeTerceros(email: string, password: string){
+    this.spinnerServ.show();
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `key=${this.auth.app.options.apiKey}`
@@ -124,6 +133,8 @@ export class AuthService {
       
     }).catch( (e) => {
       throw e.error
+    }).finally( () => {
+      this.spinnerServ.hide();
     });
   }
 
