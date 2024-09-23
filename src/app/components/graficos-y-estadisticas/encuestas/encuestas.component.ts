@@ -253,12 +253,11 @@ export class EncuestasComponent implements OnInit, OnChanges {
         maintainAspectRatio: false,
         scales: {
           r: {
-            min: 0, // Valor mínimo del eje radial
-            max: 10, // Valor máximo del eje radial
+            min: 0, 
+            max: this.encuestas.length,
             ticks: {
-              stepSize: 1, // Mostrar los valores de 1 en 1
-              // beginAtZero: true, // Comenzar desde 0
-              precision: 0, // Mostrar sin decimales
+              stepSize: 1,
+              precision: 0,
             }
           }
         }
