@@ -1,7 +1,7 @@
 # TP Clinica OnLine
 
 ![image](https://github.com/BayonLucas/tp-clinica-2024-1c/assets/78186463/c1736d8d-6532-4703-a8e7-cf844974b4f9)
-Entontraremos la bienvenida a la aplicación web, donde visualizaremos dos botones, uno de inicio de sesión y otro para registrarse. Estos tambien los veremos en el nav que permanecerá con nosotros mientras estemos trabajando. Se púede apreciar el logo de nuestra clinica online tanto en el fondo de la pantalla como en el boton Home de la esquina superior izquierda.
+Encontraremos la bienvenida a la aplicación web, donde visualizaremos dos botones, uno de inicio de sesión y otro para registrarse. Estos tambien los veremos en el nav que permanecerá con nosotros mientras estemos trabajando. Se púede apreciar el logo de nuestra clinica online tanto en el fondo de la pantalla como en el boton Home de la esquina superior izquierda. La página cuenta con 3 idiomas para distintas pantallas (Español / Inglés / Portugués)
 
 Al querer registrarse, se habilitan dos opciones:
 ![image](https://github.com/BayonLucas/tp-clinica-2024-1c/assets/78186463/fcbe71f5-211f-47e2-9fe0-e4addbea9b87)
