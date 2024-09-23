@@ -49,7 +49,8 @@ Acá el doctor en cuestión podrá ver detalles de todos los pacientes que haya 
 
 ## Mis Turnos (Paciente y especialista):
 ![image](https://github.com/BayonLucas/tp-clinica-2024-1c/assets/78186463/5ba6314e-ee4f-4ecd-96a2-a46a2a52439c)
-En este último apartado, podrémos visualizar todos los turnos realcionados con el usuario logueado. En el caso de los especialistas, estos podrás gestionar los turnos que les solicitaron, y los pacientes podrás calificar su atención como cancelar el turno.
+En este último apartado, podrémos visualizar todos los turnos realcionados con el usuario logueado. En el caso de los especialistas, estos podrán gestionar los turnos que les solicitaron, y los pacientes podrán calificar su atención como cancelar el turno.
+![image](https://github.com/user-attachments/assets/3275e886-a61e-45e8-8ab1-eebd4a124ccd)
 
 
 
